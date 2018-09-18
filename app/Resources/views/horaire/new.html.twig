@@ -1,0 +1,300 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <style>
+        
+      .weekDays-selector input {
+        display: none;
+      }
+
+      .weekDays-selector input[type=checkbox] + label {
+        border-radius: 6px;
+        background: #dddddd;
+        height: 40px;
+        width: 80px;
+        margin-right: 3px;
+        line-height: 40px;
+        text-align: center;
+        cursor: pointer;
+      }
+
+      .weekDays-selector input[type=checkbox]:checked + label {
+        background: #2AD705;
+        color: #ffffff;
+      }
+      
+      .weekDays-selector .col-md-12 {
+          margin-bottom: 20px;
+      }
+    </style>
+    <h1>Horaire creation</h1>
+    <form action="{{ path('horaire_add') }}" id="form" name="form" method="POST">
+            <label for="">{{'Select Location'|trans}}</label>
+            <select name="loc" id="loc" class="form-control" onChange="myFunction(event)" style="margin-bottom: 25px;">
+                <option value="">{{'Select Location'|trans}}</option>
+                {% for item in locations %}
+                    <option value="{{ item.id }}">{{ item.name }}</option>
+                {% endfor %}
+            </select>
+            <div class="col-md-4">
+                <label>Jour</label>
+            </div>
+            <div class="col-md-4">
+                <label>Ouverture</label>
+            </div>
+            <div class="col-md-4">
+                <label>Fermeture</label>
+            </div>
+            <div class="weekDays-selector">
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-mon" name="jour[]" value="lundi"/>
+                    <label for="weekday-mon" class="col-md-2">Lundi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control"  onChange = "changeText(event)" id="shourM" name="sHour[]" placeholder="Entrer Heure de Debut"  disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control"  onChange = "changeText(event)" id="ehourM" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-tue" name="jour[]" value="mardi"/>
+                    <label for="weekday-tue" class="col-md-2">Mardi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control"  onChange = "changeText(event)" id="shourTu" name="sHour[]" placeholder="Entrer Heure de Debut"  disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control"  onChange = "changeText(event)" id="ehourTu" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-wed" name="jour[]" value="mercredi"/>
+                    <label for="weekday-wed" class="col-md-2">Mercredi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="shourW" name="sHour[]" placeholder="Entrer Heure de Debut" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="ehourW" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-thu" name="jour[]" value="jeudi"/>
+                    <label for="weekday-thu" class="col-md-2">Jeudi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="shourTh" name="sHour[]" placeholder="Entrer Heure de Debut" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="ehourTh" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-fri" name="jour[]" value="vendredi"/>
+                    <label for="weekday-fri" class="col-md-2">Vendredi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="shourF" name="sHour[]" placeholder="Entrer Heure de Debut"  disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="ehourF" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-sat" name="jour[]" value="samedi"/>
+                    <label for="weekday-sat" class="col-md-2">Samedi</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="shourSa" name="sHour[]" placeholder="Entrer Heure de Debut" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="ehourSa" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-12">
+                    <input type="checkbox" id="weekday-sun" name="jour[]" value="dimanche"/>
+                    <label for="weekday-sun" class="col-md-2">Dimanche</label>
+                    <div class="col-md-offset-1 col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="shourSu" name="sHour[]" placeholder="Entrer Heure de Debut" disabled />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="input-group clockpicker ">
+                            <input type="text" class="form-control" onChange = "changeText(event)" id="ehourSu" name="eHour[]" placeholder="Entrer Heure de Fin" disabled />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="col-md-6">
+                <input type="submit" value="Confirm" class="tg-btn pull-right" style="margin-top: 10px;background-color: coral">
+            </div>   
+            
+            <p id="test"></p>
+    </form>   
+               
+<script type="text/javascript">
+    $('.clockpicker').clockpicker();
+</script>    
+
+<script>
+document.getElementById('weekday-mon').onchange = function() {
+    document.getElementById('shourM').disabled = !this.checked;
+    document.getElementById('ehourM').disabled = !this.checked;
+};
+document.getElementById('weekday-tue').onchange = function() {
+    document.getElementById('ehourTu').disabled = !this.checked;
+    document.getElementById('shourTu').disabled = !this.checked;
+};
+document.getElementById('weekday-wed').onchange = function() {
+    document.getElementById('ehourW').disabled = !this.checked;
+    document.getElementById('shourW').disabled = !this.checked;
+};
+document.getElementById('weekday-thu').onchange = function() {
+    document.getElementById('ehourTh').disabled = !this.checked;
+    document.getElementById('shourTh').disabled = !this.checked;
+};
+document.getElementById('weekday-fri').onchange = function() {
+    document.getElementById('ehourF').disabled = !this.checked;
+    document.getElementById('shourF').disabled = !this.checked;
+};
+document.getElementById('weekday-sat').onchange = function() {
+    document.getElementById('ehourSa').disabled = !this.checked;
+    document.getElementById('shourSa').disabled = !this.checked;
+};
+document.getElementById('weekday-sun').onchange = function() {
+    document.getElementById('ehourSu').disabled = !this.checked;
+    document.getElementById('shourSu').disabled = !this.checked;
+};
+</script>
+
+<script>
+$('#form').submit(function(e){
+    var check = true;
+    if($('#loc').val() == ""){
+        check = false;
+    }
+        
+    if(document.getElementById('weekday-mon').checked){
+        if($('#shourM').val() == "" || $('#ehourM').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-tue').checked){
+        if($('#shourTu').val() == "" || $('#ehourTu').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-wed').checked){
+        if($('#shourW').val() == "" || $('#ehourW').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-thu').checked){
+        if($('#shourTh').val() == "" || $('#ehourTh').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-fri').checked){
+        if($('#shourF').val() == "" || $('#ehourF').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-sat').checked){
+        if($('#shourSa').val() == "" || $('#ehourSa').val() == ""){
+            check = false;
+        }
+    }else if(document.getElementById('weekday-sun').checked){
+        if($('#shourSu').val() == "" || $('#ehourSu').val() == ""){
+            check = false;
+        }
+    }else{
+        check = false;
+    }
+    
+    
+    if(!check){
+        alert('Veuillez remplire les champs obligatoires');
+        e.preventDefault();
+    }
+});
+</script>
+
+<script>
+    function myFunction(e) {
+        
+        var locId = document.getElementById("loc").value;
+
+        {% for horaire in horaires %}
+            if('{{horaire.locationId.id}}' == locId ){
+                if('{{horaire.jour}}' == 'lundi'){
+                    document.getElementById("shourM").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourM").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                
+                if('{{horaire.jour}}' == 'mardi'){
+                    document.getElementById("shourTu").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourTu").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'mercredi'){
+                    document.getElementById("shourW").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourW").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'jeudi'){
+                    document.getElementById("shourTh").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourTh").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'vendredi'){
+                    document.getElementById("shourF").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourF").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'samedi'){
+                    document.getElementById("shourSa").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourSa").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'dimanche'){
+                    document.getElementById("shourSu").value = '{{horaire.heureDebut|date('H:i')}}';
+                    document.getElementById("ehourSu").value = '{{horaire.heureFin|date('H:i')}}';
+                }
+                
+            }            
+        {% endfor %}
+        
+    }
+</script>
+<script>
+    function changeText(event){
+        this.setState(
+            {this.state.textValue : event.target.value}
+        );
+    }
+</script>
+{% endblock %}
+
+
+
+
+
+

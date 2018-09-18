@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DataBundle\Entity\Appointments" table="appointments">
+    <indexes>
+      <index name="IDX_6A41727A1ADAD7EB" columns="patient"/>
+      <index name="IDX_6A41727A3BB8880C" columns="reason"/>
+    </indexes>
+    <unique-constraints>
+      <unique-constraint name="UNIQ_6A41727ADF7DFD0E" columns="seance"/>
+    </unique-constraints>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="seenbefor" type="boolean" column="seenBefor" nullable="false"/>
+    <field name="note" type="text" column="note" nullable="true">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="phone" type="string" column="phone" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <field name="etat" type="string" column="etat" length="255" nullable="false">
+      <options>
+        <option name="fixed"/>
+      </options>
+    </field>
+    <many-to-one field="patient" target-entity="FosUser" fetch="LAZY">
+      <join-columns>
+        <join-column name="patient" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="reason" target-entity="Reasons" fetch="LAZY">
+      <join-columns>
+        <join-column name="reason" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="seance" target-entity="Seances" fetch="LAZY">
+      <join-columns>
+        <join-column name="seance" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

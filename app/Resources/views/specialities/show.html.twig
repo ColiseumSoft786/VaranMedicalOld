@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Speciality'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ speciality.id }}</td>
+            </tr>
+            <tr>
+                <th>Libelle</th>
+                <td>{{ speciality.libelle }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('specialities_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('specialities_edit', { 'id': speciality.id }) }}">{{ 'edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

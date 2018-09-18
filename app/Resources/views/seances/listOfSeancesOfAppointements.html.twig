@@ -1,0 +1,9 @@
+<div class="tg-timeslots" style="width: 100%">
+    {% for seance in seances %}
+        {% if seance.absence == 0 %}
+                <span class="tg-radio">
+                        <a href="{{ path('appointments_index', {'id':seance.id}) }}" class="btn btn-info {% if seance.dispo == 0 %} disabled {% endif %}" {% if seance.dispo == 0 %} style="background-color: #aeaeae" {% endif %}>{{ seance.heurDebut|date("H:i") }}</a>
+                </span>
+        {% endif %}
+    {% endfor %}
+</div>

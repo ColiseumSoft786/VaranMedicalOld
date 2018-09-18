@@ -1,0 +1,48 @@
+patient_index:
+    path:     /
+    defaults: { _controller: "PatientBundle:Patient:index" }
+    methods:  GET
+
+patient_show:
+    path:     /{id}/show
+    defaults: { _controller: "PatientBundle:Patient:show" }
+    methods:  GET
+
+patient_create:
+    path:     /createAccount
+    defaults: { _controller: "PatientBundle:Patient:create" }
+
+patient_profil:
+    path:     /{id}/patientProfil
+    defaults: { _controller: "PatientBundle:Patient:profil" }
+patient_profil_togglenotif:
+    path:     /togglenotification
+    defaults: { _controller: "PatientBundle:Patient:togglenotif" }
+
+patient_new:
+    path:     /new
+    defaults: { _controller: "PatientBundle:Patient:new" }
+    methods:  [GET, POST]
+
+patient_editProfil:
+    path:     /{id}/edit
+    defaults: { _controller: "PatientBundle:Patient:edit" }
+    methods:  [GET, POST]
+
+patient_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "PatientBundle:Patient:delete" }
+    methods:  DELETE
+
+patient_verifierNom:
+    path:     /patientVerifierNom
+    defaults: { _controller: "PatientBundle:Patient:verifierNom" }
+
+patient_verifierPrenom:
+    path:     /patientVerifierPrenom
+    defaults: { _controller: "PatientBundle:Patient:verifierPrenom" }
+
+patient_image_edit:
+    path:     /{id}/imageEdit
+    defaults: { _controller: "PatientBundle:Patient:profileEditImage" }
+    methods:  [GET, POST]

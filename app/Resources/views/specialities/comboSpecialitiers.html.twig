@@ -1,0 +1,13 @@
+<div class="col-lg-12">
+    <div class="form-group tg-formgroup">
+        <span class="tg-select">
+            <select id="comboSpecialitie" name="specialite">
+                <option disabled="disabled" selected="selected">{{ 'Selectionner'|trans }}</option>
+                {% for specialitie in specialities %}
+                    <option value="{{ specialitie.libelle }}">{{ specialitie.libelle }}</option>
+                {% endfor %}
+
+            </select>
+        </span>
+    </div>
+</div>

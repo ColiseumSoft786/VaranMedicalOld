@@ -1,0 +1,63 @@
+{#
+{{- form_label(form.category,'Categoryname',{ 'label_attr' : {'class': 'control-label','for':'Cname'}}) -}} 
+{{- form_widget(form.category,{ 'attr': {'class': 'form-control col-md-10','max-length':55},'label': 'Category name','required':true,'id':'Cname' }) -}}
+#}
+<div class="tg-box">
+    <div class="tg-tabtitle">
+        <h2>Leave Your Question</h2>
+    </div>
+    {{ form_start(form,{'attr':{'class':"tg-formtheme tg-formleavefeedback",'id':'formAddQuestion'}}) }}
+        <fieldset>
+            <div class="row">
+
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder':'Objet'}})}}
+                    </div>
+                </div>                
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        {{ form_widget(form.question, {'attr': {'class': 'form-control', 'placeholder':'Question'}})}}
+                    </div>
+                </div>
+
+                {{ form_widget(form.doctor) }}
+                
+                <div class="col-sm-12 col-xs-12">
+                    <input type="submit" class="tg-btn" value="Envoyer" />
+                </div>
+            </div>
+        </fieldset>
+    {{ form_end(form) }}
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('body').on('submit', '#formAddQuestion', function (e) {
+            // On empêche le navigateur de soumettre le formulaire
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('questions_new') }}";
+            
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                    location.reload();
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+    

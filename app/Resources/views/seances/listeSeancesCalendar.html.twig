@@ -1,0 +1,40 @@
+{% if calendrie.deleatedAt is null %}
+    {% if calendrie.absence == 1 and "now"|date('Y-m-d')  <= calendrie.date|date('Y-m-d') %}
+        {
+        "id": {{ calendrie.id }},
+        "name": "Absent",
+        "startdate": "{{ calendrie.date|date('Y-m-d') }}",
+        "enddate": "",
+        "color": "#787683",
+        "url": "{{ path('seances_index', {'calendrie':calendrie.id}) }}"
+        },
+    {% else %}
+        {% for seance in seances  %}
+            {
+            "id": {{ calendrie.id }},
+            "name": "{{ seance.heurDebut|date('H:i') }}",
+            "startdate": "{{ calendrie.date|date('Y-m-d') }}",
+            "enddate": "",
+            {% if seance.dispo == 0 %}
+                "color": "#b21c27",
+                "url": ""
+            {% else %}
+                "color": "#dfe0d8",
+                "url": ""
+            {% endif %}
+
+            },
+        {% endfor %}
+    {% endif %}
+    {% if "now"|date('Y-m-d')  <= calendrie.date|date('Y-m-d') %}
+        {
+        "id": {{ calendrie.id }},
+        "name": "Planifier...",
+        "startdate": "{{ calendrie.date|date('Y-m-d') }}",
+        "enddate": "",
+        "color": "#484848",
+        "url": "{{ path('seances_index', {'calendrie':calendrie.id}) }}"
+        },
+    {% endif %}
+
+{% endif %}

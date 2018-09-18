@@ -1,0 +1,27 @@
+educations_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Educations:index" }
+    methods:  GET
+
+educations_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Educations:show" }
+    methods:  GET
+
+educations_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Educations:new" }
+    methods:  [GET, POST]
+
+educations_addEducation:
+    path:     /addEducation
+    defaults: { _controller: "DoctorsBundle:Educations:addEducation" }
+
+educations_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Educations:edit" }
+    methods:  [GET, POST]
+
+educations_delete:
+    path:     /{education}/delete
+    defaults: { _controller: "DoctorsBundle:Educations:delete" }

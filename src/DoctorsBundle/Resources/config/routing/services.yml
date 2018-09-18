@@ -1,0 +1,34 @@
+services_index:
+    path:     /{doctor}/index
+    defaults: { _controller: "DoctorsBundle:Services:index" }
+    methods:  GET
+
+services_settings:
+    path:     /settings
+    defaults: { _controller: "DoctorsBundle:Services:settings" }
+    methods:  GET
+    
+services_comboServicesBySpecialitie:
+    path:     /{specialitie}/comboSpecialitie
+    defaults: { _controller: "DoctorsBundle:Services:comboServicesBySpecialitie" }
+    methods:  GET
+
+services_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Services:show" }
+    methods:  GET
+
+services_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Services:new" }
+    methods:  [GET, POST]
+
+services_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Services:edit" }
+    methods:  [GET, POST]
+
+services_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Services:delete" }
+    methods:  DELETE

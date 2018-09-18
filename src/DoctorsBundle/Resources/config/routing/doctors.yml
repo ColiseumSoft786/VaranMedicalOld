@@ -1,0 +1,58 @@
+doctors_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Doctors:index" }
+    methods:  GET
+
+doctor_search:
+    path:     /search
+    defaults: { _controller: "DoctorsBundle:Doctors:search" }
+    methods:  GET
+
+doctors_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Doctors:show" }
+    methods:  GET
+
+doctor_detail:
+    path:     /{doctor}/details
+    defaults: { _controller: "DoctorsBundle:Doctors:details" }
+    methods:  [GET, POST]
+
+doctors_new:
+    path:     /CreateAccountStep1
+    defaults: { _controller: "DoctorsBundle:Doctors:new" }
+    methods:  [GET, POST]
+
+doctors_addSpecialitie:
+    path:     /addSpecialitie
+    defaults: { _controller: "DoctorsBundle:Doctors:addSpecialitie" }
+
+doctors_create:
+    path:     /CreateAccountStep2
+    defaults: { _controller: "DoctorsBundle:Doctors:create" }
+
+doctor_verifierNom:
+    path:     /verifierNom
+    defaults: { _controller: "DoctorsBundle:Doctors:verifierNom" }
+
+doctor_verifierPrenom:
+    path:     /verifierPrenom
+    defaults: { _controller: "DoctorsBundle:Doctors:verifierPrenom" }
+
+doctors_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Doctors:edit" }
+    methods:  [GET, POST]
+
+doctors_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Doctors:delete" }
+    methods:  DELETE
+doctor_deleteSpecialitie:
+    path:     /{id}/deleteSpecialitie
+    defaults: { _controller: "DoctorsBundle:Doctors:deleteSpecialitie" }
+
+doctors_image_edit:
+    path:     /{id}/imageEdit
+    defaults: { _controller: "DoctorsBundle:Doctors:profileEditImage" }
+    methods:  [GET, POST]

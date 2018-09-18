@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Hôpitaux</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ hopitaux.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Name'|trans }}</th>
+                <td>{{ hopitaux.name }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('hopitaux_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('hopitaux_edit', { 'id': hopitaux.id }) }}">{{ 'edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

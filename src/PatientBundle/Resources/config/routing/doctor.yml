@@ -1,0 +1,6 @@
+doctor_managment_display:
+    path:     /display
+    defaults: { _controller: PatientBundle:Doctor:display }
+doctor_managment_display_review:
+    path:     /display/review
+    defaults: { _controller: PatientBundle:Doctor:review }

@@ -1,0 +1,22 @@
+holiday_display:
+    path:     /
+    defaults: { _controller: "AppointmentsBundle:Holiday:display" }
+    methods:  GET
+holiday_statuschange:
+    path:     /stautschange
+    defaults: { _controller: "AppointmentsBundle:Holiday:changestatus" }
+holiday_addweekend:
+    path:     /Weekend/New
+    defaults: { _controller: "AppointmentsBundle:Holiday:addweekend" }
+holiday_addweekend_delete:
+    path:     /Weekend/Delete/{id}
+    defaults: { _controller: "AppointmentsBundle:Holiday:deleteweekend" }
+holiday_weekend_getdetailofselecteddate:
+    path:     /Weekend/getdetailofselecteddate
+    defaults: { _controller: "AppointmentsBundle:Holiday:getdetailofselecteddate" }
+holiday_weekend_unblock:
+    path:     /Weekend/unblock
+    defaults: { _controller: "AppointmentsBundle:Holiday:unblockWeekEnd" }
+holiday_weekend_unblock_delete:
+    path:     /Weekend/unblock/delete/{id}
+    defaults: { _controller: "AppointmentsBundle:Holiday:deleteunblockday" }

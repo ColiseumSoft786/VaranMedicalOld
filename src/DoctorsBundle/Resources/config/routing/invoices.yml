@@ -1,0 +1,29 @@
+invoices_index:
+    path:     /{doctor}/{service}/index
+    defaults: { _controller: "DoctorsBundle:Invoices:index" }
+    methods:  GET
+
+invoices_listSubServices:
+    path:     /{doctor}/{service}/listSubService
+    defaults: { _controller: "DoctorsBundle:Invoices:listSubServicesByDoctor" }
+    methods:  GET
+
+invoices_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Invoices:show" }
+    methods:  GET
+
+invoices_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Invoices:new" }
+    methods:  [GET, POST]
+
+invoices_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Invoices:edit" }
+    methods:  [GET, POST]
+
+invoices_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Invoices:delete" }
+    methods:  [DELETE, GET]

@@ -1,0 +1,39 @@
+<div class="row">
+    <div class="tg-alertmessages">
+        <div class="alert alert-success tg-alertmessage fade in" hidden id="success">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <i class="fa fa-check"></i>
+            <span><strong>success Message.</strong> Ajouter avec succès.</span>
+        </div>
+        <div class="alert alert-warning tg-alertmessage fade in" hidden id="warning">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <i class="fa fa-exclamation-triangle"></i>
+            <span><strong>warning Message.</strong> Existe déjà.</span>
+        </div>
+        <div class="alert alert-danger tg-alertmessage fade in" hidden id="erreur">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <i class="fa fa-bug"></i>
+            <span><strong>Error Message.</strong> Erreur en ajout.</span>
+        </div>
+    </div>
+</div>
+<br><br>
+<div class="row tg-rowmargin">
+        <div class="col-md-10 col-sm-9 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                <span class="tg-select">
+                    <select id="specialitie" required >
+                        <option value="">{{ 'Select/Type Specializations'|trans }}</option>
+                        {% for specialitie in specialities %}
+                            <option value="{{ specialitie.id }}">{{ specialitie.libelle }}</option>
+                        {% endfor %}
+                    </select>
+                </span>
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                <button class="tg-btn tg-btn-lg" id="AddSpecialities" >{{ 'add now'|trans }}</button>
+            </div>
+        </div>
+</div>

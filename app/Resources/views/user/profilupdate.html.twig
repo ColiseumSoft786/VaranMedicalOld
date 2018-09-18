@@ -1,0 +1,327 @@
+{% include ('base.html.twig') %}
+{% block body %}
+    <body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************--
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+    <!--************************************
+            Preloader End
+    *************************************-->
+
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        {{ render(controller('AppBundle:Default:header')) }}
+
+        <!--************************************
+                Main Start
+        *************************************-->
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-content" class="tg-content tg-dashboard">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                            <div class="tg-widgetdashboard">
+                                <div class="tg-widgetprofile">
+                                    <figure class="tg-directpostimg"> 
+                                        {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                            <a href="#">
+                                                <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                            </a>
+                                        {% else %}
+                                            <a href="#">
+                                                <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                            </a>
+                                        {% endif %}
+                                        {% if app.user.verifier == 1 %}
+                                            <figcaption>
+                                                <a class="tg-usericon tg-iconvarified" href="#">
+                                                    <em class="tg-usericonholder">
+                                                        <i class="fa fa-shield"></i>
+                                                        <span>{{ 'verified'|trans }}</span>
+                                                    </em>
+                                                </a>
+                                            </figcaption>
+                                        {% endif %}
+                                    </figure>
+                                    <div class="tg-directposthead">
+                                        <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                        <div class="tg-subjects"></div>
+                                        <ul class="tg-metadata">
+                                            <li><span class="tg-stars"><span></span></span></li>
+                                            <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                        </ul>
+                                    </div>
+                                    <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                                <nav id="tg-dashboardnav" class="tg-dashboardnav">
+                                    <ul>
+                                        <li> <a href="{{ path('locations_index')}}"> <i class="fa fa-location-arrow"></i> <span>{{ 'Job Locations'|trans }}</span> </a> </li>
+                                        <li> <a href="#"> <i class="fa fa-user"></i> <span>{{ 'Profile Settings'|trans }}</span> </a> </li>
+                                    </ul>
+                                </nav>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                            <div class="tg-dashboardtabs">
+                                <ul class="tg-dashboardtabnav" role="tablist">
+                                    <li role="presentation" class="active"> <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">{{ 'Overview'|trans }}</a> </li>
+                                    <li role="presentation"> <a href="#services" aria-controls="services" role="tab" data-toggle="tab">{{ 'Services'|trans }}</a> </li>
+                                    <li role="presentation"> <a href="#addphotos" aria-controls="addphotos" role="tab" data-toggle="tab" id="azer">{{ 'Photos'|trans }}(en construction)</a> </li>
+                                </ul>
+                                <div class="tab-content tg-dashboardtabcontent">
+                                    <div role="tabpanel" class="tab-pane active" id="overview">
+                                        <div class="tg-searchbulder tg-searchprofilesttings">
+                                            <div class="tg-dashboardbox">
+                                                <div class="tg-dashboardboxtitle">
+                                                    <h2>{{ 'Basic Information'|trans }}</h2>
+                                                </div>
+                                                <div class="tg-box tg-basicinformation">
+                                                    <div class="row tg-rowmargin" id="basicInfo">
+                                                        {{ render(controller('DoctorsBundle:Doctors:profilEditBasicInformation', {'doctor': doctor.id})) }}
+                                                    </div>
+                                                    <div id="formBasicInfo">
+
+                                                    </div>
+                                                    <button class="btn btn-default pull-right" id="editBasicInfo"><i class="fa fa-edit"></i></button>
+                                                </div>
+
+                                            </div>
+                                            <div class="tg-dashboardbox">
+                                                <div class="tg-dashboardboxtitle">
+                                                    <h2>{{ 'Specializations'|trans }}</h2>
+                                                </div>
+                                                <div class="tg-box tg-education tg-uiicons">
+                                                    {{ render(controller('DoctorsBundle:Specialities:getComboSpecialities')) }}
+                                                    <div id="specialitiesList">
+                                                        {{ render(controller('DoctorsBundle:Doctors:profilEditSpecialities', {'doctor': doctor.id})) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tg-dashboardbox">
+                                                <div class="tg-dashboardboxtitle">
+                                                    <h2>{{ 'Educations'|trans }}</h2>
+                                                </div>
+                                                <div class="tg-box tg-education tg-uiicons">
+                                                    <div class="row tg-rowmargin" id="newEducation">
+                                                        {{ render(controller('DoctorsBundle:Educations:new')) }}
+                                                    </div>
+                                                    <div class="row tg-rowmargin" id="editEducation">
+
+                                                    </div>
+                                                    <div id="educationsList">
+                                                        {{ render(controller('DoctorsBundle:Doctors:profilEditEducations', {'doctor': doctor.id})) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="tg-dashboardbox">
+                                                <div class="tg-dashboardboxtitle">
+                                                    <h2>{{ 'Certifications'|trans }}</h2>
+                                                </div>
+                                                <div class="tg-box tg-education tg-uiicons">
+                                                    <div class="row tg-rowmargin" id="newCertification">
+                                                        {{ render(controller('DoctorsBundle:Certifications:new')) }}
+                                                    </div>
+                                                    <div class="row tg-rowmargin" id="editCertification">
+
+                                                    </div>
+                                                    <div id="certificationList">
+                                                        {{ render(controller('DoctorsBundle:Doctors:profilEditCertification', {'doctor': doctor.id})) }}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>  
+                                    <div role="tabpanel" class="tab-pane" id="services">
+                                        <div class="tg-dashboardbox tg-profilesettings">
+                                            {{ render(controller('DoctorsBundle:Services:index', {'doctor':doctor.id})) }}
+                                        </div>
+                                        <div class="tg-updateall"> <span class="tg-note">* Click <strong>invoices settings</strong> to update latest added detail (s).</span>
+                                        </div>
+                                    </div>                
+                                    <div role="tabpanel" class="tab-pane" id="addphotos">
+                                        <div class="tg-dashboardbox">
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                {{ render(controller('DoctorsBundle:Doctors:profileEditImage', {'doctor': doctor.id})) }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!--************************************
+                Main End
+        *************************************-->
+        <script>
+            $(document).ready(function() {
+                // configure the bootstrap datepicker
+                $('.js-datepicker').datepicker({
+                    format: 'dd-mm-yyyy'
+                });
+            });
+        </script>
+        <script>
+
+            $(document).ready(function () {
+                $('#upload').change(function() {
+                    var filename = $(this).val();
+                    var lastIndex = filename.lastIndexOf("\\");
+                    if (lastIndex >= 0) {
+                        filename = filename.substring(lastIndex + 1);
+                    }
+                    $('#filename').val(filename);
+                });
+
+                $("#AddSpecialities").click(function () {
+                    var specialitie = $('#specialitie').val();
+                    var DATA = 'specialitie='+ specialitie;
+                    var URL = "{{ path('doctors_addSpecialitie') }}";
+                    console.log(URL);
+                    console.log(DATA);
+                    $.ajax({
+                        type: "POST",
+                        url: URL,
+                        data: DATA,
+                        cache: false,
+                        success: function (response) {
+                            console.log('done');
+                            if (response == 'warning'){
+                                $('#warning').show()
+                            }else {
+                                $('#success').show();
+                                $('#specialitiesList').html(response);
+                            }
+                            return true;
+
+                        }
+                    });
+                });
+                $("#editBasicInfo").click(function () {
+                    var URL = "{{ path('doctors_edit',{ 'id': 'myID' }) }}";
+                    var idDoctor = '{{ app.user.idTable }}'
+                    URL = URL.replace(/myID/g, idDoctor);
+                    $.ajax({
+                        type: "POST",
+                        url: URL,
+                        cache: false,
+                        success: function (response) {
+                            $('#basicInfo').hide();
+                            $('#editBasicInfo').hide();
+                            $('#formBasicInfo').html(response);
+                            return true;
+                        }
+                    });
+                });
+                
+                $('body').on('submit', '#formEducation', function (e) {
+                    // On empêche le navigateur de soumettre le formulaire
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    var $form = $(this);
+                    var formdata = (window.FormData) ? new FormData($form[0]) : null;
+                    var data = (formdata !== null) ? formdata : $form.serialize();
+
+                    var URL = "{{ path('educations_addEducation',{ 'idOwner': 'myID' }) }}";
+                    var idDoctor = '{{ app.user.idTable }}'
+                    URL = URL.replace(/myID/g, idDoctor);
+
+                    console.log('Click sur valider add consommation avec url = '+URL);
+
+                    $.ajax({
+                        url: URL,
+                        type: "POST",
+                        contentType: false, // obligatoire pour de l'upload
+                        processData: false, // obligatoire pour de l'upload
+                        dataType: 'html', // selon le retour attendu
+                        data: data,
+                        success: function (response) {
+                            $('#successEducation').show();
+                            $('#educationsList').html(response);
+                            return true;
+                        }
+                    });
+                    return false;
+                });
+
+                $('body').on('submit', '#formCertification', function (e) {
+                    // On empêche le navigateur de soumettre le formulaire
+                    e.preventDefault();
+                    e.stopImmediatePropagation();
+
+                    var $form = $(this);
+                    var formdata = (window.FormData) ? new FormData($form[0]) : null;
+                    var data = (formdata !== null) ? formdata : $form.serialize();
+
+                    var URL = "{{ path('certifications_addCertification',{ 'idOwner': 'myID' }) }}";
+                    var idDoctor = '{{ app.user.idTable }}'
+                    URL = URL.replace(/myID/g, idDoctor);
+
+                    console.log('Click sur valider add consommation avec url = '+URL);
+
+                    $.ajax({
+                        url: URL,
+                        type: "POST",
+                        contentType: false, // obligatoire pour de l'upload
+                        processData: false, // obligatoire pour de l'upload
+                        dataType: 'html', // selon le retour attendu
+                        data: data,
+                        success: function (response) {
+                            $('#successCertification').show();
+                            $('#certificationList').html(response);
+                            return true;
+                        }
+                    });
+                    return false;
+                });
+                
+            $('body').on('submit', '#formEditDoctorImage', function (e) {
+                // On empêche le navigateur de soumettre le formulaire
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                var $form = $(this);
+                var formdata = (window.FormData) ? new FormData($form[0]) : null;
+                var data = (formdata !== null) ? formdata : $form.serialize();
+
+                var URL = "{{ path('doctors_edit',{ 'id': 'myID' }) }}";
+                var idDoctor = '{{ app.user.idTable }}'
+                URL = URL.replace(/myID/g, idDoctor);
+
+
+                $.ajax({
+                    url: URL,
+                    type: "POST",
+                    contentType: false, // obligatoire pour de l'upload
+                    processData: false, // obligatoire pour de l'upload
+                    dataType: 'html', // selon le retour attendu
+                    data: data,
+                    success: function (response) {
+                        location.reload();
+                        return true;
+                    }
+                });
+                return false;
+            });
+            });
+        </script>
+
+
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    {% include ('default/footer.html.twig') %}
+
+{% endblock %}

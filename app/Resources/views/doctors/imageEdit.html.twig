@@ -1,0 +1,97 @@
+<div class="tg-box tg-profilephoto">
+    <div class="tg-box tg-profilephoto">
+        <div class="row tg-rowmargin">
+            <form action="" id="formEditDoctorImage">
+                <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.firstName, {'attr':{'class':'form-control', 'placeholder':'Prénom', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.lastName, {'attr':{'class':'form-control', 'placeholder':'Nom', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.title, {'attr':{'class':'form-control', 'placeholder':'title', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding hidden">
+                    Please call us to change your name.
+                </div>
+                <div class="col-md-12 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.birthday, {'attr':{'class':'form-control js-datepicker', 'placeholder':'Date de naissance', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.GSM, {'attr':{'class':'form-control', 'placeholder':'GSM', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+
+                <div class="col-md-12 col-sm-6 col-xs-12 tg-columnpadding hidden">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.professionalStatement, {'attr':{'class':'form-control', 'placeholder':'Professional statement', 'readonly':'true'}}) }}
+                    </div>
+                </div>
+                    
+                    
+                    
+                <div class="col-md-2 col-sm-6 col-xs-12 tg-columnpadding">
+                    <div class="form-group tg-formgroup">
+                        {{ form_widget(edit_form.imageFile)}}
+                        {{ form_widget(edit_form._token) }}
+                    </div>
+                </div>
+
+                    
+                <br/><br/><br/><br/>
+                <div class="col-md-2 col-sm-6 col-xs-12 tg-columnpadding">
+                    <div class="form-group tg-formgroup">
+                        <button class="tg-btn tg-btn-lg" type="submit" id="updateBasicInfo">{{ 'upload'|trans }}</button>
+                    </div>
+                </div>
+            </form>      
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        // configure the bootstrap datepicker
+        $('.js-datepicker').datepicker({
+            format: 'yyyy-mm-dd'
+        });
+        
+        $('body').on('submit', '#formEditDoctorImage', function (e) {
+            // On empêche le navigateur de soumettre le formulaire
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('doctors_image_edit',{ 'id': 'myID' }) }}";
+            var idDoctor = '{{ app.user.idTable }}'
+            URL = URL.replace(/myID/g, idDoctor);
+
+
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                    location.reload();
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>

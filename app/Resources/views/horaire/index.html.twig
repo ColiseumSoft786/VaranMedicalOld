@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Horaires list</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Jour</th>
+                <th>Heuredebut</th>
+                <th>Heurefin</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for horaire in horaires %}
+            <tr>
+                <td><a href="{{ path('horaire_show', { 'id': horaire.id }) }}">{{ horaire.id }}</a></td>
+                <td>{{ horaire.jour }}</td>
+                <td>{% if horaire.heureDebut %}{{ horaire.heureDebut|date('H:i:s') }}{% endif %}</td>
+                <td>{% if horaire.heureFin %}{{ horaire.heureFin|date('H:i:s') }}{% endif %}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('horaire_show', { 'id': horaire.id }) }}">show</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('horaire_edit', { 'id': horaire.id }) }}">edit</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('horaire_new') }}">Create a new horaire</a>
+        </li>
+    </ul>
+{% endblock %}

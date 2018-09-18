@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Doctor'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ doctor.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Firstname'|trans }}</th>
+                <td>{{ doctor.firstName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Lastname'|trans }}</th>
+                <td>{{ doctor.lastName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Birthday'|trans }}</th>
+                <td>{% if doctor.birthday %}{{ doctor.birthday|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            {#<tr>
+                <th>{{ 'Email'|trans }}</th>
+                <td>{{ doctor.email }}</td>
+            </tr>#}
+            <tr>
+                <th>{{ 'Gsm'|trans }}</th>
+                <td>{{ doctor.GSM }}</td>
+            </tr>
+            {#<tr>
+                <th>{{ 'Sexe'|trans }}</th>
+                <td>{{ doctor.sexe }}</td>
+            </tr>#}
+            <tr>
+                <th>{{ 'Professional statement'|trans }}</th>
+                <td>{{ doctor.professionalStatement }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('doctors_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('doctors_edit', { 'id': doctor.id }) }}">{{ 'edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

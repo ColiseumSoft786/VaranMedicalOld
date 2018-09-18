@@ -1,0 +1,152 @@
+<form class="tg-formbookappointment" id="formEditLocation">
+    <fieldset class="tg-formstepone tg-current">
+        <h3>Chercher votre location ?</h3>
+        <div class="row tg-rowmargin">
+            <div class="col-sm-12 col-xs-12 tg-columnpadding">
+                <div id="mapEditLocation" style="height:250px;width:100%;">
+
+                </div>
+            </div>
+        </div>
+        <br>
+        <div class="row tg-rowmargin">
+            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.name, {'attr':{'class':'form-control', 'placeholder':'Name'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.langitude, {'attr':{'class':'form-control langitude', 'placeholder':'Longitude', 'readonly':'true'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.latitude, {'attr':{'class':'form-control latitude', 'placeholder':'Latitude', 'readonly':'true'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.adresse, {'attr':{'class':'form-control', 'placeholder':'Adresse', 'type':'text', 'rows':'2' }}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.ville, {'attr':{'class':'form-control', 'placeholder':'Ville', 'type':'text'}}) }}
+                </div>
+            </div>
+            <div class="col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(edit_form.codeZip, {'attr':{'class':'form-control', 'placeholder':'Code Zip', 'type':'text'}}) }}
+                    {{ form_widget(edit_form._token) }}
+                </div>
+            </div>
+            <input type="hidden" id="doctorsbundle_locations_doctor" name="doctorsbundle_locations[doctor]" value="{{ app.user.idTable }}">
+        </div>
+        <div class="tg-btnbox">
+            <button type="submit" class="tg-btn">{{ 'edit'|trans }}</button>
+        </div>
+    </fieldset>
+</form>
+<script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcgnHwvZsCydPTdHNn_mCaG8eCcPllzD4&callback=initialiserCarteEdit"></script>
+    <script>
+        function initialiserCarteEdit() {
+            geocoders = new google.maps.Geocoder();
+            // Ici j'ai mis la latitude et longitude du vieux Port de Marseille pour centrer la carte de départ
+            var latitudeLangitude = new google.maps.LatLng({{ location.latitude }}, {{ location.langitude }});
+            var mapOptions = {
+                zoom      : 14,
+                center    : latitudeLangitude,
+                mapTypeId : google.maps.MapTypeId.HYBRID
+            };
+            mapEdit = new google.maps.Map(document.getElementById('mapEditLocation'), mapOptions);
+            var location = new google.maps.Marker({
+                map: mapEdit,
+                position: new google.maps.LatLng({{ location.latitude }}, {{ location.langitude }}),
+                draggable: true
+            });
+            mapEdit.setCenter(location.position);
+            location.setMap(mapEdit);
+
+            google.maps.event.addListener(location, 'dragend', function (evt) {
+                var lat = evt.latLng.lat().toFixed(20);
+                var lng = evt.latLng.lng().toFixed(20);
+                $("#doctorsbundle_locations_latitude").val(lat);
+                $("#doctorsbundle_locations_langitude").val(lng);
+            });
+
+            google.maps.event.addListener(location, 'dragstart', function (evt) {
+                $("#doctorsbundle_locations_latitude").val('Currently dragging marker...');
+                $("#doctorsbundle_locations_langitude").val('Currently dragging marker...');
+            });
+        }
+
+        function TrouverAdresse() {
+            // Récupération de l'adresse tapée dans le formulaire
+            var adresse = document.getElementById('adresse').value;
+            geocoder.geocode( { 'address': adresse}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    // Récupération des coordonnées GPS du lieu tapé dans le formulaire
+                    var strposition = results[0].geometry.location+"";
+                    strposition=strposition.replace('(', '');
+                    strposition=strposition.replace(')', '');
+                    // Affichage des coordonnées dans le <span>
+                    // Création du marqueur du lieu (épingle)
+
+                    var markeur = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        draggable: true
+                    });
+
+                    google.maps.event.addListener(markeur, 'dragend', function (evt) {
+                        var latitude = evt.latLng.lat().toFixed(20);
+                        var longitude = evt.latLng.lng().toFixed(20);
+                        $(".latitude").val(latitude);
+                        $(".langitude").val(longitude);
+                    });
+
+                    google.maps.event.addListener(markeur, 'dragstart', function (evt) {
+                        $(".latitude").val('Currently dragging marker...');
+                        $(".langitude").val('Currently dragging marker...');
+                    });
+                } else {
+                    alert('Adresse introuvable: ' + status);
+                }
+            });
+        }
+        // Lancement de la construction de la carte google map
+        google.maps.event.addDomListener(window, 'load', initialiserCarteEdit());
+    </script>
+<script>
+    $(document).ready(function () {
+        $('body').on('submit', '#formEditLocation', function (e) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('locations_edit',{ 'id': 'myID' }) }}";
+            var idLocation = '{{ location.id }}'
+            URL = URL.replace(/myID/g, idLocation);
+            
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                    location.reload();
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>

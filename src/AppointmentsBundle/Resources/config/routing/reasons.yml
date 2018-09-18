@@ -1,0 +1,24 @@
+reasons_index:
+    path:     /
+    defaults: { _controller: "AppointmentsBundle:Reasons:index" }
+    methods:  GET
+
+reasons_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppointmentsBundle:Reasons:show" }
+    methods:  GET
+
+reasons_new:
+    path:     /new
+    defaults: { _controller: "AppointmentsBundle:Reasons:new" }
+    methods:  [GET, POST]
+
+reasons_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppointmentsBundle:Reasons:edit" }
+    methods:  [GET, POST]
+
+reasons_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppointmentsBundle:Reasons:delete" }
+    methods:  DELETE

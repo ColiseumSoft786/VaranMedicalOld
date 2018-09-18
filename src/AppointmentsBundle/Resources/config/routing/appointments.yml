@@ -1,0 +1,78 @@
+appointments_check_seance:
+    path:     /checkSeance
+    defaults: { _controller: "AppointmentsBundle:Appointments:checkseance" }
+    methods:  POST
+
+appointments_display:
+    path:     /display
+    defaults: { _controller: "AppointmentsBundle:Appointments:display" }
+    methods:  GET
+appointments_displaybydate:
+    path:     /displaybydate
+    defaults: { _controller: "AppointmentsBundle:Appointments:getdisplaybydate" }
+    methods:  GET
+
+appointments_appointmentforPatient:
+    path:     /appointmentforPatient/{seance}
+    defaults: { _controller: "AppointmentsBundle:Appointments:appointmentforPatient" }
+appointments_appointmentforPatient_old:
+    path:     /appointmentforPatient/Patient/Old
+    defaults: { _controller: "AppointmentsBundle:Appointments:oldpatient" }
+appointments_appointmentforPatient_new:
+    path:     /appointmentforPatient/Patient/New
+    defaults: { _controller: "AppointmentsBundle:Appointments:newpatient" }
+appointments_appointment_copyperiod:
+    path:     /CopyAPeriod/
+    defaults: { _controller: "AppointmentsBundle:Appointments:copyperiod" }
+appointments_appointment_reminder:
+    path:     /reminder/
+    defaults: { _controller: "AppointmentsBundle:Appointments:reminder" }
+appointments_appointment_getappointment:
+    path:     /getAppointment/
+    defaults: { _controller: "AppointmentsBundle:Appointments:getdetails" }
+
+
+appointments_cancel:
+    path:     /{id}/cancel
+    defaults: { _controller: "AppointmentsBundle:Appointments:cancel" }
+    methods:  GET
+
+appointments_index:
+    path:     /{id}/index
+    defaults: { _controller: "AppointmentsBundle:Appointments:index" }
+    methods:  GET
+
+appointments_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppointmentsBundle:Appointments:show" }
+    methods:  GET
+
+appointments_new:
+    path:     /{seance}/new
+    defaults: { _controller: "AppointmentsBundle:Appointments:new" }
+    methods:  [GET, POST]
+
+appointments_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppointmentsBundle:Appointments:edit" }
+    methods:  [GET, POST]
+
+appointments_appointmentsByUser:
+    path:     /{success}/appointmentsByUser
+    defaults: { _controller: "AppointmentsBundle:Appointments:appointmentsByUser" }
+    methods:  [GET, POST]
+
+appointments_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppointmentsBundle:Appointments:delete" }
+    methods:  DELETE
+
+calendries_appoitment_update:
+    path:     /appointmentStatusUpdate
+    defaults: { _controller: "AppointmentsBundle:Appointments:confirmtoggle" }
+calendries_appoitment_seancebylocation:
+    path:     /getseansesbylocation
+    defaults: { _controller: "AppointmentsBundle:Appointments:getseansesbylocation" }
+calendries_appoitment_cutcopy:
+    path:     /cutcopy
+    defaults: { _controller: "AppointmentsBundle:Appointments:cutcopy" }

@@ -1,0 +1,169 @@
+<div class="col-sm-12 col-xs-12">
+    <div class="tg-alertmessages">
+        <div class="alert alert-warning tg-alertmessage fade in" id="addSeanceHeurDebutExist" hidden>
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+            <i class="fa fa-check"></i>
+            <span><strong>Déja planifier.</strong> pour ce lieu de travaille ou bien pour votre autres lieux de travaille.</span>
+        </div>
+    </div>
+</div>
+
+    <fieldset>
+        <div class="tg-appoinmentbox">
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    <input type="text" class="form-control clockpicker" placeholder="Enter Start Time" id="heurDébut" >
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    <input type="text" class="form-control clockpicker" placeholder="Enter End Time" id="heurFin" >
+                    <input type="hidden" id="calendrier" value="{{ calendrie.id }}">
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    <select id="duree" class="form-control">
+                        <option value="">Select Appointment Time</option>
+                        <option value="15">15 min</option>
+                        <option value="20">20 min</option>
+                        <option value="25">25 min</option>
+                        <option value="30">30 min</option>
+                        <option value="35">35 min</option>
+                        <option value="40">40 min</option>
+                        <option value="45">45 min</option>
+                        <option value="50">50 min</option>
+                        <option value="55">55 min</option>
+                        <option value="60">60 min</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-5 col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    <select id="pause" class="form-control">
+                        <option value="">Select Pause Time</option>
+                        <option value="5">5 min</option>
+                        <option value="10">10 min</option>
+                        <option value="15">15 min</option>
+                        <option value="20">20 min</option>
+                        <option value="25">25 min</option>
+                        <option value="30">30 min</option>
+                        <option value="35">35 min</option>
+                        <option value="40">40 min</option>
+                        <option value="45">45 min</option>
+                        <option value="50">50 min</option>
+                        <option value="55">55 min</option>
+                        <option value="60">60 min</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-lg-2 col-xs-12 tg-columnpadding pull-right">
+                <button type="submit" class="tg-btn" id="btnPlanning">Add</button>
+            </div>
+        </div>
+    </fieldset>
+<div id="result"></div>
+<script type="text/javascript">
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Done'
+    });
+</script>
+
+<script>
+
+    $(document).ready(function () {
+
+        $("#btnPlanning").click(function () {
+            var start = $('#heurDébut').val();
+            var end = $('#heurFin').val();
+            var calendrie = $('#calendrier').val();
+
+            if (start == null || end == null){
+                alert('Veuiller difinir l\'intervalle du plage d\'ouverture');
+                return true;
+            }else {
+                var URL = "{{ path('seances_verifierHeurDebut', {'heurDebut' : 'sss', 'heurFin':'ttt', 'calendrie' : 'ddd'}) }}";
+                URL = URL.replace(/sss/g, start);
+                URL = URL.replace(/ddd/g, calendrie);
+                URL = URL.replace(/ttt/g, end);
+                console.log(URL);
+                start 	= $('#heurDébut').val().split(':');
+                end 	= $('#heurFin').val().split(':');
+                var pause 	 = parseInt($('#pause').val());
+                var workTime = parseInt($('#duree').val());
+                $.ajax({
+                    type: "GET",
+                    url: URL,
+                    cache: false,
+                    success: function (Response) {
+                        if (Response == 'exist'){
+                            alert('une plage est deja plannifier');
+
+                        }else {
+                            splitInterval(pause, workTime, start, end, calendrie);
+                        }
+                    }
+                });
+            }
+
+        });
+    });
+    var intervals = data = [];
+    var nextTime;
+    function splitInterval(pause, workTime, start, end, calendrier) {
+        start = parseInt(start[0] * 60) + parseInt(start[1]);
+        end = parseInt(end[0] * 60) + parseInt(end[1]);
+        if (start < end) {
+            var total = end - start;
+            var min = 00;
+            for (var i = 0; i < (total / workTime); i++) {
+                nextTime = start + workTime;
+                if (nextTime >= end) {
+                    min = 0;
+                }
+                intervals[i] = formateTime((start * 60) + (min * 60)) +' - '+ formateTime((nextTime * 60) + (min * 60)) + '<br />';
+                seconds = ((nextTime * 60) + pause) * 60 ;
+                data = secondsTimeSpanToHMS(seconds);
+                var HD = formateTime((start * 60) + (min * 60));
+                var HF = formateTime((nextTime * 60) + (min * 60));
+                start = data[0];
+                min = data[1];
+                var URL = "{{ path('seances_addSeances') }}";
+                var DATA = 'heurDebut=' + HD + '&heurFin=' + HF + '&calendrier=' + calendrier;
+                $.ajax({
+                    type: "POST",
+                    data: DATA,
+                    url: URL,
+                    cache: false,
+                    success: function (response) {
+                        $('#seances').html(response);
+                        return true;
+                    }
+                });
+            }
+        } else {
+            alert('the first hour must be less than second hour :p ');
+        }
+    }
+
+    function secondsTimeSpanToHMS(s) {
+        var h = Math.floor(s/3600); //Get whole hours
+        s -= h*3600;
+        var m = Math.floor(s/60); //Get remaining minutes
+        s -= m*60;
+        return [h, m]; //zero padding on minutes and seconds
+    }
+
+    function formateTime(s) {
+        var h = Math.floor(s/3600); //Get whole hours
+        s -= h*3600;
+        var m = Math.floor(s/60); //Get remaining minutes
+        s -= m*60;
+        return h+':'+m; //zero padding on minutes and seconds
+    }
+
+</script>
+
+

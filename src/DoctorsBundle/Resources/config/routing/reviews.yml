@@ -1,0 +1,25 @@
+reviews_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Reviews:index" }
+    methods:  GET
+    
+reviews_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Reviews:new" }
+    methods:  [GET, POST]
+
+reviews_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Reviews:show" }
+    methods:  GET
+
+reviews_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Reviews:edit" }
+    methods:  [GET, POST]
+
+reviews_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Reviews:delete" }
+    methods:  DELETE
+

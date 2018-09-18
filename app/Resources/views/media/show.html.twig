@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Medium'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ medium.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Path'|trans }}</th>
+                <td>{{ medium.path }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Type'|trans }}</th>
+                <td>{{ medium.type }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('media_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('media_edit', { 'id': medium.id }) }}">{{ 'Edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

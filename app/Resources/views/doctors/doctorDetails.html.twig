@@ -1,0 +1,266 @@
+{% include ('base.html.twig') %}
+{% block body %}
+    <body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+    <!--************************************
+            Preloader End
+    *************************************-->
+
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        {{ render(controller('AppBundle:Default:header')) }}
+        <!--************************************
+                            Inner Banner Start
+                *************************************-->
+        <div id="tg-innerbanner" class="tg-innerbanner tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <form class="tg-formtheme tg-formsearch" action="{{ path('doctor_search') }}" method="get">
+                            <fieldset>
+                                <input type="text" name="mots" class="form-control" placeholder="Specialities, Doctors, Hospitals, Labs, Spas...">
+                                <button type="submit" class="tg-btnformsearch"><i class="fa fa-search"></i></button>
+                            </fieldset>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                    Inner Banner End
+        *************************************-->
+        <!--************************************
+						Main Start
+		*************************************-->
+        
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-twocolumns" class="tg-twocolumns">
+                        <div class="col-md-9 col-sm-8 col-xs-12">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-directpost tg-detailpage">
+                                    <div class="tg-detail">
+                                        <figure class="tg-directpostimg">
+                                            
+                                                <a href="{{ path('doctor_detail', {'doctor' : doctor.id}) }}">
+                                                    <img src="{{ asset('assets/images/directpost/img-04.jpg') }}" alt="image description">
+                                                </a>
+                                            <figcaption>
+                                                <a class="tg-usericon tg-iconfeatured" href="#">
+                                                    <em class="tg-usericonholder">
+                                                        <i class="fa fa-bolt"></i>
+                                                        <span>{{ 'featured'|trans }}</span>
+                                                    </em>
+                                                </a>
+                                                {% if render(controller('UserBundle:User:isVerified', {'doctor':doctor.id})) == 1 %}
+                                                    <a class="tg-usericon tg-iconvarified" href="#">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-shield"></i>
+                                                            <span>{{ 'verified'|trans }}</span>
+                                                        </em>
+                                                    </a>
+                                                {% endif %}
+                                            </figcaption>
+                                        </figure>
+                                    </div>
+                                    <div class="tg-directinfo">
+                                        <div class="tg-directposthead">
+                                            <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                            <div class="tg-subjects">{{ render(controller('DoctorsBundle:Doctors:getDoctorsSpecification', {'doctor':doctor.id})) }}</div>
+                                            <ul class="tg-metadata">
+                                                <li><span class="tg-stars"><span></span></span></li>
+                                                <li><a href="#"><i class="fa fa-heart tg-like"></i></a></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes</a></li>
+                                            </ul>
+                                            <button type="button" class="tg-btn" data-toggle="modal" data-target="#tg-appointmentlightbox">{{ 'Make An Appointment'|trans }}</button>
+                                        </div>modal
+                                        <div class="tg-description">
+                                            <p>{{ doctor.professionalStatement }}</p>
+                                        </div>
+
+                                    </div>
+                                        
+                                    <section class="tg-section">
+                                        <div class="tg-detailpagetabs">
+                                            <ul class="tg-navdetailpagetabs" role="tablist">
+                                                <li role="presentation" class="active">
+                                                    <a href="#overview" aria-controls="overview" role="tab" data-toggle="tab">{{ 'Overview'|trans }}</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#calendrie" aria-controls="calendrie" role="tab" data-toggle="tab">{{ 'Calendrier'|trans }}</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#horaire" aria-controls="horaire" role="tab" data-toggle="tab">Horaire</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#reviews" aria-controls="reviews" role="tab" data-toggle="tab">{{ 'Reviews'|trans }}</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#mapothercenters" aria-controls="mapothercenters" role="tab" data-toggle="tab">{{ 'Map/Other Centers'|trans }}</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#services" aria-controls="services" role="tab" data-toggle="tab">{{ 'Services'|trans }}</a>
+                                                </li>
+                                                <li role="presentation">
+                                                    <a href="#askquestion" aria-controls="askquestion" role="tab" data-toggle="tab">{{ 'Ask Question'|trans }}</a>
+                                                </li>
+                                            </ul>
+                                            <div class="tab-content tg-contentdetailpage">
+                                                <div role="tabpanel" class="tab-pane tg-overview fade in active" id="overview">
+                                                    <div class="tg-box">
+                                                        <div class="tg-icontitle">
+                                                            <h3 class="fa fa-location-arrow">{{ 'Available Locations'|trans }}</h3>
+                                                        </div>
+                                                        <div style="z-index: 99999">
+                                                            {{ render(controller('DoctorsBundle:Locations:doctorLocations', {'doctor':doctor.id})) }}
+
+                                                        </div>
+                                                    </div>
+                                                    {{ render(controller('DoctorsBundle:Doctors:doctorDetailsSpecialites', {'doctor':doctor.id})) }}
+                                                    {{ render(controller('DoctorsBundle:Doctors:doctorDetailsEducations', {'doctor':doctor.id})) }}
+                                                    {{ render(controller('DoctorsBundle:Doctors:doctorDetailsCertifications', {'doctor':doctor.id})) }}
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane tg-services fade" id="calendrie">
+                                                    <div class="tg-box">
+                                                        <div class="tg-tabtitle">
+                                                            <h3>Calendrier</h3>
+                                                        </div>
+                                                        <div>
+                                                            <label for="">Select Location</label>
+                                                            <select name="" id="seancecal_select" class="form-control">
+                                                                <option value="">- Select Location -</option>
+                                                                {% for item in location %}
+                                                                    <option value="{{ path('seances_index_getSeancesByDoctor',{location:item.id}) }}">{{ item.name }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <script>
+                                                            $('#seancecal_select').change(function(){
+                                                                var path = $(this).val();
+                                                                $.ajax({
+                                                                    url: path,
+                                                                    type: 'POST',
+                                                                    success: function(result){
+                                                                        $('#seancecal').html(result);
+                                                                    }
+                                                                });
+                                                            });
+                                                        </script>
+                                                        <div id="seancecal">
+
+                                                        </div>
+                                                        {#{{ render(controller('AppointmentsBundle:Seances:getSeancesByDoctor', {'doctor': doctor.id })) }}#}
+                                                    </div>
+                                                </div>
+                                                    
+                                                <div role="tabpanel" class="tab-pane tg-services fade" id="horaire">
+                                                    <div class="tg-box">
+                                                        <div class="tg-tabtitle">
+                                                            <h3>Horaire</h3>
+                                                        </div>
+                                                        {{ render(controller('DoctorsBundle:Horaire:getHoraireByDoctor', {'doctor': doctor.id })) }}
+                                                    </div>
+                                                </div>
+                                                    
+                                                <div role="tabpanel" class="tab-pane tg-reviews fade" id="reviews">
+                                                    {{ render(controller('DoctorsBundle:Reviews:reviewsList',{'doctor':doctor.id})) }}
+                                                    {{ render(controller('DoctorsBundle:Reviews:new')) }}
+                                                </div>
+                                                
+                                                <div role="tabpanel" class="tab-pane tg-mapothercenters fade" id="mapothercenters">
+                                                    <div class="tg-box">
+                                                        <div class="tg-tabtitle">
+                                                            <h2>{{ 'Available Locations'|trans }}</h2>
+                                                        </div>
+                                                        {{ render(controller('DoctorsBundle:Locations:doctorMapLocations', {'doctor':doctor.id})) }}
+                                                    </div>
+                                                </div>
+                                                <div role="tabpanel" class="tab-pane tg-services fade" id="services">
+                                                    <div class="tg-box">
+                                                        <div class="tg-tabtitle">
+                                                            <h3>services</h3>
+                                                            <h4>{{ 'Fee Per Patient'|trans }} </h4>
+                                                        </div>
+                                                        {{ render(controller('DoctorsBundle:Services:listServicesByDoctor', {'doctor': doctor.id})) }}
+                                                    </div>
+                                                </div>
+                                                 
+                                                    
+                                                <div role="tabpanel" class="tab-pane tg-askquestion fade" id="askquestion">
+                                                    {{ render(controller('DoctorsBundle:Questions:new')) }}                                                    
+                                                    {{ render(controller('DoctorsBundle:Questions:questionsList',{'doctor':doctor.id})) }}
+                                                </div>    
+                                               
+                                            </div>
+                                        </div>
+                                    </section>
+                                </div>
+                            </div>
+                        </div>
+                         
+                        {{ render(controller('DoctorsBundle:Locations:getNearestDoctor', {'doctor': doctor.id })) }}
+
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <!--************************************
+						Main End
+		*************************************-->
+
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    <div class="modal tg-modal tg-appointmentlightbox fade" id="tg-appointmentlightbox" tabindex="-1" role="dialog">
+        <div style="margin-left: -300px" class="modal-dialog tg-modaldialog">
+            <div class="modal-content tg-modalcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <div>
+                    <label for="">Select Location</label>
+                    <select name="" id="seancemodel_select" class="form-control">
+                        <option value="">- Select Location -</option>
+                        {% for item in location %}
+                            <option value="{{ path('seances_index_getSeancesByDoctor',{location:item.id}) }}">{{ item.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <script>
+                    $('#seancemodel_select').change(function(){
+                        var path = $(this).val();
+                        $.ajax({
+                            url: path,
+                            type: 'POST',
+                            success: function(result){
+                                $('#seancemodel').html(result);
+                            }
+                        });
+                    });
+                </script>
+                <div id="seancemodel">
+
+                </div>
+                {#{{ render(controller('AppointmentsBundle:Seances:getSeancesByDoctor', {'doctor': doctor.id })) }}#}
+            </div>
+        </div>
+    </div>
+
+    {% include ('default/footer.html.twig') %}
+
+
+
+
+{% endblock %}

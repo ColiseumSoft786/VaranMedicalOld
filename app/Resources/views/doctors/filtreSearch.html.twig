@@ -1,0 +1,126 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<div class="tg-filterarea">
+    <a class="tg-btnfilter" href="javascript:void(0);"><i class="fa fa-filter"></i></a>
+    <div id="tg-filtersection" class="tg-filtersection">
+        <a class="tg-btnfilter" href="javascript:void(0);"></a>
+        <form class="tg-themeform tg-formrefinesearch">
+             <h3>{{ 'Narrow Your Search'|trans }}</h3>
+            <fieldset>
+                <h4>Specialité</h4>
+                <span class="tg-optionbox">
+                    {{ render(controller('DoctorsBundle:Specialities:getSpecialities')) }}
+                </span>
+            </fieldset>
+            <fieldset>
+                <h4>{{ 'Availability'|trans }}</h4>
+
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="monday" name="availability[]" value="Monday">
+                    <label for="monday">{{ 'Monday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="tuesday" name="availability[]" value="Tuesday">
+                    <label for="tuesday">{{ 'Tuesday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="wednesday" name="availability[]" value="Wednesday">
+                    <label for="wednesday">{{ 'Wednesday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="thursday" name="availability[]" value="Thursday">
+                    <label for="thursday">{{ 'Thursday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="friday" name="availability[]" value="Friday">
+                    <label for="friday">{{ 'Friday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="saturday" name="availability[]" value="Saturday">
+                    <label for="saturday">{{ 'Saturday'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                    <input type="checkbox" id="sunday" name="availability[]" value="Sunday">
+                    <label for="sunday">{{ 'Sunday'|trans }}</label>
+                </span>
+                <div class="tg-uislider">
+                    <div id="tg-timerangeslider" class="tg-timerangeslider tg-themerangeslider">
+                        <div class="sliders_step1">
+                            <div id="slider-range"></div>
+                        </div>
+                    </div>
+                    <div class="tg-amountbox">
+                        <span>{{ 'Time Range'|trans }}: </span>
+                        <span name="" class="tg-timeslider">12:00 AM</span> - <span name="timeMax" class="tg-timeslider2">12:00 AM</span>
+                        <input type="hidden" name = "timeMin" id="timeMin" readonly>
+                        <input type="hidden" name = "timeMax" id="timeMax" readonly>
+
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <h4>{{ 'Gender'|trans }}</h4>
+                <span class="tg-checkbox">
+                        <input type="checkbox" id="allgender" name="gender" value="all">
+                        <label for="allgender">{{ 'All'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                        <input type="checkbox" id="male" name="gender" value="male">
+                        <label for="male">{{ 'Male'|trans }}</label>
+                </span>
+                <span class="tg-checkbox">
+                        <input type="checkbox" id="female" name="gender" value="female">
+                        <label for="female">{{ 'Female'|trans }}</label>
+                </span>
+            </fieldset>
+            
+            <fieldset>
+                <h4>{{ 'Consultation Fee'|trans }}</h4>
+                <div id="tg-consultationfeerangeslider" class="tg-consultationfeerangeslider tg-themerangeslider"></div>
+                <div class="tg-amountbox">
+                    <span>{{ 'Fee Range'|trans }}: </span>
+                    <input type="text" id="tg-consultationfeeamount" >
+                    <input type="hidden" name = "fraisMin" id="fraisMin" readonly>
+                    <input type="hidden" name = "fraisMax" id="fraisMax" readonly>
+                </div>
+            </fieldset>
+            {#<fieldset>
+                <h4>{{ 'Radius'|trans }}</h4>
+                <div id="tg-radiusrangeslider" class="tg-radiusrangeslider tg-themerangeslider"></div>
+                <div class="tg-amountbox">
+                    <span>{{ 'Distance in (Miles)'|trans }}: </span>
+                    <input type="text" name = "distance" id="tg-radiusamount" readonly>
+                    <input type="hidden" name = "distanceMin" id="distanceMin" readonly>
+                    <input type="hidden" name = "distanceMax" id="distanceMax" readonly>
+                </div>
+            </fieldset>
+            #}
+            
+            <fieldset>
+                <input type="hidden" name = "mots" value="" id="searchParam" readonly>
+            </fieldset>
+            <h1><span id="searchParam"></span></h1>
+            <fieldset>
+                <button class="tg-btn" type="reset">{{ 'reset all'|trans }}</button>
+                <button class="tg-btn" type="submit">{{ 'apply filter'|trans }}</button>
+            </fieldset>
+        </form>
+    </div>
+</div>
+            
+<script>
+    $(document).ready(function(){
+        $('input:checkbox[name="gender"]').click(function() {
+            $('input:checkbox[name="gender"]').not(this).prop('checked', false);
+        });
+});
+</script>
+<script>
+var url_string = window.location.href;
+var url = new URL(url_string);
+var mots = url.searchParams.get("mots");
+document.getElementById("searchParam").value = mots;
+document.getElementById("searchBar").value = mots;
+
+</script>

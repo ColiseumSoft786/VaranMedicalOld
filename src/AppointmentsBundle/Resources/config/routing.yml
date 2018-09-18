@@ -1,0 +1,23 @@
+appointments_calendries:
+    resource: "@AppointmentsBundle/Resources/config/routing/calendries.yml"
+    prefix:   /calendries
+
+appointments_seances:
+    resource: "@AppointmentsBundle/Resources/config/routing/seances.yml"
+    prefix:   /seances
+
+appointments_appointments:
+    resource: "@AppointmentsBundle/Resources/config/routing/appointments.yml"
+    prefix:   /appointments
+
+appointments_reasons:
+    resource: "@AppointmentsBundle/Resources/config/routing/reasons.yml"
+    prefix:   /reasons
+
+appointments_settings:
+    resource: "@AppointmentsBundle/Resources/config/routing/settings.yml"
+    prefix:   /settings
+
+appointments_holiday:
+    resource: "@AppointmentsBundle/Resources/config/routing/holiday.yml"
+    prefix:   /Holidays

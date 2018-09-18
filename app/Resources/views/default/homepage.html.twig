@@ -1,0 +1,1016 @@
+{% include ('base.html.twig') %}
+{% block body %}
+    <body class="tg-home tg-login">
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!--************************************
+                        Preloader Start
+        *************************************
+            <div class="preloader-outer">
+                <div class="pin"></div>
+                <div class="pulse"></div>
+            </div>
+        <!--************************************
+                        Preloader End
+        *************************************-->
+
+        <!--************************************
+                        Wrapper Start
+        *************************************-->
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+            {{  render(controller('AppBundle:Default:header')) }}
+            <!--************************************
+                            Home Banner Start
+            *************************************-->
+            <div id="tg-homebanner" class="tg-homebanner tg-haslayout">
+                <figure class="tg-bannerbg">
+                    <img src="{{ asset('assets/images/banner/index.jpg') }}" alt="image description">
+                </figure>
+                <div class="tg-bannercontent">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <form class="tg-formtheme tg-formsearch" action="{{ path('doctor_search') }}" method="get">
+                                    <div class="tg-sectionhead">
+                                        <div class="tg-sectiontitle">
+                                            <h1>{{ 'Find a Medical Help'|trans }}!</h1>
+                                            <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                        </div>
+                                    </div>
+                                    <fieldset>
+                                        <input type="text" name="mots" class="form-control" placeholder="Specialities, Doctors, Hospitals, Labs, Spas...">
+                                        <button type="submit" class="tg-btnformsearch"><i class="fa fa-search"></i></button>
+                                    </fieldset>
+                                    <div class="tg-searchbulder">
+                                        <div id="tg-subcategories" class="tg-subcategories">
+                                            <div id="doctorscategory" class="tg-tabcontent tg-active">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist" name="subcategory" value="Dentist">
+                                                    <label for="dentist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist" name="subcategory" value="Urologist">
+                                                    <label for="urologist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="hospitalscategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath2" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist2" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda2" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist2" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist2" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist2" name="subcategory" value="Dentist">
+                                                    <label for="dentist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent2" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist2" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist2" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist2" name="subcategory" value="Urologist">
+                                                    <label for="urologist2">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="spascategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist3" name="subcategory" value="Dentist">
+                                                    <label for="dentist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent3" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist3" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist3" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist3" name="subcategory" value="Urologist">
+                                                    <label for="urologist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath3" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist3" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda3" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist3" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist3" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist3">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="pharmaciescategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath4" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist4" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda4" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist4" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist4" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist4" name="subcategory" value="Dentist">
+                                                    <label for="dentist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent4" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist4" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist4" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist4" name="subcategory" value="Urologist">
+                                                    <label for="urologist4">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="labscategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist5" name="subcategory" value="Dentist">
+                                                    <label for="dentist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent5" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist5" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist5" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist5" name="subcategory" value="Urologist">
+                                                    <label for="urologist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath5" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist5" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda5" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist5" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist5" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist5">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="fitnesscategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath6" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist6" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda6" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist6" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist6" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist6" name="subcategory" value="Dentist">
+                                                    <label for="dentist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent6" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist6" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist6" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist6" name="subcategory" value="Urologist">
+                                                    <label for="urologist6">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="bloodbankcategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist7" name="subcategory" value="Dentist">
+                                                    <label for="dentist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent7" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist7" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist7" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist7" name="subcategory" value="Urologist">
+                                                    <label for="urologist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath7" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist7" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda7" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist7" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist7" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist7">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                            <div id="clinicscategory" class="tg-tabcontent">
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="homeopath8" name="subcategory" value="Homeopath">
+                                                    <label for="homeopath8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-21.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Homeopath'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ophthalmologist8" name="subcategory" value="Ophthalmologist">
+                                                    <label for="ophthalmologist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-22.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ophthalmologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ayurveda8" name="subcategory" value="Ayurveda">
+                                                    <label for="ayurveda8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-23.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ayurveda'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dermatologist8" name="subcategory" value="Dermatologist">
+                                                    <label for="dermatologist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-24.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dermatologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="neurologist8" name="subcategory" value="Neurologist">
+                                                    <label for="neurologist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-25.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Neurologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="dentist8" name="subcategory" value="Dentist">
+                                                    <label for="dentist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Dentist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="ent8" name="subcategory" value="Ear-Nose-Throat (ENT)">
+                                                    <label for="ent8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-17.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Ear-Nose-Throat'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="gastroenterologist8" name="subcategory" value="Gastroenterologist">
+                                                    <label for="gastroenterologist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-18.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Gastroenterologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="psychiatrist8" name="subcategory" value="Psychiatrist">
+                                                    <label for="psychiatrist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-19.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Psychiatrist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                                <span class="tg-checkbox tg-subcategorycheckbox">
+                                                    <input type="checkbox" id="urologist8" name="subcategory" value="Urologist">
+                                                    <label for="urologist8">
+                                                        <span><img src="{{ asset('assets/images/icons/icon-20.png') }}" alt="image description"></span>
+                                                        <span>{{ 'Urologist'|trans }}</span>
+                                                    </label>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--************************************
+                            Home Banner End
+            *************************************-->
+            <!--************************************
+                            Main Start
+            *************************************-->
+            <main id="tg-main" class="tg-main tg-haslayout">
+                <!--************************************
+                                Features Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="tg-sectionhead">
+                                    <div class="tg-sectiontitle">
+                                        <h2>{{ 'A Complete Medical Portal'|trans }}</h2>
+                                        <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tg-features">
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="tg-feature">
+                                        <figure class="tg-featureicon"><img src="{{ asset('assets/images/icons/icon-02.png') }}" alt="image description"></figure>
+                                        <h3><a href="#">{{ 'Find Medical Help'|trans }}</a></h3>
+                                        <div class="tg-description">
+                                            <p>Consectetur adipisicing elit eiusmod tempor incididunt ut labore dolore magna aliqua minim veniam quis nostrud exercitation ullamco laboris.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="tg-feature">
+                                        <figure class="tg-featureicon"><img src="{{ asset('assets/images/icons/icon-03.png') }}" alt="image description"></figure>
+                                        <h3><a href="#">{{ 'Make Appointment'|trans }}</a></h3>
+                                        <div class="tg-description">
+                                            <p>Consectetur adipisicing elit eiusmod tempor incididunt ut labore dolore magna aliqua minim veniam quis nostrud exercitation ullamco laboris.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-sm-4 col-xs-12">
+                                    <div class="tg-feature">
+                                        <figure class="tg-featureicon"><img src="{{ asset('assets/images/icons/icon-04.png') }}" alt="image description"></figure>
+                                        <h3><a href="#">{{ 'Get Facilitate'|trans }}</a></h3>
+                                        <div class="tg-description">
+                                            <p>Consectetur adipisicing elit eiusmod tempor incididunt ut labore dolore magna aliqua minim veniam quis nostrud exercitation ullamco laboris.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Features End
+                *************************************-->
+                <!--************************************
+                                Statistics Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout tg-parallaximg tg-imgoverlap" data-bleed="-17" data-appear-top-offset="600" data-parallax="scroll" data-image-src="{{ asset('assets/images/parallax/bgparallax-02.jpg') }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <div class="tg-statisticscounters">
+                                    <div class="row">
+                                        <div class="tg-counter">
+                                            <h2><span data-from="0" data-to="36012" data-speed="8000" data-refresh-interval="50">36012</span></h2>
+                                            <h3>{{ 'Happy Customers'|trans }}</h3>
+                                        </div>
+                                        <div class="tg-counter">
+                                            <figure><img src="{{ asset('assets/images/icons/icon-06.png') }}" alt="image description"></figure>
+                                            <h2><span data-from="0" data-to="21067" data-speed="8000" data-refresh-interval="50">21067</span></h2>
+                                            <h3>{{ 'Active Members'|trans }}</h3>
+                                        </div>
+                                        <div class="tg-counter">
+                                            <figure><img src="{{ asset('assets/images/icons/icon-07.png') }}" alt="image description"></figure>
+                                            <h2><span data-from="0" data-to="6954" data-speed="8000" data-refresh-interval="50">6954</span></h2>
+                                            <h3>{{ 'New Members'|trans }}</h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-sm-6 hidden-xs">
+                                <figure class="tg-sectionimg"><img src="{{ asset('assets/images/img-04.png') }}" alt="image description"></figure>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Statistics End
+                *************************************-->
+                <!--************************************
+                                Featured DiretPost Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12">
+                                <div class="tg-sectionhead">
+                                    <div class="tg-sectiontitle">
+                                        <h2>{{ 'Featured Listings'|trans }}</h2>
+                                        <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                    </div>
+                                </div>
+                                <ul id="tg-filterbalenav" class="tg-filterbalenav option-set">
+                                    <li><a class="tg-active" data-filter="*" href="javascript:void(0);">all</a></li>
+                                    <li><a data-filter=".doctors" href="javascript:void(0);">Doctors</a></li>
+                                    <li><a data-filter=".hospitals" href="javascript:void(0);">Hospitals</a></li>
+                                    {#
+                                    <li><a data-filter=".spas" href="javascript:void(0);">Spas</a></li>
+                                    <li><a data-filter=".pharmacies" href="javascript:void(0);">Pharmacies</a></li>
+                                    <li><a data-filter=".lab" href="javascript:void(0);">Lab</a></li>
+                                    <li><a data-filter=".fitnesscenters" href="javascript:void(0);">Fitness Centers</a></li>#}
+                                </ul>
+                                <div id="filter-masonry" class="tg-featureddirectposts tg-searchresult tg-filtermasonry">
+
+                                    {% if doctors != null %}
+                                        {% for doctor in doctors %}
+                                            
+                                            <div class="tg-directpost doctors">
+                                                <figure style="width:120px; height: 120px" class="tg-directpostimg">
+                                                    {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                                        <a href="#">
+                                                            <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                                        </a>
+                                                    {% else %}
+                                                        <a href="#">
+                                                            <img src="{{ asset('assets/images/directpost/img-02.jpg') }}" alt="image description">
+                                                        </a>
+                                                    {% endif %}
+                                                    <figcaption>
+                                                        <a class="tg-usericon tg-iconfeatured" href="#">
+                                                            <em class="tg-usericonholder">
+                                                                <i class="fa fa-bolt"></i>
+                                                                <span>{{ 'featured'|trans }}</span>
+                                                            </em>
+                                                        </a>
+                                                        <a class="tg-usericon tg-iconvarified" href="#">
+                                                            <em class="tg-usericonholder">
+                                                                <i class="fa fa-shield"></i>
+                                                                <span>{{ 'verified'|trans }}</span>
+                                                            </em>
+                                                        </a>
+                                                    </figcaption>
+                                                </figure>
+                                                <div class="tg-directinfo">
+                                                    <div class="tg-leftarea">
+                                                        <div class="tg-directposthead">
+                                                            <h3><a href="#">Dr. {{doctor.getFirstName()}} {{doctor.getLastName()}}</a></h3>
+                                                            <div class="tg-subjects">{{doctor.getProfessionalStatement()}}</div>
+                                                        </div>
+                                                        <ul class="tg-contactinfo">
+                                                            <li><a href="#"><i class="fa fa-location-arrow"></i><address>154 Bayswater Rd, W2 4HP, UK</address></a></li>
+                                                            <li><a href="#"><i class="fa fa-phone"></i><span>{{doctor.getGSM()}}</span></a></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="tg-rightarea">
+                                                        <div class="tg-bookappoinment">
+                                                            <a href="#"><i class="fa fa-thumbs-o-up"></i>99%<span>(1009 votes)</span></a>
+                                                            <button type="button" class="tg-btn" data-toggle="modal" data-target="#tg-appointmentlightbox">
+                                                                {{ 'Book Appointment'|trans }}</button>
+                                                            <ul class="tg-metadata">
+                                                                <li><span class="tg-stars"><span></span></span></li>
+                                                                <li><a href="#"><i class="fa fa-heart tg-like"></i></a></li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                    {% endif %}
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Featured DiretPost End
+                *************************************-->
+                <!--************************************
+                                Student Review Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout tg-parallaximg" data-position-x="center" data-position-y="center" data-appear-top-offset="600" data-parallax="scroll" data-bleed="0" data-image-src="{{ asset('assets/images/parallax/bgparallax-03.jpg') }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-10 col-md-offset-1 col-sm-12 col-xs-12">
+                                <div class="tg-sectionhead">
+                                    <div class="tg-sectiontitle">
+                                        <h2>{{ 'Valuable Feedback'|trans }}</h2>
+                                        <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                    </div>
+                                </div>
+                                <div id="tg-feedbackslider" class="tg-feedbackslider tg-feedback">
+                                    {% for dataComment in dataComments %} 
+                                        <div class="item">
+                                            <div class="tg-feedbackcontent">
+                                                <blockquote>
+                                                    <q>{{dataComment.Comments}}</q>
+                                                </blockquote>
+                                                <h3>Dr. {{dataComment.doctor.getFirstName()}} {{dataComment.doctor.getLastName()}}</h3>
+                                                <ul class="tg-metadata">
+                                                    <li><span>{{dataComment.doctor.getProfessionalStatement()}} </span></li>
+                                                    <li><span class="tg-tooltip tg-stars" data-toggle="tooltip" data-placement="top right" title="Moyenne de 4,85 sur la base de 423 avis"><span></span></span></li>
+                                                </ul>
+                                            </div>
+                                        </div>
+
+                                    {% endfor %} 
+                                </div>
+                                <div id="tg-reviewerdpslider" class="tg-reviewerdpslider tg-reviewerdp">
+                                    {% for dataComment in dataComments %} 
+                                        <div class="item">
+                                            {% if dataComment.doctor.image %}
+                                                <figure class="tg-directpostimg"> 
+                                                    <img src="{{ vich_uploader_asset(dataComment.doctor, 'imageFile') }}" alt="{{ dataComment.doctor.image }}" />
+                                                </figure>
+                                            {% else %}
+
+                                                <figure>
+                                                    <img src="{{ asset('assets/images/thumbnails/img-01.jpg') }}" alt="image description">
+                                                </figure>
+                                            {% endif %}
+
+
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Student Review End
+                *************************************-->
+                <!--************************************
+                                Trusted By Many Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-12 col-sm-12 col-xs-12">
+                                <div class="tg-trustedbymany">
+                                    <div class="tg-sectionhead">
+                                        <div class="tg-sectiontitle">
+                                            <h2>{{ 'Trusted By Many'|trans }}</h2>
+                                            <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                        </div>
+                                    </div>
+                                    <div id="tg-brandsslider" class="tg-brandsslider tg-brands">
+                                        <div class="item">
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-01.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-02.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-03.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-04.png') }}" alt="image description"></a></figure>
+                                        </div>
+                                        <div class="item">
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-01.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-02.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-03.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-04.png') }}" alt="image description"></a></figure>
+                                        </div>
+                                        <div class="item">
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-01.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-02.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-03.png') }}" alt="image description"></a></figure>
+                                            <figure><a href="#"><img src="{{ asset('assets/images/brands/img-04.png') }}" alt="image description"></a></figure>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Trusted By Many Start
+                *************************************-->
+                <!--************************************
+                                Register Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout tg-parallaximg" data-position-x="center" data-position-y="center" data-appear-top-offset="600" data-parallax="scroll" data-bleed="0" data-image-src="{{ asset('assets/images/parallax/bgparallax-04.jpg') }}">
+                    <div class="container">
+                        <div class="row">
+                            <div class="tg-freeregistration">
+                                <div class="tg-regleftarea">
+                                    <h2>{{ 'Register For Free'|trans }}!</h2>
+                                    <div class="tg-description"><p>Consectetur adiaisicine elit eiusmod temtor incididunt ut laborei dolore matna alicua minim veniam.</p></div>
+                                </div>
+                                <div class="tg-regrightarea">
+                                    <a class="tg-btn" href="javascript:void(0);">{{ 'Register Now'|trans }}</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                Register Start
+                *************************************-->
+                <!--************************************
+                                News Start
+                *************************************-->
+                <section class="tg-main-section tg-haslayout">
+                    <div class="container">
+                        <div class="row">
+                            <div class="tg-newstrusted">
+                                <div class="tg-sectionhead">
+                                    <div class="tg-sectiontitle">
+                                        <h2>{{ 'Latest News'|trans }}</h2>
+                                        <img class="tg-svginject" src="{{ asset('assets/images/sectionline.svg') }}" alt="image description">
+                                    </div>
+                                </div>
+                                <div class="tg-latestnews">
+                                    <div class="col-sm-4">
+                                        <article class="tg-post">
+                                            <figure class="tg-postimg"><a href="#"><img src="{{ asset('assets/images/post/img-01.jpg') }}" alt="image description"></a></figure>
+                                            <div class="tg-postcontent">
+                                                <time class="tg-postdate" datetime="2011-10-10">Juin <span>27</span></time>
+                                                <div class="tg-posttitle">
+                                                    <h3><a href="#">{{ 'Always Take Right Decision'|trans }}</a></h3>
+                                                </div>
+                                                <ul class="tg-metadata">
+                                                    <li>
+                                                        <em>{{ 'Posted By'|trans }}: </em>
+                                                        <a href="#">Pricilla Nader</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-description"><p>Consectetur adipisicing elit eiusmod ipor incididunt utreiat.</p></div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <article class="tg-post">
+                                            <figure class="tg-postimg"><a href="#"><img src="{{ asset('assets/images/post/img-02.jpg') }}" alt="image description"></a></figure>
+                                            <div class="tg-postcontent">
+                                                <time class="tg-postdate" datetime="2011-10-10">Juin <span>27</span></time>
+                                                <div class="tg-posttitle">
+                                                    <h3><a href="#">{{ 'Always Take Right Decision'|trans }}</a></h3>
+                                                </div>
+                                                <ul class="tg-metadata">
+                                                    <li>
+                                                        <em>{{ 'Posted By'|trans }}: </em>
+                                                        <a href="#">Pricilla Nader</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-description"><p>Consectetur adipisicing elit eiusmod ipor incididunt utreiat.</p></div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                    <div class="col-sm-4">
+                                        <article class="tg-post">
+                                            <figure class="tg-postimg"><a href="#"><img src="{{ asset('assets/images/post/img-03.jpg') }}" alt="image description"></a></figure>
+                                            <div class="tg-postcontent">
+                                                <time class="tg-postdate" datetime="2011-10-10">Juin <span>27</span></time>
+                                                <div class="tg-posttitle">
+                                                    <h3><a href="#">{{ 'Always Take Right Decision'|trans }}</a></h3>
+                                                </div>
+                                                <ul class="tg-metadata">
+                                                    <li>
+                                                        <em>{{ 'Posted By'|trans }}: </em>
+                                                        <a href="#">Pricilla Nader</a>
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-description"><p>Consectetur adipisicing elit eiusmod ipor incididunt utreiat.</p></div>
+                                            </div>
+                                        </article>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!--************************************
+                                News & Trusted End
+                *************************************-->
+            </main>
+            <!--************************************
+                            Main End
+            *************************************-->
+
+        </div>
+        <!--************************************
+                        Wrapper End
+        *************************************-->
+        {% include ('default/footer.html.twig') %}
+    {% endblock %}

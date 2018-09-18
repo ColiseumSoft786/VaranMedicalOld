@@ -1,0 +1,149 @@
+{% include ('base.html.twig') %}
+{% block body %}
+    <body class="tg-home tg-login">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************
+    <div class="preloader-outer">
+        <div class="pin"></div>
+        <div class="pulse"></div>
+    </div>
+    <!--************************************
+            Preloader End
+    *************************************-->
+
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        {{ render(controller('AppBundle:Default:header')) }}
+
+        <!--************************************
+                Main Start
+        *************************************-->
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-content" class="tg-content tg-dashboard">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                            <div class="tg-widgetprofile">
+                                <figure class="tg-directpostimg">
+                                    {% if vich_uploader_asset(patient, 'imageFile') %}
+                                        <a href="#">
+                                            <img src="{{ vich_uploader_asset(patient, 'imageFile') }}" alt="{{ patient.image }}" />
+                                        </a>
+                                    {% else %}
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                        </a>
+                                    {% endif %}                                
+                                </figure>
+                                <div class="tg-directposthead">
+                                    <h3><a href="#"> {{ patient.firstName }} {{ patient.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('patient_profil', {'id':app.user.id}) }}">{{ 'Profil'|trans }}</a> </div>
+                            <nav id="tg-dashboardnav" class="tg-dashboardnav">
+                                <ul>
+                                    <li> <a href="#"> <i class="fa fa-user"></i> <span>{{ 'Profile Settings'|trans }}</span> </a> </li>
+                                </ul>
+                            </nav>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                            <div class="tg-dashboardtabs">
+                                <h3>{{ 'Profil edit'|trans }}</h3>
+                                <hr>
+                                <br>
+                                <div class="tab-content tg-dashboardtabcontent">
+                                    <div role="tabpanel" class="tab-pane active" id="overview">
+                                        <div class="row tg-rowmargin">
+                                            {{ form_start(edit_form) }}
+                                            <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.firstName, {'attr':{'class':'form-control', 'placeholder':'Prénom'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.lastName, {'attr':{'class':'form-control', 'placeholder':'Nom'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.birthday, {'attr':{'class':'form-control js-datepicker', 'placeholder':'Date de naissance'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-4 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.gSM, {'attr':{'class':'form-control', 'placeholder':'GSM'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.domicile, {'attr':{'class':'form-control', 'placeholder':'Domicile'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.travail, {'attr':{'class':'form-control', 'placeholder':'Travail'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    <select name="patientbundle_patient[preferredNumber]" id="patientbundle_patient_preferredNumber">
+                                                        <option value="gsm">GSM</option>
+                                                        <option value="travail">Travail</option>
+                                                        <option value="domicile">Domicile</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.adresse, {'attr':{'class':'form-control', 'placeholder':'Adresse'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding" >
+                                                <div class="form-group tg-formgroup">
+                                                    <select name="patientbundle_patient[sexe]" id="patientbundle_patient_sexe">
+                                                        <option value="homme">Homme</option>
+                                                        <option value="femme">Femme</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group tg-formgroup">
+                                                    {{ form_widget(edit_form.imageFile) }}
+                                                    {{ form_widget(edit_form._token) }}
+                                                </div>
+                                            </div>
+                                            <button type="submit" class="tg-btn pull-right"><i class="fa fa-edit"></i> {{ 'Edit'|trans }}</button>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!--************************************
+                Main End
+        *************************************-->
+
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    {% include ('default/footer.html.twig') %}
+
+    {% endblock %}
+

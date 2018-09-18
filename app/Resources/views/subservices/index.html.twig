@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Subservices list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Subservice'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for subService in subServices %}
+            <tr>
+                <td><a href="{{ path('subservices_show', { 'id': subService.id }) }}">{{ subService.id }}</a></td>
+                <td>{{ subService.subService }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('subservices_show', { 'id': subService.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('subservices_edit', { 'id': subService.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('subservices_new') }}">{{ 'Create a new subService'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

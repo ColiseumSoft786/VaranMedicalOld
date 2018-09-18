@@ -1,0 +1,131 @@
+
+{% include ('base.html.twig') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% block body %}
+
+
+        <body class="tg-home tg-login">
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+        <!--************************************
+                Preloader Start
+        *************************************--
+        <div class="preloader-outer">
+            <div class="pin"></div>
+            <div class="pulse"></div>
+        </div>
+        <!--************************************
+                Preloader End
+        *************************************-->
+
+        <!--************************************
+                Wrapper Start
+        *************************************-->
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+            {{ render(controller('AppBundle:Default:header')) }}
+
+            <!--************************************
+                Main Start
+        *************************************-->
+            <main id="tg-main" class="tg-main tg-haslayout">
+                <div class="container">
+                    <div class="row">
+                        <div id="tg-content" class="tg-content tg-dashboard">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                                <div class="tg-widgetdashboard">
+                                    <div class="tg-widgetprofile">
+                                        <figure class="tg-directpostimg"> 
+                                            {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                                <a href="#">
+                                                    <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                                </a>
+                                            {% endif %}     
+                                            {% if app.user.verifier == 1 %}
+                                                <figcaption>
+                                                    <a class="tg-usericon tg-iconvarified" href="#">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-shield"></i>
+                                                            <span>{{ 'verified'|trans }}</span>
+                                                        </em>
+                                                    </a>
+                                                </figcaption>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="tg-directposthead">
+                                            <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                            <div class="tg-subjects"></div>
+                                            <ul class="tg-metadata">
+                                                <li><span class="tg-stars"><span></span></span></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                            </ul>
+                                        </div>
+                                        <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.idTable }) }}">{{ 'Profile'|trans }}</a> </div>
+                                    {% include('profilDoctorNav.html.twig') %}
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                                <div class="tg-dashboardappoinmentsetting">
+                                    <div class="tab-content tg-maintabscontent tg-cutsomslottabcontent">
+                                        <div role="tabpanel" class="tab-pane active" id="inbox">
+                                            <div class="tg-dashboardbox">
+                                                <div class="tg-dashboardboxtitle">
+                                                    <h2>Plannification d'une date</h2>
+                                                </div>
+                                                {% if calendrie.absence == 0 %}
+                                                    {{ render(controller('AppointmentsBundle:Seances:new', {'calendrie': calendrie.id})) }}
+                                                {% endif %}
+                                                <div id="seances">
+                                                    {{ render(controller('AppointmentsBundle:Seances:getSeacesByCalendarEditable', {'calendar': calendrie.id})) }}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </main>
+        <!--************************************
+                Main End
+        *************************************-->
+        <!--************************************
+				Light Box Start
+	*************************************-->
+        <div class="modal tg-modal tg-appointmentlightbox fade" id="addSeances" tabindex="-1" role="dialog">
+            <div class="modal-dialog tg-modaldialog">
+                <div class="modal-content tg-modalcontent">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <div id="addSeancesZone">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal tg-modal tg-appointmentlightbox fade" id="tg-appointmentlightbox" tabindex="-1" role="dialog">
+            <div class="modal-dialog tg-modaldialog">
+                <div class="modal-content tg-modalcontent">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h2>{{ 'Add new job location'|trans }}</h2>
+                    {{ render(controller('AppointmentsBundle:Calendries:new')) }}
+                </div>
+
+            </div>
+        </div>
+        <!--************************************
+                    Light Box End
+        *************************************-->
+        </div>
+        <!--************************************
+                Wrapper End
+        *************************************-->
+        {% include ('default/footer.html.twig') %}
+    {% endblock %}
+{% endif %}

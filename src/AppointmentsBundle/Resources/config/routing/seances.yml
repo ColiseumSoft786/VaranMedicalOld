@@ -1,0 +1,47 @@
+seances_index:
+    path:     /{calendrie}/
+    defaults: { _controller: "AppointmentsBundle:Seances:index" }
+    methods:  GET
+seances_index_getSeancesByDoctor:
+    path:     /Locations/{location}
+    defaults: { _controller: "AppointmentsBundle:Seances:getSeancesByDoctor" }
+
+seances_takeAppointement:
+    path:     /{id}/takeAppointement
+    defaults: { _controller: "AppointmentsBundle:Seances:takeAppointement" }
+seances_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppointmentsBundle:Seances:show" }
+    methods:  GET
+
+seances_addSeances:
+    path:     /addSeances
+    defaults: { _controller: "AppointmentsBundle:Seances:addSeances" }
+    methods:  POST
+
+seances_verifierHeurDebut:
+    path:     /{heurDebut}/{heurFin}/{calendrie}/verifierHeurDebut
+    defaults: { _controller: "AppointmentsBundle:Seances:verifierHeurDebut" }
+    methods:  [GET, POST]
+
+seances_verifierHeurFin:
+    path:     /{heurFin}/{calendrie}/verifierHeurFin
+    defaults: { _controller: "AppointmentsBundle:Seances:verifierHeurFin" }
+    methods:  [GET, POST]
+
+seances_new:
+    path:     /{calendrie}/new
+    defaults: { _controller: "AppointmentsBundle:Seances:new" }
+    methods:  [GET, POST]
+
+seances_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppointmentsBundle:Seances:edit" }
+    methods:  [GET, POST]
+
+seances_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppointmentsBundle:Seances:delete" }
+seances_change:
+    path:     /{id}/change
+    defaults: { _controller: "AppointmentsBundle:Seances:change" }

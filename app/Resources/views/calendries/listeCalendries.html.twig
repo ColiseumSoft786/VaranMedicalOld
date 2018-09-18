@@ -1,0 +1,63 @@
+
+<div class="tg-favoritlistingbox monthly" id="mycalendar">
+
+</div>
+    <script type="text/javascript" src="{{ asset('assets/Calendar/js/jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/Calendar/js/monthly.js') }}"></script>
+    <script type="text/javascript">
+
+        var sampleEvents = {
+            "monthly": [
+                {% for calendrie in calendries %}
+                {% set check = 0 %}
+                {% for item in pha %}
+                {% if item.date|date('Y-m-d') == calendrie.date|date('Y-m-d') %}
+                {% set check = 1 %}
+                {% endif %}
+                {% endfor %}
+                {% for item in weekends %}
+                {% if item.date|date('Y-m-d') == calendrie.date|date('Y-m-d') %}
+                {% set check = 1 %}
+                {% endif %}
+                {% endfor %}
+                {% if check == 0 %}
+                {{ render(controller('AppointmentsBundle:Seances:getSeacesByCalendar', {'calendar':calendrie.id})) }}
+                {% endif %}
+                {% endfor %}
+                {% for item in weekends %}
+                {
+                    "id": "",
+                    "name": "Weekend",
+                    "startdate": "{{ item|date('Y-m-d') }}",
+                    "enddate": "",
+                    "color": "#178300",
+                    "url": ""
+                },
+                {% endfor %}
+                {% for item in pha %}
+                {
+                    "id": {{ item.id }},
+                    "name": "{{ item.reason }}",
+                    "startdate": "{{ item.date|date('Y-m-d') }}",
+                    "enddate": "",
+                    "color": "#832c1f",
+                    "url": ""
+                },
+                {% endfor %}
+
+            ]
+        };
+    </script>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+        $('#mycalendar').monthly({
+            mode: 'event',
+            dataType: 'json',
+            events: sampleEvents
+        });
+    });
+</script>
+

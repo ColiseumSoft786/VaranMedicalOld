@@ -1,0 +1,124 @@
+
+{% include ('base.html.twig') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% block body %}
+
+
+<body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************--
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content tg-dashboard">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                        <div class="tg-widgetdashboard">
+                            <div class="tg-widgetprofile">
+                                <figure class="tg-directpostimg"> 
+                                    {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                        <a href="#">
+                                            <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                        </a>
+                                    {% else %}
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                        </a>
+                                    {% endif %}                                         
+                                    {% if app.user.verifier == 1 %}
+                                        <figcaption>
+                                            <a class="tg-usericon tg-iconvarified" href="#">
+                                                <em class="tg-usericonholder">
+                                                    <i class="fa fa-shield"></i>
+                                                    <span>{{ 'verified'|trans }}</span>
+                                                </em>
+                                            </a>
+                                        </figcaption>
+                                    {% endif %}
+                                </figure>
+                                <div class="tg-directposthead">
+                                    <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('user_profilEdit', {'doctor': app.user.idTable }) }}">{{ 'Mis à jour'|trans }}</a> </div>
+                            {% include('profilDoctorNav.html.twig') %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                        <div class="tg-dashboardtabs">
+                            <div class="tab-content tg-dashboardtabcontent">
+                                <div role="tabpanel" class="tab-pane active" id="overview">
+                                    <div class="tg-dashboardbox">
+                                        <div class="tg-dashboardboxtitle">
+                                            <h2><i class="fa fa-gears"></i> {{ 'Settings'|trans }}</h2>
+                                        </div>
+                                        <div class="tg-box tg-experience tg-uiicons">
+                                            <ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+                                                <form action="{{ path('settings_edit', { 'id' : setting.id }) }}" method="post">
+                                                    <div class=" col-lg-12 col-sm-6 col-xs-12 tg-columnpadding">
+                                                        <li> <span>Durée des rendez-vous</span> <span>{{ form_widget(edit_form.durreAppointment, {'attr':{'class':'form-control clockpicker',}}) }}</span> </li>
+                                                        <input type="hidden" value="{{ setting.doctor.id }}" id="appointmentsbundle_settings_doctor" name="appointmentsbundle_settings[doctor]" />
+                                                        {{ form_widget(edit_form._token) }}
+                                                    </div>
+                                                    <br> <br><br><br><br>
+                                                    <div class="col-lg-2 pull-right">
+                                                        <div class="tg-btnbox">
+                                                            <button type="submit" class="tg-btn">{{ 'update'|trans }}</button>
+                                                        </div>
+                                                    </div>
+                                                </form>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+{% include ('default/footer.html.twig') %}
+{% endblock %}
+<script type="text/javascript">
+    $('.clockpicker').clockpicker({
+        placement: 'top',
+        align: 'left',
+        donetext: 'Done'
+    });
+</script>
+
+{% endif %}

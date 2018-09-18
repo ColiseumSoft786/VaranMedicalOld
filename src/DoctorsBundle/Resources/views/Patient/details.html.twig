@@ -1,0 +1,307 @@
+
+{% include ('base.html.twig') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% block body %}
+
+        {#<body class="tg-home tg-login">#}
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+            {{ render(controller('AppBundle:Default:header')) }}
+
+            <!--************************************
+                Main Start
+        *************************************-->
+            <main id="tg-main" class="tg-main tg-haslayout">
+                <div class="container">
+
+                    <div id="cutt_copy" style="display: none;z-index: 9999;background-color: rgba(255,255,255,0.91);position: fixed;width: 80%;top: 0;right: 0;height: 650px">
+                        <div style="padding: 10px">
+                            <div class="pull-right">
+                                <a href="javascript:void(0)" onclick="$('#cutt_copy').fadeOut()"><span class="fa fa-close"></span></a>
+                            </div>
+                            <div>
+                                <h2>Edit Your Patient</h2>
+                                <div class="col-md-offset-2 col-md-8">
+                                    <form action="{{ path('patient_doctor_display_updatepatient') }}" method="post">
+                                        <input type="hidden" name="id" value="{{ patient.id }}">
+                                        <input type="hidden" name="dp" value="{{ dp.id }}">
+
+                                    <div class="col-md-6">
+                                        <label for="fname">First Name</label>
+                                        <input class="form-control" value="{{ patient.firstname }}" id="fname" name="fname" type="text" placeholder="First Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="lname">Last Name</label>
+                                        <input class="form-control" value="{{ patient.lastname }}" id="lname" name="lname" type="text" placeholder="Last Name">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="dob">Birthday</label>
+                                        <input class="form-control" value="{{ patient.birthday|date('Y-m-d') }}" id="dob" name="dob" type="date" placeholder="Date Of Birth">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="domicil">Domicile</label>
+                                        <input class="form-control" value="{{ patient.domicile }}" id="domicil" name="domicil" type="text" placeholder="Domicil">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="gsm">GSM</label>
+                                        <input class="form-control" value="{{ patient.gsm }}" id="gsm" name="gsm" type="text" placeholder="GSM">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="travail">Travail</label>
+                                        <input class="form-control" value="{{ patient.travail }}" id="travail" name="travail" type="text" placeholder="Travail">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="pnum">Prefered Number</label>
+                                        <select class="form-control" name="pnum" id="pnum">
+                                            <option value="">- Select Prefered Number -</option>
+                                            <option value="gsm"  {% if patient.preferrednumber == 'gsm' %}selected{% endif %} >GSM</option>
+                                            <option value="travail" {% if patient.preferrednumber == 'travail' %}selected{% endif %}>Travail</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="address">Address</label>
+                                        <textarea class="form-control" name="address" id="address">{{ patient.adresse }}</textarea>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label for="sex">Sex</label>
+                                        <select class="form-control" name="sex" id="sex">
+                                            <option value="">- Select Sex -</option>
+                                            <option value="Male" {% if patient.sexe == 'Male' %}selected{% endif %}>Male</option>
+                                            <option value="Female" {% if patient.sexe == 'Female' %}selected{% endif %}>Female</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <input type="submit" value="Update" class="tg-btn pull-right">
+                                    </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <div class="row">
+                        <div id="tg-content" class="tg-content tg-dashboard">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                                <div class="tg-widgetdashboard">
+                                    <div class="tg-widgetprofile">
+                                        <figure class="tg-directpostimg">
+                                            {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                                <a href="#">
+                                                    <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                                </a>
+                                            {% endif %}
+                                            {% if app.user.verifier == 1 %}
+                                                <figcaption>
+                                                    <a class="tg-usericon tg-iconvarified" href="#">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-shield"></i>
+                                                            <span>{{ 'verified'|trans }}</span>
+                                                        </em>
+                                                    </a>
+                                                </figcaption>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="tg-directposthead">
+                                            <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                            <div class="tg-subjects"></div>
+                                            <ul class="tg-metadata">
+                                                <li><span class="tg-stars"><span></span></span></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                            </ul>
+                                        </div>
+                                        <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                                    {% include('profilDoctorNav.html.twig') %}
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                                <script>
+                                    function changename(){
+                                        if(confirm('Are you sure to switch the first and lastname ?')){
+                                            window.location = "{{ path('patient_doctor_display_changename',{id:dp.id}) }}";
+                                        }
+
+                                    }
+                                </script>
+                                <div class="col-md-9">
+                                    <h3>Patient Name: {{ patient.firstname }} {{ patient.lastname }} <a href="javascript:void(0)" onclick="changename()" class="badge"><span class="fa fa-exchange"></span></a></h3>
+                                    <p><b>Birthday:</b> {{ patient.birthday|date('d-M-Y') }}</p>
+                                    <p><b>Sex:</b> {{ patient.sexe }}</p>
+                                    <p><b>Address:</b> {{ patient.adresse }}</p>
+                                    <p><b>Email:</b> {{ user.email }}</p>
+                                    <p><b>Review:</b> {% if dp.review == "" %} <label class="label label-warning">Review not given</label> {% else %}<span class="badge">{{ dp.review }}</span>{% endif %} </p>
+                                    <p><b>Status:</b> {% if dp.block == 1 %}<span class="badge" style="background-color: orangered">Blocklisted</span>{% else %}<span class="badge" style="background-color: yellowgreen">Safe</span>{% endif %}</p>
+                                </div>
+                                <div class="col-md-3">
+                                    <a class="tg-btn tg-btn-md btn-block" href="{{ path('patient_doctor_display_changestatus') }}?id={{ dp.id }}">{% if dp.block == 1 %}<span>unblock</span>{% else %}<span>block</span>{% endif %}</a>
+                                    <a class="tg-btn tg-btn-md btn-block" onclick="$('#cutt_copy').fadeIn()" href="javascript:void(0)">Edit Patient Record</a>
+                                </div>
+                                <div class="col-md-offset-4 col-md-4">
+                                    <button onclick="$('#toggleapp').fadeIn()" class="tg-btn tg-btn-md">Show Appointments</button>
+                                </div>
+
+                                <div id="toggleapp" style="display: none">
+                                    <div class="col-xs-10">
+
+                                    </div>
+                                    <div class="col-xs-2">
+                                        <a href="javascript:void(0)" onclick="printDiv()" class="tg-btn tg-btn-md" style="" >
+                                            Print <span class="fa fa-print"></span>
+                                        </a>
+                                    </div>
+                                    <script>
+                                        function printDiv()
+                                        {
+                                            var divToPrint=document.getElementById('divtoprint');
+                                            console.log(divToPrint.innerHTML);
+                                            var newWin=window.open('','Print-Window');
+                                            newWin.document.open();
+                                            newWin.document.write('<html><head></head>');
+                                            newWin.document.write('<body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+                                            newWin.document.close();
+                                            /*setTimeout(function(){newWin.close();},10);*/
+
+                                        }
+                                    </script>
+
+                                    <div class="col-md-12" style="margin-top: 20px">
+                                        <div >
+                                            {% if appointment|length != 0 %}
+                                                <div id="divtoprint">
+                                                    <style>
+                                                        @media print {
+                                                            .nodisplay{
+                                                                display: none;
+                                                            }
+                                                        }
+                                                    </style>
+                                                    <h4>List Of Appointments</h4>
+                                                    <table id="apptable">
+                                                        {% for item in appointment|reverse %}
+                                                            {% if "now"|date("Y-m-d") < item.seance.calendrie.date|date('Y-m-d')  %}
+                                                                <tr>
+                                                                    <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px">
+                                                                        <label style="font-size: 20px;">{{ item.seance.calendrie.date|date('d M') }}</label><label style="font-size: 20px;">{{ item.seance.calendrie.date|date('Y') }}</label> </td>
+                                                                    <td style="padding: 10px;width: 85%;text-align: left;border-left: 10px solid #83c1f4;background-color: #c1e9fe;">
+                                                                        <label style="font-size: 18px"><b>{{ item.seance.heurDebut|date('H:i') }} - {{ item.seance.heurFin|date('H:i') }}, {{ item.seance.calendrie.location.name }}</b>
+                                                                            <span class="pull-right nodisplay">
+                                                                <span id="etat{{ item.id }}">
+                                                                    {% if item.etat == 'confirme' %}
+                                                                        <a href="javascript:void(0)" onclick="updatestatus({{ item.id }})" class="badge" style="background: green">{{ item.etat }}</a>
+                                                                        {% elseif item.etat == 'non confirmer' %}
+                                                                        <a href="javascript:void(0)" onclick="updatestatus({{ item.id }})" class="badge" style="background: orangered">{{ item.etat }}</a>
+                                                                        {% else %}
+                                                                        <a href="javascript:void(0)" class="badge" style="background: yellowgreen">{{ item.etat }}</a>
+                                                                    {% endif %}
+                                                                </span>
+                                                                        </span>
+
+                                                                        </label> <br class="hidden-xs hidden-sm hidden-md hidden-lg">
+                                                                        <label>{{ item.seance.calendrie.location.adresse }}</label><br class="hidden-xs hidden-sm hidden-md hidden-lg">
+                                                                        <label>Patient: {{ render(controller('AppointmentsBundle:Appointments:getpatientbyUser', {'id': item.patient.idtable})) }}, Reason: {{ item.reason.reason }}
+                                                                        </label>
+                                                                        <div>
+
+                                                                        </div>
+                                                                    </td>
+                                                                </tr>
+                                                            {% else %}
+                                                                <tr>
+                                                                    <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px">
+                                                                        <label style="font-size: 20px;">{{ item.seance.calendrie.date|date('d M') }}</label><label style="font-size: 20px;">{{ item.seance.calendrie.date|date('Y') }}</label> </td>
+                                                                    <td style="padding: 10px;width: 85%;text-align: left;border-left: 10px solid #83c1f4;">
+                                                                        <label style="font-size: 18px"><b>{{ item.seance.heurDebut|date('H:i') }} - {{ item.seance.heurFin|date('H:i') }}, {{ item.seance.calendrie.location.name }}</b>
+                                                                            <span class="pull-right nodisplay">
+                                                                <span id="etat{{ item.id }}">
+                                                                    {% if item.etat == 'confirme' %}
+                                                                        <a href="javascript:void(0)"  class="badge" style="background: green">{{ item.etat }}</a>
+                                                                        {% elseif item.etat == 'non confirmer' %}
+                                                                        <a href="javascript:void(0)" class="badge" style="background: orangered">{{ item.etat }}</a>
+                                                                        {% else %}
+                                                                        <a href="javascript:void(0)" class="badge" style="background: yellowgreen">{{ item.etat }}</a>
+                                                                    {% endif %}
+                                                                </span>
+                                                            </span>
+                                                                        </label><br class="hidden-xs hidden-sm hidden-md hidden-lg">
+                                                                        <label>{{ item.seance.calendrie.location.adresse }}</label><br class="hidden-xs hidden-sm hidden-md hidden-lg">
+                                                                        <label>Patient: {{ render(controller('AppointmentsBundle:Appointments:getpatientbyUser', {'id': item.patient.idtable})) }}, Reason: {{ item.reason.reason }}
+                                                                        </label>
+                                                                    </td>
+                                                                </tr>
+                                                            {% endif %}
+
+                                                        {% endfor %}
+
+                                                    </table>
+                                                </div>
+
+                                                <script>
+
+
+
+
+                                                    function performaction(newid){
+                                                        if(confirm("Really want to "+vtype+" this appontment to new place ?")){
+                                                            window.location = "{{ path('calendries_appoitment_cutcopy') }}?type="+vtype+"&app="+cutcopyid+"&sea="+newid;
+                                                        }
+                                                    }
+                                                    function showmodelcutcopy(type,id){
+                                                        vtype = type;
+                                                        cutcopyid = id;
+                                                        if(type == "cut"){
+                                                            $('#cut_copy_head').html('Cut your appointment');
+                                                        }else{
+                                                            $('#cut_copy_head').html('Copy your appointment');
+
+                                                        }
+                                                        $('#cutt_copy').fadeIn();
+
+                                                    }
+                                                    function updatestatus(id){
+                                                        $.ajax({
+                                                            url: '{{ path('calendries_appoitment_update') }}?id='+id,
+                                                            type: 'POST',
+                                                            success: function(result){
+                                                                if(result === 'confirme'){
+                                                                    $('#etat'+id).html('<a  href="javascript:void(0)" onclick="updatestatus('+id+')" class="badge" style="background: green">'+result+'</a>')
+                                                                }else{
+                                                                    $('#etat'+id).html('<a  href="javascript:void(0)" onclick="updatestatus('+id+')" class="badge" style="background: orangered">'+result+'</a>')
+                                                                }
+                                                            }
+                                                        })
+                                                    }
+                                                </script>
+                                            {% else %}
+                                                <p class="text-center">You have no Appointments till now.</p>
+                                            {% endif %}
+                                        </div>
+                                        <div id="loaddate" style="display: none;">
+                                            <p class="text-center"><label for="">Loading...</label></p>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+        </div>
+        </main>
+
+
+
+
+        {% include ('default/footer.html.twig') %}
+    {% endblock %}
+{% endif %}

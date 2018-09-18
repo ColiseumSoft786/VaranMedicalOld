@@ -1,0 +1,18 @@
+Hello, {{ patient.firstname }} {{ patient.lastname }}
+<br>
+We hope you are fine, your appointment has been created with {{ doctor.firstname }} {{ doctor.lastname }}, on {{ app.seance.calendrie.date|date('d-m-Y') }},
+but your appointment is not confirmed by the {{ doctor.firstname }} {{ doctor.lastname }}, We will notify you when
+he confirm this appointment. <br>
+Appointment Location:
+Name: {{ app.seance.calendrie.location.name }}<br>
+Address: {{ app.seance.calendrie.location.adresse }}<br>
+Ville: {{ app.seance.calendrie.location.ville }}<br>
+Zip Code: {{ app.seance.calendrie.location.codezip }}<br>
+-------------- <br>
+Appointment Time: {{ app.seance.calendrie.date|date('d-m-Y') }}<br>
+Appointment Date: {{ app.seance.heurdebut|date('H:i') }} - {{ app.seance.heurfin|date('H:i') }}<br>
+<br>
+cancel notifications: <br><b>For SMS:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=sms&val=0">click here</a> <br><b>For Email:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=email&val=0">click here</a>
+<br>
+<b>Best Regards,</b>
+Varan Team

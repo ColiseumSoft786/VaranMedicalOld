@@ -1,0 +1,29 @@
+Hello, {{ patient.firstname }} {{ patient.lastname }}
+<br>
+We hope you are fine, your appointment is {{ type }} by {{ doctor.firstname }} {{ doctor.lastname }}.
+<br>
+Status: {{ app.etat }}
+<br>
+Previous Appointment Location: <br>
+Name: {{ oldsea.calendrie.location.name }}<br>
+Address: {{ oldsea.calendrie.location.adresse }}<br>
+Ville: {{ oldsea.calendrie.location.ville }}<br>
+Zip Code: {{ oldsea.calendrie.location.codezip }}<br>
+-------------- <br>
+Appointment Time: {{ oldsea.calendrie.date|date('d-m-Y') }}<br>
+Appointment Date: {{ oldsea.heurdebut|date('H:i') }} - {{ app.seance.heurfin|date('H:i') }}<br>
+<br>
+New Appointment Location: <br>
+Name: {{ newsea.calendrie.location.name }}<br>
+Address: {{ newsea.calendrie.location.adresse }}<br>
+Ville: {{ newsea.calendrie.location.ville }}<br>
+Zip Code: {{ newsea.calendrie.location.codezip }}<br>
+-------------- <br>
+Appointment Time: {{ newsea.calendrie.date|date('d-m-Y') }}<br>
+Appointment Date: {{ newsea.heurdebut|date('H:i') }} - {{ app.seance.heurfin|date('H:i') }}<br>
+<br>
+cancel notifications: <br><b>For SMS:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=sms&val=0">click here</a> <br><b>For Email:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=email&val=0">click here</a>
+<br>
+
+<b>Best Regards,</b> <br>
+Varan Team

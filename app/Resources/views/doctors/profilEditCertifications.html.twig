@@ -1,0 +1,48 @@
+<ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+    {% for certification in certifications %}
+        <li> <span>{{ certification.title }} <button class="editCertification" value="{{ certification.id }}" style="background-color: transparent"><i class="fa fa-pencil"></i></button>  <button class="deleteCertification" value="{{ certification.id }}" style="background-color: transparent"><i class="fa fa-close"></i></button></span>  <span>{{ certification.occasion }}</span> <span>{{ certification.date|date('d-M-Y ') }}</span> </li>
+    {% endfor %}
+</ul>
+
+
+<script>
+        $(document).ready(function () {
+                $(".editCertification").click(function () {
+
+                        var URL = "{{ path('certifications_edit',{ 'id': 'sss' }) }}";
+                        var idCertification = $(this).attr('value');
+                        URL = URL.replace(/sss/g, idCertification);
+                        console.log('URL = '+URL);
+                        $.ajax({
+                                type: "POST",
+                                url: URL,
+                                cache: false,
+                                success: function (response) {
+                                        $('#editCertification').html(response);
+                                        $('#newCertification').hide();
+                                        $('#certificationList').hide();
+                                }
+                        });
+                        return true;
+                });
+
+                $(".deleteCertification").click(function () {
+                        if (!confirm('Vous voulez supprimer cet enregistrement')) return false;
+                        var URL = "{{ path('certifications_delete',{ 'certification': 'sss' }) }}";
+                        var idCertification = $(this).attr('value');
+                        console.log(idCertification)
+                        URL = URL.replace(/sss/g, idCertification);
+                        console.log('URL = '+URL);
+                        $.ajax({
+                                type: "POST",
+                                url: URL,
+                                cache: false,
+                                success: function (response) {
+                                        $('#certificationList').html(response);
+                                        $('#successCertification').hide();
+                                }
+                        });
+                        return true;
+                });
+        });
+</script>

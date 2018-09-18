@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Reasons list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Reason'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for reason in reasons %}
+            <tr>
+                <td><a href="{{ path('reasons_show', { 'id': reason.id }) }}">{{ reason.id }}</a></td>
+                <td>{{ reason.reason }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('reasons_show', { 'id': reason.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('reasons_edit', { 'id': reason.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('reasons_new') }}">{{ 'Create a new reason'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

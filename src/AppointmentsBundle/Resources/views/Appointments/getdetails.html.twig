@@ -1,0 +1,12 @@
+<p>Patient First Name: {{patient.firstname}}</p>
+<p>Patient Last Name: {{patient.lastname}}</p>
+<p>Notes: {{app.note}}</p>
+<p>Reason: {{app.reason.reason}}</p>
+Name: {{ app.seance.calendrie.location.name }}<br>
+Address: {{ app.seance.calendrie.location.adresse }}<br>
+Ville: {{ app.seance.calendrie.location.ville }}<br>
+Zip Code: {{ app.seance.calendrie.location.codezip }}<br>
+-------------- <br>
+Appointment Time: {{ app.seance.calendrie.date|date('d-m-Y') }}<br>
+Appointment Date: {{ app.seance.heurdebut|date('H:i') }} - {{ app.seance.heurfin|date('H:i') }}<br>
+<br>

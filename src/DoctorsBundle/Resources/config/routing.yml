@@ -1,0 +1,64 @@
+doctors_specialities:
+    resource: "@DoctorsBundle/Resources/config/routing/specialities.yml"
+    prefix:   /specialities
+
+doctors_locations:
+    resource: "@DoctorsBundle/Resources/config/routing/locations.yml"
+    prefix:   /locations
+
+doctors_socialinformation:
+    resource: "@DoctorsBundle/Resources/config/routing/socialinformation.yml"
+    prefix:   /socialinformation
+
+doctors_educations:
+    resource: "@DoctorsBundle/Resources/config/routing/educations.yml"
+    prefix:   /educations
+
+doctors_doctors:
+    resource: "@DoctorsBundle/Resources/config/routing/doctors.yml"
+    prefix:   /doctor
+
+doctors_homepage:
+    path:     /
+    defaults: { _controller: DoctorsBundle:Default:index }
+
+doctors_invoices:
+    resource: "@DoctorsBundle/Resources/config/routing/invoices.yml"
+    prefix:   /invoices
+
+doctors_subservices:
+    resource: "@DoctorsBundle/Resources/config/routing/subservices.yml"
+    prefix:   /subservices
+
+doctors_services:
+    resource: "@DoctorsBundle/Resources/config/routing/services.yml"
+    prefix:   /services
+
+doctors_certifications:
+    resource: "@DoctorsBundle/Resources/config/routing/certifications.yml"
+    prefix:   /certifications
+    
+doctors_reviews:
+    resource: "@DoctorsBundle/Resources/config/routing/reviews.yml"
+    prefix:   /reviews
+
+doctors_questions:
+    resource: "@DoctorsBundle/Resources/config/routing/questions.yml"
+    prefix:   /questions
+
+doctors_patient:
+    resource: "@DoctorsBundle/Resources/config/routing/patient.yml"
+    prefix:   /patient
+
+doctors_comments:
+    path: /Location/Comments/{location}
+    defaults: { _controller: "DoctorsBundle:Comments:index" }
+doctors_comments_new:
+    path: /Location/Comments/New/{location}
+    defaults: { _controller: "DoctorsBundle:Comments:new" }
+doctors_comments_delete:
+    path: /Location/Comments/Delete/{comment}
+    defaults: { _controller: "DoctorsBundle:Comments:delete" }
+doctors_comments_edit:
+    path: /Location/Comments/Edit/{comment}
+    defaults: { _controller: "DoctorsBundle:Comments:edit" }

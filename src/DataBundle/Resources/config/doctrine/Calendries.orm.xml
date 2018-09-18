@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DataBundle\Entity\Calendries" table="calendries">
+    <indexes>
+      <index name="IDX_C5720C2F64D218E" columns="location_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="deleatedat" type="datetime" column="deleatedAt" nullable="true"/>
+    <field name="date" type="date" column="date" nullable="false"/>
+    <field name="public" type="boolean" column="public" nullable="false"/>
+    <field name="absence" type="boolean" column="absence" nullable="false"/>
+    <many-to-one field="location" target-entity="Locations" fetch="LAZY">
+      <join-columns>
+        <join-column name="location_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

@@ -1,0 +1,29 @@
+admin_homepage:
+    path:     /Admin
+    defaults: { _controller: AdminBundle:Default:index }
+admin_homepage_login:
+    path:     /Admin/Login
+    defaults: { _controller: AdminBundle:Default:login }
+admin_homepage_logout:
+    path:     /Admin/Logout
+    defaults: { _controller: AdminBundle:Default:logout }
+
+admin_holiday_index_weekend:
+    path:     /Admin/Weekends
+    defaults: { _controller: AdminBundle:Holiday:index }
+admin_holiday_index_weekend_add:
+    path:     /Admin/Weekends/New
+    defaults: { _controller: AdminBundle:Holiday:addweekend }
+admin_holiday_index_weekend_delete:
+    path:     /Admin/Weekends/Delete/{id}
+    defaults: { _controller: AdminBundle:Holiday:deleteweekend }
+
+admin_holiday_index_pHoliday:
+    path:     /Admin/PublicHolidays
+    defaults: { _controller: AdminBundle:Holiday:publicholidays }
+admin_holiday_index_pHoliday_add:
+    path:     /Admin/PublicHolidays/New
+    defaults: { _controller: AdminBundle:Holiday:addph }
+admin_holiday_index_pHoliday_delete:
+    path:     /Admin/PublicHolidays/Delete/{id}
+    defaults: { _controller: AdminBundle:Holiday:deleteph }

@@ -1,0 +1,5 @@
+<ul class="tg-themelist tg-liststyledot tg-listdatastyle tg-childservices">
+    {% for invoice in invoices %}
+        <li> <em>{{ invoice.subService.subService }}</em> <span>{{ invoice.price }} €</span> </li>
+    {% endfor %}
+</ul>

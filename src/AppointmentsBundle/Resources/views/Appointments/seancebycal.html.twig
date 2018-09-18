@@ -1,0 +1,7 @@
+{% if sea|length == 0 %}
+    <p class="text-center">No Time Found</p>
+    {% else %}
+        {% for item in sea %}
+            <a href="javascript:void(0)" onclick="performaction({{ item.id }})" class="badge mybadge" style="background-color: coral;border-radius: 0">{{ item.heurdebut|date('H:i') }}</a>
+        {% endfor %}
+{% endif %}

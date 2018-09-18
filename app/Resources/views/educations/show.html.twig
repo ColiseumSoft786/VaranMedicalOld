@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Education'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ education.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Type of school'|trans }} </th>
+                <td>{{ education.typeOfSchool }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'School'|trans }}</th>
+                <td>{{ education.school }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('educations_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('educations_edit', { 'id': education.id }) }}">{{ 'edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

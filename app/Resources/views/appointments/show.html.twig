@@ -1,0 +1,184 @@
+
+{% include ('base.html.twig') %}
+{% block body %}
+
+
+    <body class="tg-home tg-login">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************
+        <div class="preloader-outer">
+            <div class="pin"></div>
+            <div class="pulse"></div>
+        </div>
+    <!--************************************
+            Preloader End
+    *************************************-->
+
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        {{ render(controller('AppBundle:Default:header')) }}
+
+        <!--************************************
+            Main Start
+    *************************************-->
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-twocolumns" class="tg-twocolumns">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                            <div class="tg-widgetdashboard">
+                                <div class="tg-widgetprofile">
+                                    <figure class="tg-directpostimg"> 
+                                        {% if vich_uploader_asset(patient, 'imageFile') %}
+                                            <a href="#">
+                                                <img src="{{ vich_uploader_asset(patient, 'imageFile') }}" alt="{{ patient.image }}" />
+                                            </a>
+                                        {% else %}
+                                            <a href="#">
+                                                <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                            </a>
+                                        {% endif %}                                        
+                                        {% if app.user.verifier == 1 %}
+                                            <figcaption>
+                                                <a class="tg-usericon tg-iconvarified" href="#">
+                                                    <em class="tg-usericonholder">
+                                                        <i class="fa fa-shield"></i>
+                                                        <span>{{ 'verified'|trans }}</span>
+                                                    </em>
+                                                </a>
+                                            </figcaption>
+                                        {% endif %}
+                                    </figure>
+                                    <div class="tg-directposthead">
+                                        <h3><a href="#">Dr. {{ patient.firstName }} {{ patient.lastName }}</a></h3>
+                                        <div class="tg-subjects"></div>
+                                        <ul class="tg-metadata">
+                                            <li><span class="tg-stars"><span></span></span></li>
+                                            <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                        </ul>
+                                    </div>
+                                    <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.idTable }) }}">{{ 'Profile'|trans }}</a> </div>
+                                {% if is_granted('ROLE_DOCTOR') %}
+                                    {% include('profilDoctorNav.html.twig') %}
+                                {% endif %}
+                                {% if is_granted('ROLE_PATIENT') %}
+                                    {% include('profilPatientNav.html.twig') %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                            <div class="tg-dashboardappointments">
+                                <div class="tg-dashboardbox">
+                                    <div class="tg-dashboardboxtitle">
+                                        <h2>{{ 'Your Appointments'|trans }}</h2>
+                                    </div>
+                                    <div class="col-md-9 col-sm-12 col-xs-12">
+                                        <br><br><br><br><br><br><br><br><br>
+                                        <div class="tg-favoritlistingbox">
+                                            <div class="tg-favoritlisttitle">
+                                                <span>Rendez-Vous</span>
+                                                <span class="tg-titleaction">Action</span>
+                                            </div>
+                                            <ul class="tg-favoritlist">
+                                                <li>
+                                                    <div class="tg-favotirelistcontent">
+                                                        <div class="tg-listdata">
+                                                            <h4>{{ appointment.seance.heurDebut|date('H:i') }}</h4>
+                                                            <span>{{ appointment.reason.reason }}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tg-btnaction">
+                                                        {#{% if appointment.etat != 'annuler' %}#}
+                                                            <button class="tg-btndelete annuler" id="{{ appointment.id }}" type="button"><i class="fa fa-close"></i></button>
+                                                        {#{% endif %}#}
+                                                            <button class="tg-btnaccept accept" id="{{ appointment.seance.id }}" type="button"><i class="fa fa-check"></i></button>
+
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-3 col-sm-12 col-xs-12">
+                                        <div id="tg-content" class="tg-content">
+                                            <div class="tg-profilewidget tg-recommendation">
+                                                <span class="tg-profilewidgeticon">
+                                                    <img src="{{ asset('assets/images/icons/icon-26.png') }}" alt="image description">
+                                                </span>
+                                                <div class="tg-percentage">
+                                                    <span></span>
+                                                    <span>{{ appointment.seance.calendrie.location.doctor.firstName|capitalize }} {{ appointment.seance.calendrie.location.doctor.lastName|capitalize }}</span><br>
+                                                </div>
+                                                <div class="tg-description">
+                                                    <h6 style="text-align: left; color: #a2acbe">{{ 'location'|trans }} :</h6>
+                                                    <p style="text-align: left"> {{ appointment.seance.calendrie.location.adresse }}.</p>
+                                                    <br>
+                                                </div>
+                                                <div class="tg-description">
+                                                    <h6 style="text-align: left; color: #a2acbe">{{ 'Appointment'|trans }} :</h6>
+                                                    <p style="text-align: left"> {{ appointment.seance.calendrie.date|date('D, d M') }} - {{ appointment.seance.heurDebut|date('H.i') }}.</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </main>
+    </div>
+    </div>
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    </body>
+    {% include ('default/footer.html.twig') %}
+
+    <script>
+        $(document).ready(function () {
+
+            $(".annuler").click(function () {
+                if (!confirm('Vous voulez vraiment annuler se rendez-vous')) return false;
+                var appointment = $(this).attr('id');
+                var type = $(this).attr('type');
+                var URL = "{{ path('appointments_cancel', {'id' : 'sss'}) }}";
+                URL = URL.replace(/sss/g, appointment);
+                console.log(URL);
+                $.ajax({
+                    type: "GET",
+                    url: URL,
+                    cache: false,
+                    success: function (response) {
+                        window.location.replace('{{ path('appointments_appointmentsByUser',{'success': 'no'}) }}');
+                    }
+                });
+            });
+            
+            $(".accept").click(function () {
+                if (!confirm('Vous voulez vraiment accepter se rendez-vous')) return false;
+                var seance = $(this).attr('id');
+                var type = $(this).attr('type');
+                var URL = "{{ path('calendries_appoitment_update', {'id' : 'sss'}) }}";
+                URL = URL.replace(/sss/g, seance);
+                console.log(URL);
+                $.ajax({
+                    type: "GET",
+                    url: URL,
+                    cache: false,
+                    success: function (response) {
+                        window.location.replace('{{ path('appointments_appointmentsByUser',{'success': 'yes'}) }}');
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

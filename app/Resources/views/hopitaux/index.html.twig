@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'hospital list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Name'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for hopitaux in hopitauxes %}
+            <tr>
+                <td><a href="{{ path('hopitaux_show', { 'id': hopitaux.id }) }}">{{ hopitaux.id }}</a></td>
+                <td>{{ hopitaux.name }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('hopitaux_show', { 'id': hopitaux.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('hopitaux_edit', { 'id': hopitaux.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('hopitaux_new') }}">{{ 'Create a new hospital'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

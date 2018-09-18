@@ -1,0 +1,24 @@
+settings_index:
+    path:     /
+    defaults: { _controller: "AppointmentsBundle:Settings:index" }
+    methods:  GET
+
+settings_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppointmentsBundle:Settings:show" }
+    methods:  GET
+
+settings_new:
+    path:     /new
+    defaults: { _controller: "AppointmentsBundle:Settings:new" }
+    methods:  [GET, POST]
+
+settings_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppointmentsBundle:Settings:edit" }
+    methods:  [GET, POST]
+
+settings_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppointmentsBundle:Settings:delete" }
+    methods:  DELETE

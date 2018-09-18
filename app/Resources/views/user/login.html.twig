@@ -1,0 +1,34 @@
+{% extends"base.html.twig" %}
+{% block body %}
+    <h3>Hello</h3>
+    <form  method="post" action="{{ path("fos_user_security_check") }}" class="tg-formtheme tg-formsigninsignup" autocomplete="off">
+        <fieldset>
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <div class="row tg-rowmargin">
+                <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                    <div class="form-group tg-formgroup">
+                        <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" placeholder="Nom d\'utilisateur"/>
+                    </div>
+                </div>
+                <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                    <div class="form-group tg-formgroup">
+                        <input type="password" id="password" name="_password" required="required" class="form-control"  placeholder="Mot de passe"/>
+                    </div>
+                </div>
+                <div class="tg-kepploginpassword">
+                    <div class="tg-checkbox">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                        <label for="keeplogin">Garder ma session active</label>
+                    </div>
+                </div>
+                <input type="text">
+                <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                    <button type="submit" class="tg-btn pull-right" id="_submit" name="_submit">Se connecter</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+{% endblock %}

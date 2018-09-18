@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DataBundle\Entity\Unblockph" table="unblockph">
+    <indexes>
+      <index name="doctor_ubph_fk_idx" columns="Doctor"/>
+      <index name="ph_ubph_fk_idx" columns="Ph"/>
+    </indexes>
+    <id name="id" type="integer" column="Id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <many-to-one field="doctor" target-entity="Doctors" fetch="LAZY">
+      <join-columns>
+        <join-column name="Doctor" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+    <many-to-one field="ph" target-entity="Publicholiday" fetch="LAZY">
+      <join-columns>
+        <join-column name="Ph" referenced-column-name="Id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

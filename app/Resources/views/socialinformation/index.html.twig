@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Social informations list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Facebook</th>
+                <th>Twitter</th>
+                <th>Linkedin</th>
+                <th>Youtube</th>
+                <th>Google plus</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for socialInformation in socialInformations %}
+            <tr>
+                <td><a href="{{ path('socialinformation_show', { 'id': socialInformation.id }) }}">{{ socialInformation.id }}</a></td>
+                <td>{{ socialInformation.facebook }}</td>
+                <td>{{ socialInformation.twitter }}</td>
+                <td>{{ socialInformation.linkedin }}</td>
+                <td>{{ socialInformation.youtube }}</td>
+                <td>{{ socialInformation.googlePlus }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('socialinformation_show', { 'id': socialInformation.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('socialinformation_edit', { 'id': socialInformation.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('socialinformation_new') }}">{{ 'Create a new social Information'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

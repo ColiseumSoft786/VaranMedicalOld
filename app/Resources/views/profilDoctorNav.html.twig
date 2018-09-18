@@ -1,0 +1,12 @@
+<nav id="tg-dashboardnav" class="tg-dashboardnav">
+    <ul>
+        <li> <a href="{{ path('locations_index') }}"> <i class="fa fa-location-arrow"></i> <span>{{ 'Job Locations'|trans }}</span> </a> </li>
+        <li> <a href="{{ path('calendries_index', {'id': 0}) }}"> <i class="fa fa-calendar"></i> <span>{{ 'Appointment Settings'|trans }}</span> </a> </li>
+        <li><a href="{{ path('appointments_display') }}"><i class="fa fa-calendar-times-o"></i> <span>Current Appointments</span></a></li>
+        <li><a href="{{ path('holiday_display') }}"><i class="fa fa-calendar-times-o"></i> <span>Holidays Setting</span></a></li>
+        <li><a href="{{ path('patient_doctor_display') }}"><i class="fa fa-user"></i> <span>Patient Management</span></a></li>
+        <li> <a href="{{ path('services_settings') }}"> <i class="fa fa-stethoscope"></i> <span>{{ 'Services Settings'|trans }}</span> </a> </li>
+        <li> <a href="{{ path('appointments_appointmentsByUser', {'success':'no'}) }}"> <i class="fa fa-calendar-check-o"></i> <span>{{ 'My Appointements'|trans }}</span> </a> </li>
+        <li> <a href="{{ path('settings_index') }}"> <i class="fa fa-user"></i> <span>{{ 'Paramétres du compte'|trans }}</span> </a> </li>
+    </ul>
+</nav>

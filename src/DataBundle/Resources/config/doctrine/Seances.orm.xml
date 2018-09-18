@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+  <entity name="DataBundle\Entity\Seances" table="seances">
+    <indexes>
+      <index name="IDX_FC699FF195C469E0" columns="calendrie_id"/>
+    </indexes>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
+    <field name="heurDebut" type="time" column="heur_debut" nullable="false"/>
+    <field name="dispo" type="boolean" column="dispo" nullable="false"/>
+    <field name="absence" type="boolean" column="absence" nullable="false"/>
+    <field name="heurFin" type="time" column="heur_fin" nullable="false"/>
+    <many-to-one field="calendrie" target-entity="Calendries" fetch="LAZY">
+      <join-columns>
+        <join-column name="calendrie_id" referenced-column-name="id"/>
+      </join-columns>
+    </many-to-one>
+  </entity>
+</doctrine-mapping>

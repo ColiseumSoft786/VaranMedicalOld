@@ -1,0 +1,15 @@
+<div class="tg-searchbulder tg-searchprofilesttings">
+    <div class="tg-tabcontent">
+        {% for specialitie in specialities %}
+            <span class="tg-checkbox tg-subcategorycheckbox">
+                <input type="checkbox"  name="subcategory" value="Dentist">
+                <label for="{{ specialitie.libelle }}">
+                    <span>
+                        <img src="{{ asset('assets/images/icons/icon-16.png') }}" alt="image description">
+                    </span>
+                    <span>{{ specialitie.libelle }}</span>
+                </label>
+			</span>
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,103 @@
+{% include ('base.html.twig') %}
+{% block body %}
+<body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************-->
+
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content tg-dashboard">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                        <div class="tg-widgetdashboard">
+                            <div class="tg-widgetprofile">
+                                <figure class="tg-directpostimg">
+                                    {% if vich_uploader_asset(patient, 'imageFile') %}
+                                        <a href="#">
+                                            <img src="{{ vich_uploader_asset(patient, 'imageFile') }}" alt="{{ patient.image }}" />
+                                        </a>
+                                    {% else %}
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                        </a>
+                                    {% endif %}
+                                </figure>                                <div class="tg-directposthead">
+                                    <h3><a href="#">{{ patient.firstName }} {{ patient.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('patient_editProfil', {'id':app.user.id }) }}">{{ 'Mis à jour'|trans }}</a> </div>
+
+                            {% include('profilPatientNav.html.twig') %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                      <h3>Your Doctors</h3>
+                          {% if dp|length != 0 %}
+                            <table>
+                                <thead>
+                                  <tr>
+                                    <th>#</th>
+                                    <th>Doctor Name</th>
+                                    <th>Review</th>
+                                    <th>Status</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  {% set count = 1 %}
+                                  {% for item in dp %}
+                                  <tr>
+                                    <td>{{ count }}</td>
+                                    <td>{{ item.doctor.firstname }} {{ item.doctor.lastname }}</td>
+                                    <td style="width: 40%">{% if item.review == "" %}
+                                       <form action="{{ path('doctor_managment_display_review') }}" method="post">
+                                          <input type="text" placeholder="Enter Your Review" name="review">
+                                          <input type="hidden" name="id" value="{{ item.id }}">
+                                          <input type="submit" class='btn btn-primary' value="Submit">
+                                       </form>
+                                       {% else %} {{ item.review }} {% endif %} </td>
+                                    <td>{% if item.block == 1 %} <label class="label label-danger">Blocked</label> {% else %} <label class="label label-success">Open for Appointments</label> {% endif %}</td>
+                                  </tr>
+                                  {% set count = count + 1 %}
+                                  {% endfor %}
+
+                                </tbody>
+                            </table>
+
+                          {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+{% include ('default/footer.html.twig') %}
+
+{% endblock %}

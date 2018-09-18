@@ -1,0 +1,14 @@
+
+<div class="col-lg-12">
+    <div class="form-group tg-formgroup">
+        <span class="tg-select">
+            <select id="appointmentsbundle_calendries_location" name="appointmentsbundle_calendries[location]">
+                <option value="">{{ 'Selectionner'|trans }}</option>
+                {% for location in locations %}
+                <option value="{{ location.id }}">{{ location.name }}</option>
+                {% endfor %}
+
+            </select>
+        </span>
+    </div>
+</div>

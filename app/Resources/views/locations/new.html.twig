@@ -1,0 +1,239 @@
+{% include ('base.html.twig') %}
+{% block body %}
+<body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content tg-dashboard">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                        <div class="tg-widgetdashboard">
+                            <div class="tg-widgetprofile">
+                                <figure class="tg-directpostimg"> 
+                                                                            
+                                        {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                            <a href="#">
+                                                <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                            </a>
+                                        {% else %}
+                                            <a href="#">
+                                                <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                            </a>
+                                        {% endif %}                                    
+                                    {% if app.user.verifier == 1 %}
+                                        <figcaption>
+                                            <a class="tg-usericon tg-iconvarified" href="#">
+                                                <em class="tg-usericonholder">
+                                                    <i class="fa fa-shield"></i>
+                                                    <span>{{ 'verified'|trans }}</span>
+                                                </em>
+                                            </a>
+                                        </figcaption>
+                                    {% endif %}
+                                </figure>
+                                <div class="tg-directposthead">
+                                    <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                            {% include('profilDoctorNav.html.twig') %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                        <div class="tg-dashboardjobslocations">
+                            <div class="tg-dashboardbox">
+                                <form class="tg-formbookappointment" method="post" action="{{ path('locations_new') }}" >
+                                    <fieldset class="tg-formstepone tg-current">
+                                        <h3>Chercher votre location ?</h3>
+                                        <div class="row tg-rowmargin">
+                                            <div class="col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    <div class="input-group input-group-sm">
+                                                        <input type="text" id="adresse" class="form-control" placeholder="Chercher dans google maps"/>
+                                                        <span class="input-group-btn">
+                                                          <button class="btn btn-info btn-flat" type="button" onclick="TrouverAdresse();"><i class="fa fa-search"></i></button>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                                <div id="mapLocation" style="height:250px;width:100%;">
+
+                                                </div>
+                                                <p>(*) Vous devez faire glisser le marqueur pour pointer vers une position</p>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="row tg-rowmargin">
+                                            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    {{ form_widget(form.name, {'attr':{'class':'form-control', 'placeholder':'Name'}}) }}
+                                                </div>
+                                            </div>
+                                            <style>
+                                                input[data-readonly] {
+                                                    pointer-events: none;
+                                                }
+                                            </style>
+                                            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    <input id="doctorsbundle_locations_langitude" name="doctorsbundle_locations[langitude]" required="required" class="form-control" placeholder="Longitude" type="text" data-readonly>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    <input id="doctorsbundle_locations_latitude" name="doctorsbundle_locations[latitude]" required="required" class="form-control" placeholder="Latitude" type="text" data-readonly>                                                </div>
+                                            </div>
+                                            <div class="col-sm-12 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    {{ form_widget(form.adresse, {'attr':{'class':'form-control', 'placeholder':'Adresse', 'type':'text', 'rows':'2'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    {{ form_widget(form.ville, {'attr':{'class':'form-control', 'placeholder':'Ville', 'type':'text'}}) }}
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6 col-xs-12 tg-columnpadding">
+                                                <div class="form-group">
+                                                    {{ form_widget(form.codeZip, {'attr':{'class':'form-control', 'placeholder':'Code Zip', 'type':'text'}}) }}
+                                                    {{ form_widget(form._token) }}
+                                                </div>
+                                            </div>
+                                            <input type="hidden" id="doctorsbundle_locations_doctor" name="doctorsbundle_locations[doctor]" value="{{ app.user.idTable }}">
+                                        </div>
+                                        <div class="tg-btnbox">
+                                            <button type="submit" class="tg-btn">{{ 'add now'|trans }}</button>
+                                        </div>
+                                    </fieldset>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+{% include ('default/footer.html.twig') %}
+    <!--************************************
+            Light Box Start
+*************************************-->
+    <script src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAcgnHwvZsCydPTdHNn_mCaG8eCcPllzD4"></script>
+
+    <script>
+
+        
+        function initialiserCarte() {
+            var longitude = {{ lon }};
+            var latitude = {{ lat }};
+            
+            $("#doctorsbundle_locations_latitude").val(latitude);
+            $("#doctorsbundle_locations_langitude").val(longitude);
+
+            
+            geocoder = new google.maps.Geocoder();
+            // Ici j'ai mis la latitude et longitude du vieux Port de Marseille pour centrer la carte de départ
+            var latlng = new google.maps.LatLng(latitude,longitude);
+            var mapOptions = {
+                zoom      : 14,
+                center    : latlng,
+                mapTypeId : google.maps.MapTypeId.roadmap
+            };
+            // map-canvas est le conteneur HTML de la carte Google Map
+            map = new google.maps.Map(document.getElementById('mapLocation'), mapOptions);
+            var ecole = new google.maps.Marker({
+                map: map,
+                position: new google.maps.LatLng(latitude,longitude),
+                draggable: true
+            });
+            map.setCenter(ecole.position);
+            ecole.setMap(map);
+
+            google.maps.event.addListener(ecole, 'dragend', function (evt) {
+                var lat = evt.latLng.lat().toFixed(20);
+                var lng = evt.latLng.lng().toFixed(20);
+                $("#doctorsbundle_locations_latitude").val(lat);
+                $("#doctorsbundle_locations_langitude").val(lng);
+            });
+
+            google.maps.event.addListener(ecole, 'dragstart', function (evt) {
+                $("#doctorsbundle_locations_latitude").val('Currently dragging marker...');
+                $("#doctorsbundle_locations_langitude").val('Currently dragging marker...');
+            });
+        }
+
+        function TrouverAdresse() {
+            // Récupération de l'adresse tapée dans le formulaire
+            var adresse = document.getElementById('adresse').value;
+            geocoder.geocode( { 'address': adresse}, function(results, status) {
+
+                if (status == google.maps.GeocoderStatus.OK) {
+                    map.setCenter(results[0].geometry.location);
+                    var strposition = results[0].geometry.location+"";
+
+                    strposition=strposition.replace('(', '');
+                    strposition=strposition.replace(')', '');
+
+                    var markeur = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location,
+                        draggable: true
+                    });
+
+                    google.maps.event.addListener(markeur, 'dragend', function (evt) {
+                        var lat = evt.latLng.lat().toFixed(20);
+                        var lng = evt.latLng.lng().toFixed(20);
+                        $("#doctorsbundle_locations_latitude").val(lat);
+                        $("#doctorsbundle_locations_langitude").val(lng);
+                    });
+
+                    google.maps.event.addListener(markeur, 'dragstart', function (evt) {
+                        $("#doctorsbundle_locations_latitude").val('Currently dragging marker...');
+                        $("#doctorsbundle_locations_langitude").val('Currently dragging marker...');
+                    });
+                } else {
+                    alert('Adresse introuvable: ' + status);
+                }
+            });
+        }
+        // Lancement de la construction de la carte google map
+        google.maps.event.addDomListener(window, 'load', initialiserCarte);
+    </script>
+
+    <!--************************************
+                Light Box End
+    *************************************-->
+{% endblock %}
+

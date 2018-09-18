@@ -1,0 +1,32 @@
+<div class="tg-dashboardbox">
+    {% if calendries|length != 0 %}
+        {% for calendrie in calendries %}
+            {% if calendrie.deleatedat == null %}
+                {% if calendrie.absence == 0 %}
+                    {% if calendrie.public == 1 %}
+                        <div class="row">
+                            <div class="col-sm-12 col-xs-12 tg-columnpadding">
+                                <div class="tg-dateandtimeslots">
+                                    <div class="tg-datebox">
+                                        <time datetime="2011-10-10">{{ calendrie.date|date("M-d") }}, {{ calendrie.date|date("l") }}</time>
+                                        <label style="color: white">{{ calendrie.location.name }}</label>
+                                        <span>{{ render(controller('AppointmentsBundle:Seances:getNbrOfSeancesActive', {'calendrie': calendrie.id })) }} Available</span>
+                                        <i class="fa fa-calendar-check-o"></i>
+                                    </div>
+                                    <div class="tg-timeslots">
+                                        {{ render(controller('AppointmentsBundle:Seances:getSeacesByCalendarAppointements', {'calendar': calendrie.id })) }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                    {% endif %}
+
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p>doctor not available in this location</p>
+    {% endif %}
+
+</div>

@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Certification'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ certification.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Title'|trans }}</th>
+                <td>{{ certification.title }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Occasion'|trans }}</th>
+                <td>{{ certification.occasion }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Date'|trans }}</th>
+                <td>{% if certification.date %}{{ certification.date|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('certifications_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('certifications_edit', { 'id': certification.id }) }}">{{ 'Edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

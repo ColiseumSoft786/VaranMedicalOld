@@ -1,0 +1,12 @@
+{% if specialities %}
+<div class="tg-box">
+    <div class="tg-icontitle">
+        <h3 class="fa fa-star-o">{{ 'Specializations'|trans }}</h3>
+    </div>
+    <ul class="tg-threecolumns tg-liststyledot tg-specialization">
+        {% for specialitie in specialities %}
+            <li>{{ specialitie.libelle }}</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

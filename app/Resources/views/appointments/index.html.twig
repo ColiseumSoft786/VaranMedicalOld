@@ -1,0 +1,98 @@
+
+{% include ('base.html.twig') %}
+{% block body %}
+
+
+<body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+        Main Start
+*************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-twocolumns" class="tg-twocolumns">
+                    <div class="col-md-8 col-sm-12 col-xs-12">
+                        <aside id="tg-sidebar" class="tg-sidebar">
+                            <div class="tg-widget tg-widgetlogin">
+                                {% if is_granted('ROLE_PATIENT') or is_granted('ROLE_DOCTOR') %}
+                                    {{ render(controller('AppointmentsBundle:Appointments:new', {'seance':seance.id})) }}
+                                {% else %}
+                                    {{ render(controller('UserBundle:User:login')) }}
+                                {% endif %}
+                            </div>
+                        </aside>
+                    </div>
+                    <div class="col-md-4 col-sm-12 col-xs-12">
+                        <div id="tg-content" class="tg-content">
+                            <div class="tg-profilewidget tg-recommendation">
+                                <span class="tg-profilewidgeticon">
+                                    <img src="{{ asset('assets/images/icons/icon-26.png') }}" alt="image description">
+                                </span>
+                                <div class="tg-percentage">
+                                    <span></span>
+                                    <span>{{ doctor.firstName|capitalize }} {{ doctor.lastName|capitalize }}</span><br>
+                                    <span style="font-size: 10pt; color: #3c3c3c;    ">{{ 'specialities'|trans }}</span>
+                                </div>
+                                <div class="tg-description">
+                                    <h6 style="text-align: left; color: #a2acbe">{{ 'location'|trans }} :</h6>
+                                    <p style="text-align: left"> {{ location.adresse }}.</p>
+                                    <br>
+                                </div>
+                                <div class="tg-description">
+                                    <h6 style="text-align: left; color: #a2acbe">{{ 'Important Notes'|trans }} :</h6>
+                                    {% for item in comments %}
+                                        <p style="text-align: left"> {{ item.comment }}.</p>
+                                    {% endfor %}
+                                    <br>
+                                </div>
+                                <div class="tg-description">
+                                    <h6 style="text-align: left; color: #a2acbe">{{ 'Appointment'|trans }} :</h6>
+                                    <p style="text-align: left"> {{ seance.calendrie.date|date('D, d M') }} - {{ seance.heurDebut|date('H.i') }}.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+<!--************************************
+        Main End
+*************************************-->
+<!--************************************
+        Light Box Start
+*************************************-->
+
+
+<!--************************************
+            Light Box End
+*************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+</body>
+{% include ('default/footer.html.twig') %}
+{% endblock %}

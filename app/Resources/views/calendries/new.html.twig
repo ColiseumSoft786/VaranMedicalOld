@@ -1,0 +1,84 @@
+<form class="tg-formbookappointment" id="formAddCalendrie">
+    <fieldset class="tg-formstepone tg-current">
+        <div class="row tg-rowmargin">
+            <h3>{{ 'Selectionner votre location'|trans }}</h3>
+            <div class="tg-alertmessages" id="successMessage">
+                <div class="alert alert-success tg-alertmessage fade in" id="addSuccess" hidden>
+                    <i class="fa fa-check"></i>
+                    <span><strong>Felecitation !</strong> Ajouter avec success.</span>
+                </div>
+                <div class="alert alert-danger tg-alertmessage fade in" id="addErreur" hidden>
+                    <i class="fa fa-bug"></i>
+                    <span><strong>{{ 'Error Message'|trans }}.</strong> Erreur en ajout.</span>
+                </div>
+                <div class="alert alert-warning tg-alertmessage fade in" id="addExist" hidden>
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <span><strong>{{ 'warning Message'|trans }}.</strong> Ce jour est déjà planifié .</span>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-sm-6 col-xs-12 tg-columnpadding">
+                {{ render(controller('DoctorsBundle:Locations:getComboLocationByDoctor', {'doctor':app.user.idTable})) }}
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(form.date, {'attr':{'class':'form-control js-datepicker', 'placeholder':'Date', 'mask':'yyyy-mm-dd"'}}) }}
+                </div>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(form._token) }}
+                </div>
+            </div>
+        </div>
+        <div class="tg-btnbox">
+            <button type="submit" class="tg-btn">{{ 'add now'|trans }}</button>
+        </div>
+    </fieldset>
+</form>
+<script>
+
+    $('body').on('submit', '#formAddCalendrie', function (e) {
+        $('#addExist').hide();
+        $('#addErreur').hide();
+        $('#addSuccess').hide();
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var $form = $(this);
+        var formdata = (window.FormData) ? new FormData($form[0]) : null;
+        var data = (formdata !== null) ? formdata : $form.serialize();
+
+        var URL = "{{ path('calendries_new')}}";
+        console.log(URL);
+
+        $.ajax({
+            url: URL,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            dataType: 'html',
+            data: data,
+            success: function (response) {
+                if(response == 'success') {
+                    $('#addExist').hide();
+                    $('#addErreur').hide();
+                    $('#addSuccess').show();
+                    location.reload();
+                }else if (response == 'deja'){
+                    $('#addErreur').hide();
+                    $('#addSuccess').hide();
+                    $('#addExist').show();
+                }else {
+                    $('#addSuccess').hide();
+                    $('#addExist').hide();
+                    $('#addErreur').show();
+                }
+            }
+        });
+
+
+        return false
+    });
+
+</script>

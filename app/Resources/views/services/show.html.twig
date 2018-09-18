@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>Service</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ service.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Service'|trans }}</th>
+                <td>{{ service.service }}</td>
+            </tr>
+           {# <tr>
+                <th>{{ 'Price'|trans }}</th>
+                <td>{{ service.price }}</td>
+            </tr>#}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('services_index', {'doctor' : doctor.id}) }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('services_edit', { 'id': service.id }) }}">{{ 'Edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

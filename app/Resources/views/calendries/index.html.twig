@@ -1,0 +1,361 @@
+
+{% include ('base.html.twig') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% block body %}
+
+
+        {#<body class="tg-home tg-login">#}
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+            {{ render(controller('AppBundle:Default:header')) }}
+
+            <!--************************************
+                Main Start
+        *************************************-->
+            <main id="tg-main" class="tg-main tg-haslayout">
+                <div class="container">
+                    <div class="row">
+                        <div id="tg-content" class="tg-content tg-dashboard">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                                <div class="tg-widgetdashboard">
+                                    <div class="tg-widgetprofile">
+                                        <figure class="tg-directpostimg"> 
+                                            {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                                <a href="#">
+                                                    <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                                </a>
+                                            {% endif %}
+                                            {% if app.user.verifier == 1 %}
+                                                <figcaption>
+                                                    <a class="tg-usericon tg-iconvarified" href="#">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-shield"></i>
+                                                            <span>{{ 'verified'|trans }}</span>
+                                                        </em>
+                                                    </a>
+                                                </figcaption>
+                                            {% endif %}
+                                        </figure>
+
+
+                                        <div class="tg-directposthead">
+                                            <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                            <div class="tg-subjects"></div>
+                                            <ul class="tg-metadata">
+                                                <li><span class="tg-stars"><span></span></span></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                            </ul>
+                                        </div>
+                                        <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                                    {% include('profilDoctorNav.html.twig') %}
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                                <div class="tg-dashboardappointments">
+                                    <div class="tg-dashboardbox">
+                                        <div class="tg-dashboardboxtitle">
+                                            <h2>Calendrier</h2>
+                                        </div>
+                                        <div id="searchBar">
+                                            <div class="col-md-6">
+                                                {{ render(controller('DoctorsBundle:Locations:getComboLocationByDoctor' , { 'doctor': app.user.idTable})) }}
+                                            </div>
+
+                                            <div class="col-md-3">
+                                                {#<button type="button" class="tg-btn btn-block" data-toggle="modal" data-target="#tg-appointmentlightbox">{{ 'add new'|trans }}</button>#}
+                                                <button id="settings_toggle" type="button" class="tg-btn btn-block">{{'Calender Entries'|trans}}</button>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <button type="button" class="tg-btn btn-block" style="background-color: coral" data-toggle="modal" data-target="#add_absence">{{ 'Create Absence'|trans }}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br><br>
+                                    <div id="addSeanceFram"></div>
+                                    <div id="settings" style="display: none;">
+                                        <form id="appform" action="{{ path('calendries_create_app') }}" method="POST">
+                                            <div class="col-md-12" style="margin-top: 10px">
+                                                <div class="col-md-4">
+                                                    <label for="">{{'Select Location'|trans}}</label>
+                                                    <select name="loc" id="loc" class="form-control">
+                                                        <option value="">{{'Select Location'|trans}}</option>
+                                                        {% for item in locations %}
+                                                            <option value="{{ item.id }}">{{ item.name }}</option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>{{'Start Date'|trans}}</label>
+                                                    <input id="from" name="sdate" type="date" value="{{ "now"|date("Y-m-d") }}" min="{{ "now"|date("Y-m-d") }}" class="form-control">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>{{'End Date'|trans}}</label>
+                                                    <input id="to" name="edate" type="date" value="{{ "now"|date("Y-m-d") }}" min="{{ "now"|date("Y-m-d") }}" class="form-control">
+                                                </div>
+                                            </div>
+
+                                            {#<script>
+                                                $("#from").datepicker();
+                                                $("#to").datepicker();
+                                            </script>#}
+                                            <div class="col-md-12" style="margin-top: 10px">
+                                                <div class="col-md-offset-2 col-md-4">
+                                                    <label>{{'Start Time'|trans}}</label>
+                                                    <input id="stime" type="text" name="stime" placeholder="Enter Start Time" class="form-control clockpicker">
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <label>{{'End Time'|trans}}</label>
+                                                    <input id="etime" class="form-control clockpicker" name="etime" placeholder="Enter End Time" type="text">
+                                                </div></div>
+
+                                            <div class="col-md-12" style="margin-top: 10px"><div class="col-md-6">
+                                                    <label for="">{{'Select Appointment Time'|trans}}</label>
+                                                    <select id="atime" name="atime" class="form-control">
+                                                        <option value="">{{'Select Appointment Time'|trans}}</option>
+                                                        <option value="15">15 min</option>
+                                                        <option value="20">20 min</option>
+                                                        <option value="25">25 min</option>
+                                                        <option value="30">30 min</option>
+                                                        <option value="35">35 min</option>
+                                                        <option value="40">40 min</option>
+                                                        <option value="45">45 min</option>
+                                                        <option value="50">50 min</option>
+                                                        <option value="55">55 min</option>
+                                                        <option value="60">60 min</option>
+                                                    </select>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">{{'Select Pause Time'|trans}}</label>
+                                                    <select id="ptime" name="ptime" class="form-control">
+                                                        <option value="">{{'Select Pause Time'|trans}}</option>
+                                                        <option value="5">5 min</option>
+                                                        <option value="10">10 min</option>
+                                                        <option value="15">15 min</option>
+                                                        <option value="20">20 min</option>
+                                                        <option value="25">25 min</option>
+                                                        <option value="30">30 min</option>
+                                                        <option value="35">35 min</option>
+                                                        <option value="40">40 min</option>
+                                                        <option value="45">45 min</option>
+                                                        <option value="50">50 min</option>
+                                                        <option value="55">55 min</option>
+                                                        <option value="60">60 min</option>
+                                                    </select>
+                                                </div></div>
+
+
+                                            <div class="col-md-12" style="margin-top: 10px"><div class="col-md-3">
+                                                    <div style="margin-top: 25px">
+                                                        <input checked id="break" name="break" type="checkbox"> {{'I need break'|trans}}
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>{{ 'Start of Break'|trans }}</label>
+                                                    <input id="sbtime" name="sbtime" class="form-control clockpicker" placeholder="Enter Start of break" type="text">
+                                                </div>
+                                                <div class="col-md-3">
+                                                    <label>{{ 'End of Break'|trans}}</label>
+                                                    <input id="ebtime" name="ebtime" class="form-control clockpicker" type="text" placeholder="Enter End of break">
+                                                </div></div>
+
+
+                                            <script type="text/javascript">
+                                                $('.clockpicker').clockpicker({
+                                                    placement: 'top',
+                                                    align: 'left',
+                                                    donetext: 'Done'
+                                                });
+                                            </script>
+                                            <div class="col-md-12" style="margin-top: 10px;margin-bottom: 10px">
+                                                <input type="submit" value="Confirm Scheduling" class="btn btn-info btn-block">
+                                            </div>
+                                        </form>
+                                        <script>
+                                            $('#break').change(function(){
+                                                if(!document.getElementById('break').checked) {
+                                                    $('#sbtime').attr("disabled","disabled");
+                                                    $('#ebtime').attr("disabled","disabled");
+                                                } else {
+                                                    $('#sbtime').removeAttr('disabled');
+                                                    $('#ebtime').removeAttr('disabled');
+                                                }
+                                            });
+                                            $('#appform').submit(function(e){
+                                                var check = true;
+                                                if($('#loc').val() == ""){
+                                                    check = false;
+                                                }else if($('#from').val() == ""){
+                                                    check = false;
+                                                }else if($('#to').val() == ""){
+                                                    check = false;
+                                                }else if($('#stime').val() == ""){
+                                                    check = false;
+                                                }else if($('#etime').val() == ""){
+                                                    check = false;
+                                                }else if($('#atime').val() == ""){
+                                                    check = false;
+                                                }else if($('#ptime').val() == ""){
+                                                    check = false;
+                                                }if(document.getElementById('break').checked){
+                                                    if($('#sbtime').val() == ""){
+                                                        check = false;
+                                                    }else if($('#ebtime').val() == ""){
+                                                        check = false;
+                                                    }
+                                                }if(check){
+                                                    var sdate = new Date($('#from').val());
+                                                    var edate = new Date($('#to').val());
+                                                    if(sdate > edate){
+                                                        alert("Start date should be greater than end date")
+                                                        e.preventDefault();
+                                                        return false;
+                                                    }
+                                                    var check12 = "01/01/2017 "+$('#stime').val()+":00";
+                                                    var check34 = "01/01/2017 "+$('#etime').val()+":00";
+                                                    var stime = Date.parse(check12);
+                                                    var etime = Date.parse(check34);
+                                                    if(stime > etime){
+                                                        alert("Start time should be greater than end time");
+                                                        e.preventDefault();
+                                                        return false;
+                                                    }
+                                                    if(!confirm("Are you sure ? If there are appointments already, they will be overwritten.")) return false;
+
+                                                }else{
+                                                    alert('Fill Everything in this form');
+                                                    e.preventDefault();
+                                                }
+                                            });
+                                        </script>
+                                    </div>
+                                    <script>
+                                        $('#settings_toggle').click(function(){
+                                           $('#settings').toggle();
+                                        });
+                                    </script>
+                                    <div id="listeCalendrie">
+                                        {% if calendrie is null %}
+                                            {{ render(controller('AppointmentsBundle:Calendries:getCalendriesByLocation', {'location': 0})) }}
+                                        {% else %}
+                                            {{ render(controller('AppointmentsBundle:Calendries:getCalendriesByLocation', {'location': calendrie.location})) }}
+                                        {% endif %}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </main>
+        <!--************************************
+                Main End
+        *************************************-->
+        <!--************************************
+				Light Box Start
+	*************************************-->
+        <div class="modal tg-modal tg-appointmentlightbox fade" id="addSeances" tabindex="-1" role="dialog">
+            <div class="modal-dialog tg-modaldialog">
+                <div class="modal-content tg-modalcontent">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <div id="addSeancesZone">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal tg-modal tg-appointmentlightbox fade" id="tg-appointmentlightbox" tabindex="-1" role="dialog">
+            <div class="modal-dialog tg-modaldialog">
+                <div class="modal-content tg-modalcontent">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h2>{{ 'Add new job location'|trans }}</h2>
+                    {{ render(controller('AppointmentsBundle:Calendries:new')) }}
+                </div>
+
+            </div>
+        </div>
+        <div class="modal tg-modal tg-appointmentlightbox fade" id="add_absence" tabindex="-1" role="dialog">
+            <div class="modal-dialog tg-modaldialog">
+                <div class="modal-content tg-modalcontent">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                    <h2>{{ 'Create your absence'|trans }}</h2>
+                    <form id="abs" action="{{ path('calendries_create_absence') }}" method="post">
+                        <div class="col-md-12">
+                            <label for="">{{'Select Location'|trans}}</label>
+                            <select name="loc" id="location" class="form-control">
+                                <option value="">{{'Select Location'|trans}}</option>
+                                {% for item in locations %}
+                                    <option value="{{ item.id }}">{{ item.name }}</option>
+                                {% endfor %}
+                            </select>
+
+                        </div>
+
+                            {#{{ render(controller('DoctorsBundle:Locations:getComboLocationByDoctor' , { 'doctor': app.user.idTable})) }}#}
+                        <div class="col-md-6">
+                            <label for="">{{'Select Start Date'|trans}}</label>
+                            <input type="date" name="date" value="{{ "now"|date("Y-m-d") }}" min="{{ "now"|date("Y-m-d") }}" class="form-control">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="">{{'Select Number of Days'|trans}}</label>
+                            <input type="number" name="day" class="form-control" value="1" min="1">
+                            <input type="submit" value="Confirm" class="tg-btn pull-right" style="margin-top: 10px;background-color: coral">
+                        </div>
+
+                    </form>
+                    <script>
+                        $('#abs').submit(function(e){
+                            var val = $('#location option:selected').val();
+                            if(val == ""){
+                                e.preventDefault();
+                                alert('Select Your Calender Location');
+                            }
+
+                        })
+                    </script>
+                </div>
+
+            </div>
+        </div>
+        <!--************************************
+                    Light Box End
+        *************************************-->
+        <script>
+
+
+
+            $(document).ready(function () {
+                $("#appointmentsbundle_calendries_location").change(function () {
+                    $('#dateSearch').val('');
+
+                    var locationId = $('#appointmentsbundle_calendries_location').val();
+                    var URL = "{{ path('calendries_getCalendriesByLocation', {'location' : 'sss'}) }}";
+                    URL = URL.replace(/sss/g, locationId);
+                    $.ajax({
+                        type: "GET",
+                        url: URL,
+                        cache: false,
+                        success: function (response) {
+                            $('#addSeanceFram').hide();
+                            $("#listeCalendrie").html(response);
+                            return true;
+                        }
+                    });
+                });
+
+            });
+        </script>
+        </div>
+        <!--************************************
+                Wrapper End
+        *************************************-->
+        {% include ('default/footer.html.twig') %}
+    {% endblock %}
+{% endif %}

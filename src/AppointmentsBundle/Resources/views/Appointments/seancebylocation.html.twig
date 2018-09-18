@@ -1,0 +1,11 @@
+{% if cal|length == 0 %}
+    <p class="text-center">No dates found</p>
+    {% else %}
+        Available Dates: <br>
+        {% for item in cal %}
+            <div class="badge" style="padding: 7px;background-color: #0b58a2;border-radius: 0">Date: {{ item.date|date('d-m-Y') }}</div>
+            <div style="padding: 5px 30px">
+                {{ render(controller('AppointmentsBundle:Appointments:getseansesbycal' , { 'id': item.id})) }}
+            </div>
+        {% endfor %}
+{% endif %}

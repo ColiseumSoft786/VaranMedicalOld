@@ -1,0 +1,82 @@
+<fieldset>
+    <div class="tg-messageshead">
+        <ul class="" >
+            {% if calendrie.absence == 1 %}
+            <a href="{{ path('calendries_absence', {'id': calendrie.id }) }}" class="btn btn-warning btn-sm"><i class="fa fa-calendar-times-o"></i>Delete Absent</a>
+            {% endif %}
+            <a href="{{ path('calendries_publier', {'id': calendrie.id }) }}" class="btn btn-info btn-sm"><i class="fa fa-share"></i> {% if calendrie.public == 0 %}Public{% else %}Private{% endif %}</a>
+            <a href="{{ path('calendries_delete', {'id': calendrie.id }) }}" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i> Supprimer</a>
+            <a id="pop" class="btn btn-sm btn-danger"><i class="fa fa-apple"></i> Duplicate to other day</a>
+            <script>
+//                $("[data-toggle=popover]").popover();
+                $('#pop').click(function () {
+                   $('#copy').toggle(); 
+                });
+
+            </script>
+        </ul>
+    </div>
+    <div class="col-md-offset-4 col-md-4" id="copy" style="display: none;">
+        <form id='app_form' method='post' action='{{ path('calendries_duplicate_app',{'calendrie' : calendrie.id}) }}'>
+            <input type='date' name='date' value='{{ 'now'|date('Y-m-d') }}' min='{{ 'now'|date('Y-m-d') }}' class='form-control'>
+            <input type='submit' style='margin-top: 10px' class='btn btn-info btn-block'>
+        </form>
+    </div>
+    <script>
+        var done = true;
+        $("#app_form").submit(function(e){
+            if(done){
+                e.preventDefault();
+                $.ajax({
+                    url: "{{ path('calendries_check_app') }}",
+                    type: "POST",
+                    data: $('#app_form').serialize(),
+                    success: function(result){
+                        if(result == "true"){
+                            done = false;
+                            $('#app_form').submit();
+                        }else{
+                            if(confirm("There is already an appointment in your selected date. are you sure to overwrite it ?")){
+                                done = false;
+                                $('#app_form').submit();
+                            }
+                        }
+                    }
+                })
+
+            }
+        });
+    </script>
+    <div class="tg-appoinmentbox">
+        <div class="tg-dateandtimeslots">
+            <div class="tg-datebox">
+                <time datetime="2011-10-10">{{ calendrie.date|date('d M, Y') }}</time>
+            </div>
+            <div class="tg-timeslots">
+                {% for seance in seances  %}
+                    {% if seance.absence == 1 %}
+                        <span class="tg-radio">
+                        <input type="radio" id="firstavailableslot61" name="firstavailableslot">
+                        <label for="firstavailableslot61" style="border-color: #00adcf">
+                            <a class="tg-btndelete" href="{{ path('seances_delete',{'id' : seance.id}) }}"><i class="fa fa-minus"></i></a>
+                            <a class="tg-btnactions" style="color: #2a6496;" href="{{ path('seances_change',{'id' : seance.id}) }}"><i class="fa fa-product-hunt"></i></a>
+                            <time class="tg-scheduletime" datetime="">{{ seance.heurDebut|date('H:i') }} - {{ seance.heurFin|date('H:i') }}</time>
+                        </label>
+                    </span>
+                        {% else %}
+                            <span class="tg-radio" >
+                        <input type="radio" id="firstavailableslot61" name="firstavailableslot">
+                        <label for="firstavailableslot61">
+                            <a class="tg-btndelete" href="{{ path('seances_delete',{'id' : seance.id}) }}"><i class="fa fa-minus"></i></a>
+                            <a class="tg-btnactions" style="color: orangered;" href="{{ path('seances_change',{'id' : seance.id}) }}"><i class="fa fa-product-hunt"></i></a>
+                            <time class="tg-scheduletime" datetime="">{{ seance.heurDebut|date('H:i') }} - {{ seance.heurFin|date('H:i') }}</time>
+                        </label>
+                    </span>
+                    {% endif %}
+
+                {% endfor %}
+
+            </div>
+        </div>
+    </div>
+</fieldset>

@@ -1,0 +1,19 @@
+patient_doctor_display:
+    path:     /display
+    defaults: { _controller: DoctorsBundle:Patient:display }
+patient_doctor_details:
+    path:     /details/{doc}/{dp}
+    defaults: { _controller: DoctorsBundle:Patient:details }
+
+patient_doctor_display_changestatus:
+    path:     /display/ChangeStatus
+    defaults: { _controller: DoctorsBundle:Patient:changestatus }
+patient_doctor_display_changename:
+    path:     /display/Changename/{id}
+    defaults: { _controller: DoctorsBundle:Patient:changename }
+patient_doctor_display_updatepatient:
+    path:     /display/updatePatient
+    defaults: { _controller: DoctorsBundle:Patient:updatePatient }
+patient_doctor_display_downloadPatient:
+    path:     /display/downloadPatient
+    defaults: { _controller: DoctorsBundle:Patient:downloadPatient }

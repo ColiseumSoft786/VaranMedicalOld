@@ -1,0 +1,52 @@
+
+<div class="tg-box">
+
+
+    {% for question in questions %}
+    <div class="tg-questionanswers">
+        <div class="tg-questionanswer">
+            <div class="tg-patientfeedbackbox">
+                <figure>
+                    <img src="images/thumbnails/img-13.jpg" alt="image description">
+                    <figcaption>
+                        <a href="#"><i class="fa fa-reply "></i></a>
+                    </figcaption>
+                </figure>
+                <div class="tg-patientfeedbackcontent">
+                    <div class="tg-contenthead">
+                        <div class="tg-leftbox">
+                            <div class="tg-patientname">
+                                <h4><a href="#">{{ question.title }}</a></h4>
+                            </div>
+                            <ul class="tg-metadata">
+                                <li><a href="#">Edwide Coldiron</a></li>
+                                <li><a href="#">Il y a 10 minutes</a></li>
+                            </ul>
+                        </div>
+                        <div class="tg-rightbox">
+                            <ul class="tg-metadata">
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-thumbs-o-up tg-tooltip" data-toggle="tooltip" data-placement="top" title="like"></i>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="fa fa-thumbs-o-down tg-tooltip tg-dislike" data-toggle="tooltip" data-placement="top" title="dislike"></i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="tg-description">
+                        <p>{{ question.question }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+    <div class="tg-btnbox">
+        <a class="tg-btn tg-btnloadmoretwo" href="javascript:void(0);">{{ 'load more'|trans }}</a>
+    </div>
+</div>

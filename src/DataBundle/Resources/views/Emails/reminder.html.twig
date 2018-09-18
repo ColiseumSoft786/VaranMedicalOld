@@ -1,0 +1,19 @@
+Hello, {{ patient.firstname }} {{ patient.lastname }}
+<br>
+We hope you are fine, This email is reminder by {{ doctor.firstname }} {{ doctor.lastname }}. For the following Appointment (be on time):
+<br>
+Status: {{ app.etat }}
+<br>
+Appointment Location: <br>
+Name: {{ app.seance.calendrie.location.name }}<br>
+Address: {{ app.seance.calendrie.location.adresse }}<br>
+Ville: {{ app.seance.calendrie.location.ville }}<br>
+Zip Code: {{ app.seance.calendrie.location.codezip }}<br>
+-------------- <br>
+Appointment Time: {{ app.seance.calendrie.date|date('d-m-Y') }}<br>
+Appointment Date: {{ app.seance.heurdebut|date('H:i') }} - {{ app.seance.heurfin|date('H:i') }}<br>
+<br>
+cancel notifications: <br><b>For SMS:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=sms&val=0">click here</a> <br><b>For Email:</b> <a href="{{ url('patient_profil_togglenotif') }}?id={{ id }}&toggle=email&val=0">click here</a>
+<br>
+<b>Best Regards,</b> <br>
+Varan Team

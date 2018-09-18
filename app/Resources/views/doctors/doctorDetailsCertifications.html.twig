@@ -1,0 +1,16 @@
+{% if certifications %}
+    <div class="tg-box">
+        <div class="tg-icontitle">
+            <h3 class="fa fa-mortar-board">{{ 'Certification'|trans }}</h3>
+        </div>
+        <ul class="tg-themelist tg-liststyledot tg-listdatastyle tg-education">
+            {% for certification in certifications %}
+                <li>
+                    <span>{{ certification.title }}</span>
+                    <span>{{ certification.occasion }}</span>
+                    <span>{{ certification.date|date('d-M-Y') }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

@@ -1,0 +1,10 @@
+<ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+    <li><b>{{ 'Name'|trans }} :</b> {{ doctor.title }} {{ doctor.firstName }} {{ doctor.lastName }}</li>
+    <li><b>{{ 'Birthday'|trans }} :</b> {{ doctor.birthday|date('d-M-Y') }}</li>
+    {% if doctor.GSM %}
+        <li><b>{{ 'Phone'|trans }}:</b> {{ doctor.GSM }} </li>
+    {% endif %}
+    {% if doctor.professionalStatement %}
+        <li><b>{{ 'Professional Statement'|trans }}:</b> {{ doctor.professionalStatement }} </li>
+    {% endif %}
+</ul>

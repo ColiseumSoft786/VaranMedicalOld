@@ -1,0 +1,125 @@
+<form class="tg-formbookappointment" id="formAddServices">
+    <fieldset class="tg-formstepone tg-current">
+        <div class="row tg-rowmargin">
+            <div class="tg-alertmessages" id="successMessage">
+                <div class="alert alert-success tg-alertmessage fade in" id="addSuccess" hidden>
+                    <i class="fa fa-check"></i>
+                    <span><strong>{{ 'success Message'|trans }}.</strong> Adipisicing elit, sed do eiusmod.</span>
+                </div>
+                <div class="alert alert-danger tg-alertmessage fade in" id="addErreur" hidden>
+                    <i class="fa fa-bug"></i>
+                    <span><strong>{{ 'Error Message'|trans }}.</strong> Adipisicing elit, sed do eiusmod.</span>
+                </div>
+                <div class="alert alert-warning tg-alertmessage fade in" id="addExist" hidden>
+                    <i class="fa fa-exclamation-triangle"></i>
+                    <span><strong>{{ 'warning Message'|trans }}.</strong> ce service est deja plannifier .</span>
+                </div>
+            </div>
+            <br><br>
+            <div class="col-lg-12 col-sm-12 col-xs-12 tg-columnpadding">
+                {{ render(controller('DoctorsBundle:Specialities:getComboSpecialitiesByDoctor', {'doctor':app.user.idTable})) }}
+            </div>
+            
+            
+            
+            
+            
+            <div class="col-lg-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div id="comboServices">
+
+                </div>
+            </div>
+            <div class="col-lg-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div id="comboSubServices">
+
+                </div>
+            </div>
+            
+            
+            <div class="col-lg-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group">
+                    {{ form_widget(form.price, {'attr':{'class':'form-control js-datepicker', 'placeholder':'Prix'}}) }}
+                    <input type="hidden" id="doctorsbundle_invoices_doctor" name="doctorsbundle_invoices[doctor]" value="{{ app.user.idTable }}">
+                    {{ form_widget(form._token) }}
+                </div>
+            </div>
+        </div>
+        <div class="tg-btnbox">
+            <button type="submit" class="tg-btn">{{ 'add now'|trans }}</button>
+        </div>
+    </fieldset>
+</form>
+
+<script>
+    $('body').on('submit', '#formAddServices', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var $form = $(this);
+        var formdata = (window.FormData) ? new FormData($form[0]) : null;
+        var data = (formdata !== null) ? formdata : $form.serialize();
+
+        var URL = "{{ path('invoices_new')}}";
+        console.log(URL);
+
+        $.ajax({
+            url: URL,
+            type: "POST",
+            contentType: false,
+            processData: false,
+            dataType: 'html',
+            data: data,
+            success: function (response) {
+                if(response == 'Success') {
+                    $('#addExist').hide();
+                    $('#addErreur').hide();
+                    $('#addSuccess').show();
+                }else if (response == 'deja'){
+                    $('#addErreur').hide();
+                    $('#addSuccess').hide();
+                    $('#addExist').show();
+                }else {
+                    $('#addSuccess').hide();
+                    $('#addExist').hide();
+                    $('#addErreur').show();
+                }
+            }
+        });
+
+
+        return false
+    });
+    $(document).ready(function () {
+        $("#comboSpecialitie").change(function () {
+            var specialitie = $('#comboSpecialitie').val();
+
+            var URL = "{{ path('services_comboServicesBySpecialitie', {'specialitie': 'ddd'}) }}";
+            URL = URL.replace(/ddd/g, specialitie);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $("#comboServices").html(response);
+                    return true;
+                }
+            });
+        });
+
+        $(".comboServices").change(function () {
+            var service = $('.comboServices').val();
+            console.log(service);
+            var URL = "{{ path('subservices_comboSubServicesByService', {'service': 'ddd'}) }}";
+            URL = URL.replace(/ddd/g, service);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $("#comboSubServices").html(response);
+                    return true;
+                }
+            });
+        });
+    });
+</script>

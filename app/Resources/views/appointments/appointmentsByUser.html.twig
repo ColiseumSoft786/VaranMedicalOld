@@ -1,0 +1,212 @@
+
+{% include ('base.html.twig') %}
+{% block body %}
+
+
+    <body class="tg-home tg-login">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************
+        <div class="preloader-outer">
+            <div class="pin"></div>
+            <div class="pulse"></div>
+        </div>
+    <!--************************************
+            Preloader End
+    *************************************-->
+
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        {{ render(controller('AppBundle:Default:header')) }}
+
+        <!--************************************
+            Main Start
+    *************************************-->
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-twocolumns" class="tg-twocolumns">
+                        <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                            <div class="tg-widgetdashboard">
+                                <div class="tg-widgetprofile">
+                                    <figure class="tg-directpostimg"> 
+                                        {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                            <a href="#">
+                                                <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                            </a>
+                                        {% else %}
+                                            <a href="#">
+                                                <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                            </a>
+                                        {% endif %}
+                                        {% if app.user.verifier == 1 %}
+                                            <figcaption>
+                                                <a class="tg-usericon tg-iconvarified" href="#">
+                                                    <em class="tg-usericonholder">
+                                                        <i class="fa fa-shield"></i>
+                                                        <span>{{ 'verified'|trans }}</span>
+                                                    </em>
+                                                </a>
+                                            </figcaption>
+                                        {% endif %}
+                                    </figure>
+                                    <div class="tg-directposthead">
+                                        <h3><a href="#">Dr. {{ patient.firstName }} {{ patient.lastName }}</a></h3>
+                                        <div class="tg-subjects"></div>
+                                        <ul class="tg-metadata">
+                                            <li><span class="tg-stars"><span></span></span></li>
+                                            <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                        </ul>
+                                    </div>
+                                        {% if is_granted('ROLE_DOCTOR') %}
+                                            <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                                        {% endif %}
+                                        {% if is_granted('ROLE_PATIENT') %}
+                                            <a class="tg-btn tg-btn-lg" href="{{ path('patient_profil', {'id':app.user.id}) }}">{{ 'Profil'|trans }}</a> </div>
+                                        {% endif %}
+                                {% if is_granted('ROLE_DOCTOR') %}
+                                    {% include('profilDoctorNav.html.twig') %}
+                                {% endif %}
+                                {% if is_granted('ROLE_PATIENT') %}
+                                    {% include('profilPatientNav.html.twig') %}
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                            <h4>Up Coming Appointments</h4>
+                            <table>
+                                {% for item in appointments %}
+                                    {% if "now"|date("Y-m-d") < item.seance.calendrie.date|date('Y-m-d')  %}
+                                        <tr>
+                                            <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px">
+                                                <label style="font-size: 20px;">{{ item.seance.calendrie.date|date('d M') }}</label><label style="font-size: 20px;">{{ item.seance.calendrie.date|date('Y') }}</label> </td>
+                                            <td style="padding: 10px;width: 85%;text-align: left;border-left: 10px solid #83c1f4;background-color: #c1e9fe;">
+                                                <label style="font-size: 18px"><b>{{ item.seance.heurDebut|date('H:i') }} - {{ item.seance.heurFin|date('H:i') }}, {{ item.seance.calendrie.location.name }}</b></label>
+                                                <label>{{ item.seance.calendrie.location.adresse }}</label>
+                                                <label>{{ item.reason.reason }} - </label>
+                                            </td>
+                                        </tr>
+                                    {% else %}
+                                    {% endif %}
+
+                                {% endfor %}
+
+                            </table>
+                            <div class="tg-dashboardappointments">
+                                <div class="tg-dashboardbox">
+                                    <div class="tg-dashboardboxtitle">
+                                        <h2>{{ 'Your Appointments'|trans }}</h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-4 text-center" style="background-color: #6cbf6d; color: #ffffff">
+                                            Confirmer
+                                        </div>
+                                        <div class="col-lg-4 text-center" style="background-color: #f1b55f; color: #ffffff">
+                                            Non confirmer
+                                        </div>
+                                        <div class="col-lg-4 text-center" style="background-color: #db6460; color: #ffffff">
+                                            Annuler
+                                        </div>
+                                    </div>
+                                    <div class="tg-favoritlistingbox monthly" id="mycalendar">
+
+                                    </div>
+                                    <script type="text/javascript" src="{{ asset('assets/Calendar/js/jquery.js') }}"></script>
+                                    <script type="text/javascript" src="{{ asset('assets/Calendar/js/monthly.js') }}"></script>
+                                    <script type="text/javascript">
+
+                                        var sampleEvents = {
+                                            "monthly": [
+                                                {% for appointment in appointments %}
+                                                {
+                                                    "id": {{ appointment.id }},
+                                                    "name": "{{ appointment.seance.heurDebut|date('H:i') }} <br> Docteur : {{ appointment.seance.calendrie.location.doctor.firstName }} {{ appointment.seance.calendrie.location.doctor.lastName }} <br> Raison: {{ appointment.reason.reason }}",
+                                                    "startdate": "{{ appointment.seance.calendrie.date|date('Y-m-d') }}",
+                                                    "enddate": "",
+                                                    {% if "now"|date('Y-m-d')  > appointment.seance.calendrie.date|date('Y-m-d') %}
+                                                    "color": "#dfe0d8",
+                                                    {% else %}
+                                                        {% if appointment.etat == 'annuler' %}
+                                                        "color": "#db6460",
+                                                        {% elseif appointment.etat == 'confirme' %}
+                                                        "color": "#6cbf6d",
+                                                        {% elseif appointment.etat == 'non confirmer' %}
+                                                        "color": "#f1b55f",
+                                                        {% endif %}
+                                                    {% endif %}
+
+                                                {% if appointment.etat != 'annuler' and "now"|date('Y-m-d')  <= appointment.seance.calendrie.date|date('Y-m-d') %}
+                                                    "url": "{{ path('appointments_show', {'id': appointment.id}) }}",
+                                                {% else %}
+                                                    "url": "",
+                                                {% endif %}
+                                                },
+                                                {% endfor %}
+                                            ]
+                                        };
+                                    </script>
+                                </div>
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!--************************************
+            Main End
+    *************************************-->
+    <!--************************************
+            Light Box Start
+    *************************************-->
+
+
+    <!--************************************
+                Light Box End
+    *************************************-->
+
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+    </body>
+    {% include ('default/footer.html.twig') %}
+
+    <script>
+        $(document).ready(function () {
+            $('#mycalendar').monthly({
+                mode: 'event',
+                dataType: 'json',
+                events: sampleEvents
+            });
+
+            $(".annuler").click(function () {
+                if (!confirm('Vous voulez vraiment annuler se rendez-vous')) return false;
+                var appointment = $(this).attr('id');
+                var type = $(this).attr('type');
+                var URL = "{{ path('appointments_cancel', {'id' : 'sss', 'type':'fff'}) }}";
+                URL = URL.replace(/sss/g, appointment);
+                URL = URL.replace(/fff/g, type);
+                console.log(URL);
+                $.ajax({
+                    type: "GET",
+                    url: URL,
+                    cache: false,
+                    success: function (response) {
+                        location.reload();
+                        return true;
+                    }
+                });
+            });
+        });
+    </script>
+
+{% endblock %}

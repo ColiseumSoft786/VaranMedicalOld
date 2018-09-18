@@ -1,0 +1,64 @@
+calendries_index:
+    path:     /{id}/calendrier
+    defaults: { _controller: "AppointmentsBundle:Calendries:index" }
+    methods:  GET
+
+calendries_activation:
+    path:     /{id}/{active}/activation
+    defaults: { _controller: "AppointmentsBundle:Calendries:activation" }
+    methods:  GET
+
+calendries_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppointmentsBundle:Calendries:show" }
+    methods:  GET
+
+calendries_getCalendriesByLocation:
+    path:     /{location}/getCalendriesByLocation
+    defaults: { _controller: "AppointmentsBundle:Calendries:getCalendriesByLocation" }
+    methods:  GET
+
+calendries_getCalendriesByLocationByDate:
+    path:     /{location}/{date}/getCalendriesByLocationByDate
+    defaults: { _controller: "AppointmentsBundle:Calendries:getCalendriesByLocationByDate" }
+    methods:  GET
+
+calendries_new:
+    path:     /new
+    defaults: { _controller: "AppointmentsBundle:Calendries:new" }
+    methods:  [GET, POST]
+
+calendries_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppointmentsBundle:Calendries:edit" }
+    methods:  [GET, POST]
+
+calendries_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppointmentsBundle:Calendries:delete" }
+    methods:  GET
+
+calendries_absence:
+    path:     /{id}/absence
+    defaults: { _controller: "AppointmentsBundle:Calendries:absence" }
+    methods:  GET
+calendries_create_absence:
+    path:     /Create/Absence
+    defaults: { _controller: "AppointmentsBundle:Calendries:createabsence" }
+    methods:  POST
+calendries_create_app:
+    path:     /Create/Appointment
+    defaults: { _controller: "AppointmentsBundle:Calendries:createapp" }
+    methods:  POST
+calendries_duplicate_app:
+    path:     /Duplicate/Appointment/{calendrie}
+    defaults: { _controller: "AppointmentsBundle:Calendries:copyaday" }
+    methods:  POST
+calendries_check_app:
+    path:     /Duplicate/Check/Appointment
+    defaults: { _controller: "AppointmentsBundle:Calendries:checkCalendrie" }
+
+calendries_publier:
+    path:     /{id}/publier
+    defaults: { _controller: "AppointmentsBundle:Calendries:publier" }
+    methods:  GET

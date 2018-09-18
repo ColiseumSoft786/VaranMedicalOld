@@ -1,0 +1,24 @@
+specialities_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Specialities:index" }
+    methods:  GET
+
+specialities_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Specialities:show" }
+    methods:  GET
+
+specialities_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Specialities:new" }
+    methods:  [GET, POST]
+
+specialities_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Specialities:edit" }
+    methods:  [GET, POST]
+
+specialities_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Specialities:delete" }
+    methods:  DELETE

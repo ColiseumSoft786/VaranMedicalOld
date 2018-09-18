@@ -1,0 +1,7 @@
+medias_media:
+    resource: "@MediasBundle/Resources/config/routing/media.yml"
+    prefix:   /media
+
+medias_homepage:
+    path:     /
+    defaults: { _controller: MediasBundle:Default:index }

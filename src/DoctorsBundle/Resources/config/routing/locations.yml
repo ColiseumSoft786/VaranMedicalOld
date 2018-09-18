@@ -1,0 +1,24 @@
+locations_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Locations:index" }
+    methods:  GET
+
+locations_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Locations:show" }
+    methods:  GET
+
+locations_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Locations:new" }
+    methods:  [GET, POST]
+
+locations_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Locations:edit" }
+    methods:  [GET, POST]
+
+locations_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Locations:delete" }
+    methods:  GET

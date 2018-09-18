@@ -1,0 +1,23 @@
+media_index:
+    path:     /
+    defaults: { _controller: "MediasBundle:Media:index" }
+    methods:  GET
+
+media_show:
+    path:     /{id}/show
+    defaults: { _controller: "MediasBundle:Media:show" }
+    methods:  GET
+
+media_new:
+    path:     /new
+    defaults: { _controller: "MediasBundle:Media:new" }
+    methods:  [GET, POST, FILE]
+
+media_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "MediasBundle:Media:edit" }
+
+media_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "MediasBundle:Media:delete" }
+    methods:  DELETE

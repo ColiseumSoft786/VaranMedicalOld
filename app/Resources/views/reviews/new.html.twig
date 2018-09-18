@@ -1,0 +1,78 @@
+{#
+{{- form_label(form.category,'Categoryname',{ 'label_attr' : {'class': 'control-label','for':'Cname'}}) -}} 
+{{- form_widget(form.category,{ 'attr': {'class': 'form-control col-md-10','max-length':55},'label': 'Category name','required':true,'id':'Cname' }) -}}
+#}
+<div class="tg-box">
+    <div class="tg-tabtitle">
+        <h2>Leave Your Feedback</h2>
+    </div>
+    {{ form_start(form,{'attr':{'class':"tg-formtheme tg-formleavefeedback",'id':'formAddReview'}}) }}
+        <fieldset>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="form-group">
+                        <label>Recommend This Doctor: </label>
+                        <div class="tg-recommendedradio">
+                            <span class="tg-radio">                                            
+                                {{ form_widget(form.recommended[0],{'id':'yes' }) }}
+                                <label for="yes"><i class="fa fa-thumbs-o-up"></i> yes</label>
+                            </span>
+
+                            <span class="tg-radio">                                            
+                                {{ form_widget(form.recommended[1],{'id':'no' }) }}
+                                <label for="no"><i class="fa fa-thumbs-o-up"></i> no</label>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        {{ form_widget(form.title, {'attr': {'class': 'form-control', 'placeholder':'Review Reason'}})}}
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xs-12">
+                    <div class="form-group">
+                        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder':'Description'}}) }}
+                    </div>
+                </div>
+
+                {{ form_widget(form.doctor) }}
+                
+                <div class="col-sm-12 col-xs-12">
+                    <input type="submit" class="tg-btn" value="Envoyer" />
+                </div>
+            </div>
+        </fieldset>
+    {{ form_end(form) }}
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('body').on('submit', '#formAddReview', function (e) {
+            // On empêche le navigateur de soumettre le formulaire
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('reviews_new') }}";
+            
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                    location.reload();
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+    

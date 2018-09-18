@@ -1,0 +1,52 @@
+user_index:
+    path:     /
+    defaults: { _controller: "UserBundle:User:index" }
+    methods:  GET
+
+user_profil:
+    path:     /{id}/profil
+    defaults: { _controller: "UserBundle:User:profil" }
+    methods:  GET
+
+user_profilEdit:
+    path:     /{doctor}/profilEdit
+    defaults: { _controller: "UserBundle:User:profilEdit" }
+    methods:  GET
+
+user_createUser:
+    path:     /createUser
+    defaults: { _controller: "UserBundle:User:createUser" }
+    methods:  POST
+
+user_login:
+    path:     /userLogin/
+    defaults: { _controller: "UserBundle:User:login" }
+
+user_new:
+    path:     /new
+    defaults: { _controller: "UserBundle:User:new" }
+    methods:  [GET, POST]
+
+user_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "UserBundle:User:edit" }
+    methods:  [GET, POST]
+
+user_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "UserBundle:User:delete" }
+    methods:  DELETE
+
+user_verifierUserName:
+    path:     /verifierUserName
+    defaults: { _controller: "UserBundle:User:verifierUserName" }
+
+user_verifierMail:
+    path:     /verifierMail
+    defaults: { _controller: "UserBundle:User:verifierMail" }
+user_ipcheck:
+    path:     /useripcheck
+    defaults: { _controller: "UserBundle:User:ipcheck" }
+
+
+

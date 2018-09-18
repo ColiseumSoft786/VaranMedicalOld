@@ -1,0 +1,13 @@
+<div class="col-lg-4">
+    <div class="form-group tg-formgroup">
+        <span class="tg-select">
+            <select id="serviceDoctor">
+                <option>{{ 'Selectionner'|trans }}</option>
+                {% for service in services %}
+                    <option value="{{ service.id }}">{{ service.service }}</option>
+                {% endfor %}
+            </select>
+        </span>
+    </div>
+</div>
+

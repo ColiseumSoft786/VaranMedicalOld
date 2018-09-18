@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Educations list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Type of school'|trans }}</th>
+                <th>{{ 'School'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for education in educations %}
+            <tr>
+                <td><a href="{{ path('educations_show', { 'id': education.id }) }}">{{ education.id }}</a></td>
+                <td>{{ education.typeOfSchool }}</td>
+                <td>{{ education.school }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('educations_show', { 'id': education.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('educations_edit', { 'id': education.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('educations_new') }}">{{ 'Create a new education'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

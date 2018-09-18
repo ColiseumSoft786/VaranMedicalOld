@@ -1,0 +1,232 @@
+
+{% include ('base.html.twig') %}
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    {% block body %}
+
+        {#<body class="tg-home tg-login">#}
+        <!--[if lt IE 8]>
+        <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+            {{ render(controller('AppBundle:Default:header')) }}
+
+            <!--************************************
+                Main Start
+        *************************************-->
+            <main id="tg-main" class="tg-main tg-haslayout">
+                <div class="container">
+                    <div class="row">
+                        <div id="tg-content" class="tg-content tg-dashboard">
+                            <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                                <div class="tg-widgetdashboard">
+                                    <div class="tg-widgetprofile">
+                                        <figure class="tg-directpostimg">
+                                            {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                                <a href="#">
+                                                    <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                                </a>
+                                            {% else %}
+                                                <a href="#">
+                                                    <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                                </a>
+                                            {% endif %}
+                                            {% if app.user.verifier == 1 %}
+                                                <figcaption>
+                                                    <a class="tg-usericon tg-iconvarified" href="#">
+                                                        <em class="tg-usericonholder">
+                                                            <i class="fa fa-shield"></i>
+                                                            <span>{{ 'verified'|trans }}</span>
+                                                        </em>
+                                                    </a>
+                                                </figcaption>
+                                            {% endif %}
+                                        </figure>
+                                        <div class="tg-directposthead">
+                                            <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                            <div class="tg-subjects"></div>
+                                            <ul class="tg-metadata">
+                                                <li><span class="tg-stars"><span></span></span></li>
+                                                <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                            </ul>
+                                        </div>
+                                        <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                                    {% include('profilDoctorNav.html.twig') %}
+                                </div>
+                            </div>
+                            <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                                <h2>Create Appointment for your Patient</h2>
+                                <table>
+                                     <tr>
+                                                <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px">
+                                                    <label style="font-size: 20px;">{{ seance.calendrie.date|date('d M') }}</label><label style="font-size: 20px;">{{ seance.calendrie.date|date('Y') }}</label> </td>
+                                                <td colspan="2" style="padding: 10px;width: 85%;text-align: left;border-left: 10px solid #83c1f4;background-color: #c1e9fe;">
+                                                    <label style="font-size: 18px"><b>{{ seance.heurDebut|date('H:i') }} - {{ seance.heurFin|date('H:i') }}, {{ seance.calendrie.location.name }}</b></label>
+                                                    <label>{{ seance.calendrie.location.adresse }}</label>
+                                                    {#<label>{{ item.reason.reason }}</label>#}
+                                                </td>
+                                            </tr>
+                                    <tr>
+                                        <input type="hidden" value="{{ seance.id }}" id="seance">
+                                        <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px"></td>
+                                        <td style="padding: 10px;text-align: left;border-left: 10px solid #83c1f4;;" colspan="2">
+                                            <label for="">Enter Note</label>
+                                            <textarea id="notes" class="form-control"></textarea>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px"></td>
+                                        <td style="padding: 10px;text-align: left;border-left: 10px solid #83c1f4;;">
+                                            <label for="reason">Select Reason</label>
+                                            <select id="reason">
+                                                {% for item in reason %}
+                                                    <option value="{{ item.id }}">{{ item.reason }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </td>
+                                        <td style="padding: 10px;text-align: left;">
+                                            <input type="radio" onclick="tonew()" name="new" id="newinput"> New Patient ? <br>
+                                            <input type="radio" onclick="toold()" name="new" id="oldinput"> Old Patient ?
+                                            <br>
+                                            <span id="pat" style="display: none">
+                                                <label for="">Select Patient</label>
+                                                <select id="patient" onchange="pat(this)" class="form-control">
+                                                    <option value="" name="">Select Patient</option>
+                                                    {% for item in dp %}
+                                                        <option name="{{ item.patient.gsm }}" value="{{ item.patient.id }}">{{ item.patient.firstname }} {{ item.patient.lastname }}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    <script>
+                                        function pat(){
+                                            var val = $("#patient option:selected").attr('name');
+                                            $('#phoneold').val(val);
+                                            $('#old').show();
+                                        }
+                                        function tonew(){
+                                            $('#new').show();
+                                            $('#old').hide();
+                                            $('#pat').hide();
+                                        }function toold(){
+                                            $('#pat').show();
+                                            $('#new').hide();
+                                            //$('#old').show();
+                                        }
+                                    </script>
+                                    <tr>
+                                        <td style="width: 15%;vertical-align: middle;text-align: right;padding-right: 10px"></td>
+                                        <td colspan="2" style="padding: 10px;text-align: left;border-left: 10px solid #83c1f4;;">
+                                            <div id="old" style="display: none">
+                                                <label for="">Phone #</label>
+                                                <input type="text" id="phoneold" class="form-control">
+                                                <input type="button" onclick="oldpatient()" value="Submit" class="btn btn-info" style="margin-top: 10px">
+                                            </div>
+                                            <div id="new" style="display: none;">
+                                                <label for="">Phone #</label>
+                                                <input type="text" name="phone" id="phone" class="form-control">
+                                                <label for="">First Name</label>
+                                                <input type="text" name="fname" id="fname" class="form-control">
+                                                <label for="">Last Name</label>
+                                                <input type="text" name="lname" id="lname" class="form-control">
+                                                <label for="">Address</label>
+                                                <input type="text" name="address" id="address" class="form-control">
+                                                <label for="">Date of birth</label>
+                                                <input type="date" name="dob" id="dob" class="form-control">
+                                                <label for="">Select Sex</label>
+                                                <select name="sex" id="sex">
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+
+                                                <label for="">Username</label>
+                                                <input type="text" name="uname" id="uname" class="form-control">
+                                                <label for="">Email</label>
+                                                <input type="text" name="email" id="email" class="form-control">
+                                                <label for="">Password</label>
+                                                <input type="password" name="pass" id="pass" class="form-control">
+                                                <input type="button" onclick="newpaitent()" value="Submit" class="btn btn-info" style="margin-top: 10px">
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                                <script>
+                                    function oldpatient(){
+                                        var check = false;
+                                        if($('#seance').val() == ""){
+                                            alert("Seance is empty");
+                                            check = true;
+                                        }if($('#patient').val() == ""){
+                                            alert("Patient is empty");
+                                            check = true;
+                                        }if($('#phoneold').val() == ""){
+                                            alert("Phone# is empty");
+                                            check = true;
+                                        }if($('#reason').val() == ""){
+                                            alert("Reason is empty");
+                                            check = true;
+                                        }if($('#notes').val() == ""){
+                                            alert("Notes is empty");
+                                            check = true;
+                                        }
+                                        if(check == false){
+                                            window.location = "{{ path('appointments_appointmentforPatient_old') }}?seance="+$('#seance').val()+"&patient="+$('#patient').val()+"&phone="+$('#phoneold').val()+"&reason="+$('#reason').val()+"&note="+$('#notes').val();
+                                        }
+                                    }
+                                    function newpaitent(){
+                                        var check = false;
+                                        if($('#seance').val() == ""){
+                                            alert("Seance is empty");
+                                            var check = true;
+                                        }if($('#phone').val() == ""){
+                                            alert("Phone# is empty");
+                                            var check = true;
+                                        }if($('#reason').val() == ""){
+                                            alert("Reason is empty");
+                                            var check = true;
+                                        }if($('#notes').val() == ""){
+                                            alert("Notes is empty");
+                                            var check = true;
+                                        }if($('#fname').val() == ""){
+                                            alert("First Name is empty");
+                                            var check = true;
+                                        }if($('#lname').val() == ""){
+                                            alert("Last Name is empty");
+                                            var check = true;
+                                        }if($('#dob').val() == ""){
+                                            alert("Birthday is empty");
+                                            var check = true;
+                                        }if($('#address').val() == ""){
+                                            alert("Address is empty");
+                                            var check = true;
+                                        }if($('#sex').val() == ""){
+                                            alert("Sex is empty");
+                                            var check = true;
+                                        }if($('#uname').val() == ""){
+                                            alert("User name is empty");
+                                            var check = true;
+                                        }if($('#email').val() == ""){
+                                            alert("Email is empty");
+                                            var check = true;
+                                        }if($('#pass').val() == ""){
+                                            alert("Password is empty");
+                                            var check = true;
+                                        }
+                                        if(check == false){
+                                            window.location = "{{ path('appointments_appointmentforPatient_new') }}?fname="+$('#fname').val()+"&lname="+$('#lname').val()+"&dob="+$('#dob').val()+"&address="+$('#address').val()+"&sex="+$('#sex').val()+"&uname="+$('#uname').val()+"&email="+$('#email').val()+"&pass="+$('#pass').val()+"&seance="+$('#seance').val()+"&phone="+$('#phone').val()+"&reason="+$('#reason').val()+"&note="+$('#notes').val();
+                                        }
+                                    }
+                                </script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        </div>
+        </main>
+
+
+        {% include ('default/footer.html.twig') %}
+    {% endblock %}
+{% endif %}

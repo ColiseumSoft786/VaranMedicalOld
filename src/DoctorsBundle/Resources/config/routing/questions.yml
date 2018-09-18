@@ -1,0 +1,24 @@
+questions_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:Questions:index" }
+    methods:  GET
+
+questions_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:Questions:show" }
+    methods:  GET
+
+questions_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:Questions:new" }
+    methods:  [GET, POST]
+
+questions_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:Questions:edit" }
+    methods:  [GET, POST]
+
+questions_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:Questions:delete" }
+    methods:  DELETE

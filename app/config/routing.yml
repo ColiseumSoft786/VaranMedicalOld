@@ -1,0 +1,40 @@
+admin:
+    resource: "@AdminBundle/Resources/config/routing.yml"
+    prefix:   /
+data:
+    resource: "@DataBundle/Resources/config/routing.yml"
+    prefix:   /data
+
+doctors_horaire:
+    resource: "@DoctorsBundle/Controller/HoraireController.php"
+    type:     annotation
+    
+appointments:
+    resource: "@AppointmentsBundle/Resources/config/routing.yml"
+    prefix:   /
+    
+user:
+    resource: "@UserBundle/Resources/config/routing.yml"
+    prefix:   /users
+
+medias:
+    resource: "@MediasBundle/Resources/config/routing.yml"
+    prefix:   /medias
+
+patient:
+    resource: "@PatientBundle/Resources/config/routing.yml"
+    prefix:   /patient
+
+doctors:
+    resource: "@DoctorsBundle/Resources/config/routing.yml"
+    prefix:   /doctors
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+    prefix: /
+    requirements:
+            page: \d+
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

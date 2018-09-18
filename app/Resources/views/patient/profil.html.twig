@@ -1,0 +1,136 @@
+{% include ('base.html.twig') %}
+{% block body %}
+<body class="tg-home tg-login">
+
+<link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
+<script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************--
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content tg-dashboard">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                        <div class="tg-widgetdashboard">
+                            <div class="tg-widgetprofile">                    
+                                <figure class="tg-directpostimg">
+                                    {% if vich_uploader_asset(patient, 'imageFile') %}
+                                        <a href="#">
+                                            <img src="{{ vich_uploader_asset(patient, 'imageFile') }}" alt="{{ patient.image }}" />
+                                        </a>
+                                    {% else %}
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                        </a>
+                                    {% endif %}
+                                </figure>
+                                <div class="tg-directposthead">
+                                    <h3><a href="#">{{ patient.firstName }} {{ patient.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('patient_editProfil', {'id':app.user.idTable }) }}">{{ 'Mis à jour'|trans }}</a> </div>
+
+                            {% include('profilPatientNav.html.twig') %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                        <div class="tg-dashboardtabs">
+                            <h3>{{ 'Profil'|trans }}</h3>
+                            <hr>
+                            <br>
+                            <div class="tab-content tg-dashboardtabcontent">
+                                <div role="tabpanel" class="tab-pane active" id="overview">
+                                    <ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+                                        <li><b>{{ 'Name'|trans }} :</b> {{ patient.firstName }} {{ patient.lastName }}</li>
+                                        <li><b>{{ 'Birthday'|trans }} :</b> {{ patient.birthday|date('d-M-Y') }}</li>
+                                        {% if patient.GSM %}
+                                            <li><b>{{ 'GSM'|trans }}:</b> {{ patient.gSM }} </li>
+                                        {% endif %}
+                                        {% if patient.travail %}
+                                            <li><b>{{ 'Work'|trans }}:</b> {{ patient.travail }} </li>
+                                        {% endif %}
+                                        {% if patient.domicile %}
+                                            <li><b>{{ 'Home'|trans }}:</b> {{ patient.domicile }} </li>
+                                        {% endif %}
+                                        {% if patient.adresse %}
+                                            <li><b>{{ 'Adresse'|trans }}:</b> {{ patient.adresse }} </li>
+                                        {% endif %}
+                                    </ul>
+                                    <div class="tg-updateall"> <span class="tg-note">* Cliquez sur <strong>Mise à jour</strong> pour modifier ou mettre à jour vos informations.</span>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="col-md-12">
+                                <hr>
+                                {% if notif != null %}
+                                    <ul>
+                                        <li> <span>Email Notification</span> <span class="pull-right"><input type="checkbox"  {% if notif.email == 1 %}checked onchange="toggle({{ user.id }},'email',0)"{% else %}onchange="toggle({{ user.id }},'email',1)"{% endif %} data-toggle="toggle"></span> </li>
+                                    </ul>
+                                    <hr>
+                                    <ul>
+                                        <li> <span>SMS Notification</span> <span class="pull-right"><input type="checkbox" {% if notif.sms == 1 %}checked onchange="toggle({{ user.id }},'sms',0)"{% else %}onchange="toggle({{ user.id }},'sms',1)"{% endif %} data-toggle="toggle"></span> </li>
+
+                                    </ul>
+                                {% else %}
+                                    <ul>
+                                        <li> <span>Email Notification</span> <span class="pull-right"><input onchange="toggle({{ user.id }},'email',0)" type="checkbox" checked data-toggle="toggle"></span> </li>
+                                    </ul>
+                                    <hr>
+                                    <ul>
+                                        <li> <span>SMS Notification</span> <span class="pull-right"><input onchange="toggle({{ user.id }},'sms',0)" type="checkbox" checked data-toggle="toggle"></span> </li>
+
+                                    </ul>
+                                {% endif %}
+                                <script>
+                                    function toggle(id,toggle,val){
+                                        window.location = "{{ path('patient_profil_togglenotif') }}?id="+id+"&toggle="+toggle+"&val="+val;
+                                    }
+                                </script>
+
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+{% include ('default/footer.html.twig') %}
+
+{% endblock %}
+

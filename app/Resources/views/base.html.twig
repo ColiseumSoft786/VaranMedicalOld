@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% include ('default/stylesheet.html.twig') %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}" />
+    <style>
+        #loading{
+            position: absolute;
+            background-color: white;
+            padding: 3px;
+            padding-left: 15px;
+            left: 0;
+            top: 170px;
+            box-shadow: 0px 1px 9px 0px grey;
+            display: none;
+        }
+        #loading img{
+            height: 30px;
+            width: 30px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="loading">
+    <img src="{{ asset('assets/images/loading.gif') }}" alt="">
+</div>
+
+{% block body %}
+
+{% endblock %}
+</body>
+{% block javascripts %}{% include ('default/javascripts.html.twig') %}{% endblock %}
+<script>
+    var loading = $("#loading");
+    $(document).ajaxStart(function () {
+        console.log("start");
+        loading.fadeIn();
+    });
+
+    $(document).ajaxStop(function () {
+        console.log("End");
+        loading.fadeOut();
+    });
+</script>
+</html>

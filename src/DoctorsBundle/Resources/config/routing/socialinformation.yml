@@ -1,0 +1,24 @@
+socialinformation_index:
+    path:     /
+    defaults: { _controller: "DoctorsBundle:SocialInformation:index" }
+    methods:  GET
+
+socialinformation_show:
+    path:     /{id}/show
+    defaults: { _controller: "DoctorsBundle:SocialInformation:show" }
+    methods:  GET
+
+socialinformation_new:
+    path:     /new
+    defaults: { _controller: "DoctorsBundle:SocialInformation:new" }
+    methods:  [GET, POST]
+
+socialinformation_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "DoctorsBundle:SocialInformation:edit" }
+    methods:  [GET, POST]
+
+socialinformation_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "DoctorsBundle:SocialInformation:delete" }
+    methods:  DELETE

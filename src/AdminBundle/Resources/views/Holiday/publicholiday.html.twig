@@ -1,0 +1,74 @@
+{% extends "::admin.html.twig" %}
+
+{% block title %}Admin: Public Holidays{% endblock %}
+
+{% block body %}
+
+    <section class="content-header">
+        <h1>
+            Public Holidays
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li class="active">Weekends</li>
+        </ol>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <a class="label label-info" href="{{ path('admin_holiday_index_pHoliday_add') }}"><span class="fa fa-plus-circle"></span> Create a Public Holiday</a>
+
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            {#<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>#}
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="table-responsive">
+                            <table class="table no-margin">
+                                <thead>
+                                <tr>
+                                    <th style="text-align: center;">#</th>
+                                    <th style="text-align: center;">Date</th>
+                                    <th style="text-align: center;">Added By</th>
+                                    <th style="text-align: center;">Reason</th>
+                                    <th style="text-align: center;">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+
+                                {% set count = 1 %}
+                                {% for item in holi %}
+                                    <tr  style="text-align: center;">
+                                        <td>{{ count }}</td>
+                                        <td>{{ item.date }}</td>
+                                        <td>{{ item.admin.name }}</td>
+                                        <td>{{ item.reason }}</td>
+                                        <td><a href="{{ path('admin_holiday_index_pHoliday_delete',{id:item.id}) }}">Delete</a></td>
+                                    </tr>
+                                    {% set count = count + 1 %}
+                                {% endfor %}
+
+
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.table-responsive -->
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- /.box-footer -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}

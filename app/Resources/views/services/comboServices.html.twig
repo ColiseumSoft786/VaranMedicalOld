@@ -1,0 +1,31 @@
+<div class="col-lg-12">
+    <div class="form-group tg-formgroup">
+        <span class="tg-select">
+            <select class="comboServices">
+                <option>{{ 'Selectionner'|trans }}</option>
+                {% for service in services %}
+                    <option value="{{ service.id }}">{{ service.service }}</option>
+                {% endfor %}
+            </select>
+        </span>
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $(".comboServices").change(function () {
+            var service = $('.comboServices').val();
+            console.log(service);
+            var URL = "{{ path('subservices_comboSubServicesByService', {'service': 'ddd'}) }}";
+            URL = URL.replace(/ddd/g, service);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $("#comboSubServices").html(response);
+                    return true;
+                }
+            });
+        });
+    });
+</script>

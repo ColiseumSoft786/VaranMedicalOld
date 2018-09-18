@@ -1,0 +1,250 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <body class="tg-login">
+    <!--[if lt IE 8]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!--************************************
+            Preloader Start
+    *************************************
+    <div class="preloader-outer">
+        <div class="pin"></div>
+        <div class="pulse"></div>
+    </div>
+    <!--************************************
+            Wrapper Start
+    *************************************-->
+    <div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+        <!--************************************
+                Header Start
+        *************************************-->
+        {{ render(controller('AppBundle:Default:header')) }}
+        <!--************************************
+                Header End
+        *************************************-->
+        <!--************************************
+                Home Banner Start
+        *************************************-->
+        <div class="tg-pageinnerbanner tg-haslayout tg-parallaximg" data-appear-top-offset="600" data-parallax="scroll" data-image-src="images/banner/img-02.jpg">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="tg-pageheadcontent">
+                            <div class="tg-pagetitle">
+                                <h1>Connexion / Créer un compte</h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--************************************
+                Home Banner End
+        *************************************-->
+        <!--************************************
+                Main Start
+        *************************************-->
+        <main id="tg-main" class="tg-main tg-haslayout">
+            <div class="container">
+                <div class="row">
+                    <div id="tg-twocolumns" class="tg-twocolumns">
+                        <div class="col-md-offset-2 col-sm-offset-2 col-md-8 col-sm-8 col-xs-12">
+                            <div id="tg-content" class="tg-content">
+                                <div class="tg-signinsignup">
+                                    <div class="tg-title" id="titleInscription">
+                                        <h2>Inscrivez-vous dès maintenant</h2>
+                                    </div>
+                                    <div class="tg-title" id="titleConnexion" hidden>
+                                        <h2>Se connecter</h2>
+                                    </div>
+                                    <div class="tg-alertmessages col-md-12 col-sm-12 col-xs-12">
+                                        <div class="alert alert-success tg-alertmessage fade in" id="alertSuccess" hidden>
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                            <i class="fa fa-check"></i>
+                                            <span><strong>Félicitation!</strong>  Votre compte a bien été enregistré.</span>
+                                        </div>
+                                        <div class="alert alert-danger tg-alertmessage fade in" id="divErreurAlert" hidden>
+                                            <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                            <i class="fa fa-bug"></i>
+                                            <span><strong>Message d'erreur </strong> Probleme de creation de compte.</span>
+                                        </div>
+                                    </div>
+                                    <div class="tg-dashboardtabs">
+                                        <div class="tab-content tg-dashboardtabcontent">
+                                            <div role="tabpanel" class="tab-pane active" id="overview">
+                                                <div class="tg-searchbulder">
+                                                    <div id="tg-subcategories" class="tg-subcategories">
+                                                        <div id="doctorscategory" class="tg-tabcontent tg-active">
+                                                            <div id="formAddDoctor">
+                                                                <form class="tg-formtheme tg-formsigninsignup" id="addDoctorForm" autocomplete="off">
+                                                                    <fieldset>
+                                                                        <div class="row tg-rowmargin">
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                                                <div class="form-group tg-formgroup">
+                                                                                    <span class="tg-select" >
+                                                                                            <select name="doctorsbundle_doctors[title]" id="doctorsbundle_doctors_title">
+                                                                                                    <option value="">Titre</option>
+                                                                                                    <option value="mr">Mr</option>
+                                                                                                    <option value="mme">Mme</option>
+                                                                                                    <option value="mlle">Mlle</option>
+                                                                                            </select>
+                                                                                    </span>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                                                                                <div class="form-group tg-formgroup">
+                                                                                    {{ form_widget(form.firstName, {'attr':{'class':'form-control', 'placeholder':'Prénom'}}) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-6 col-sm-6 col-xs-12 tg-columnpadding">
+                                                                                <div class="form-group tg-formgroup">
+                                                                                    {{ form_widget(form.lastName, {'attr':{'class':'form-control', 'placeholder':'Nom'}}) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div id="noDispoName" hidden>
+                                                                                <p style="color:#761c19"><i class="fa fa-times-circle" style="color: #761c19"></i>Nom et prénom existent déjà</p>
+                                                                            </div>
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                                                <div class="form-group tg-formgroup">
+                                                                                    {{ form_widget(form.birthday,{'attr':{'class':'form-control js-datepicker', 'placeholder':'Date de naissance'}}) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                                                <div class="form-group tg-formgroup">
+                                                                                    {{ form_widget(form.imageFile) }}
+                                                                                </div>
+                                                                            </div>
+                                                                            {{ form_widget(form._token) }}
+                                                                            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                                                                                <button type="submit" class="tg-btn pull-right">Suivant<i class="fa fa-arrow-right"></i></button>
+                                                                            </div>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                // configure the bootstrap datepicker
+                $('.js-datepicker').datepicker({
+                    format: 'dd-mm-yyyy'
+                });
+            });
+        </script>
+        
+        <script>
+            var nomDispo = false;
+            var prenomDispo = false;
+            $('body').on('submit', '#addDoctorForm', function (e) {
+                e.preventDefault();
+                e.stopImmediatePropagation();
+
+                var $form = $(this);
+                var formdata = (window.FormData) ? new FormData($form[0]) : null;
+                var data = (formdata !== null) ? formdata : $form.serialize();
+
+                var URL = "{{ path('doctors_create')}}";
+                console.log(URL);
+                //i add this (comments) to have possiblity to create account with same nom and prenom
+/*                
+                if (prenomDispo == false && nomDispo == false){
+                    $('#noDispoName').show();
+                }else {
+                    $('#noDispoName').hide();
+*/                    
+                    $.ajax({
+                        url: URL,
+                        type: "POST",
+                        contentType: false, // obligatoire pour de l'upload
+                        processData: false, // obligatoire pour de l'upload
+                        dataType: 'html', // selon le retour attendu
+                        data: data,
+                        success: function (response) {
+                            if (response == 'erreur') {
+                                $('#divErreurAlert').show();
+                            } else {
+                                $('#formAddDoctor').html(response);
+                            }
+                            return true;
+                        }
+                    });
+/*                    
+                }
+*/
+                return false;
+            });
+
+            $("#doctorsbundle_doctors_lastName").change(function (key) {
+                var nom = $("#doctorsbundle_doctors_lastName").val();
+                var DATA = 'nom=' + nom;
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('doctor_verifierNom')}}",
+                    data: DATA,
+                    cache: false,
+                    success: function (responce) {
+                        if(responce == 'dispo'){
+                            nomDispo = true;
+                            $('#noDispoName').hide();
+                        }else {
+                            nomDispo = false;
+                        }
+
+                    }
+                });
+                return false;
+            });
+
+            $("#doctorsbundle_doctors_firstName").change(function (key) {
+                var prenom = $("#doctorsbundle_doctors_firstName").val();
+                var DATA = 'prenom=' + prenom;
+
+                $.ajax({
+                    type: "POST",
+                    url: "{{ path('doctor_verifierPrenom')}}",
+                    data: DATA,
+                    cache: false,
+                    success: function (responce) {
+                        if(responce == 'dispo'){
+                            prenomDispo = true;
+                            $('#noDispoName').hide();
+                        }else {
+                            prenomDispo = false;
+                        }
+                    }
+                });
+                return false;
+            });
+        </script>
+        <!--************************************
+                Main End
+        *************************************-->
+        <!--************************************
+                Footer Start
+        *************************************-->
+        {% include ('default/footer.html.twig') %}
+        <!--************************************
+                Footer End
+        *************************************-->
+    </div>
+    <!--************************************
+            Wrapper End
+    *************************************-->
+
+    </body>
+{% endblock %}

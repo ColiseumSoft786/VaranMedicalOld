@@ -1,0 +1,51 @@
+<div class="tg-servicelocations">
+    {% for location in locations %}
+    <div class="tg-servicelocation" style="width: 100%">
+        <div class="tg-directpost" style="width: 100%">
+            <div class="tg-detail">
+                <figure class="tg-directpostimg">
+                    {% if vich_uploader_asset(doctor, 'imageFile') %}
+                        <a href="#">
+                            <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                        </a>
+                    {% else %}
+                        <a href="#">
+                            <img src="{{ asset('assets/images/directpost/img-01.jpg') }}" alt="image description">
+                        </a>
+                    {% endif %}
+                    <figcaption>
+                        <a class="tg-usericon tg-iconvarified" href="#">
+                            <em class="tg-usericonholder">
+                                <i class="fa fa-shield"></i>
+                                <span>varified</span>
+                            </em>
+                        </a>
+                    </figcaption>
+
+                </figure>
+            </div>
+            <div class="tg-directinfo" >
+                <div class="tg-directposthead">
+
+                    <h3
+                    ><a href="#">{{ location.name }}</a></h3>
+
+                    <div class="tg-subjects">{{ location.ville }}</div>
+                    <ul class="tg-metadata">
+                        <li><span class="tg-stars"><span></span></span></li>
+                        <li><a href="#"><i class="fa fa-heart tg-like"></i></a></li>
+                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes</a></li>
+                    </ul>
+                    <div style="display: inlines;">
+                        {{  render(controller('DoctorsBundle:Locations:comments',{'location': location})) }}
+                    </div>
+                </div>
+                <div class="tg-description">
+                    <p>{{ location.adresse }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+

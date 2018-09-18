@@ -1,0 +1,47 @@
+<ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+    {% for education in educations %}
+    <li> <span>{{ education.typeOfSchool }} <button class="editEducation" value="{{ education.id }}" style="background-color: transparent"><i class="fa fa-pencil"></i></button>  <button class="deleteEducation" value="{{ education.id }}" style="background-color: transparent"><i class="fa fa-close"></i></button> </span>  <span>{{ education.school }}</span> <span></span> </li>
+    {% endfor %}
+</ul>
+
+<script>
+    $(document).ready(function () {
+        $(".editEducation").click(function () {
+
+            var URL = "{{ path('educations_edit',{ 'id': 'sss' }) }}";
+            var idEducation = $(this).attr('value');
+            URL = URL.replace(/sss/g, idEducation);
+            console.log('URL = '+URL);
+            $.ajax({
+                type: "POST",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $('#editEducation').html(response);
+                    $('#newEducation').hide();
+                    $('#educationsList').hide();
+                }
+            });
+            return true;
+        });
+
+        $(".deleteEducation").click(function () {
+            if (!confirm('Vous voulez supprime cet enregistrement')) return false;
+            var URL = "{{ path('educations_delete',{ 'education': 'sss' }) }}";
+            var idEducation = $(this).attr('value');
+            console.log(idEducation)
+            URL = URL.replace(/sss/g, idEducation);
+            console.log('URL = '+URL);
+            $.ajax({
+                type: "POST",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $('#educationsList').html(response);
+                    $('#successEducation').hide();
+                }
+            });
+            return true;
+        });
+    });
+</script>

@@ -1,0 +1,10 @@
+<div class="tg-collapsecontent">
+    <ul>
+        {% for invoice in invoices %}
+        <li>
+            <span>{{ invoice.subService.subService }}</span>
+            <span>{{ invoice.price }} €</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>

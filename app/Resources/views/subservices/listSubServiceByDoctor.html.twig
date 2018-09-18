@@ -1,0 +1,84 @@
+<div class="tg-alertmessages" id="successMessage">
+    <div class="alert alert-success tg-alertmessage fade in" id="deleteSuccess" hidden>
+        <i class="fa fa-check"></i>
+        <span><strong>{{ 'success Message'|trans }}.</strong> Adipisicing elit, sed do eiusmod.</span>
+    </div>
+    <div class="alert alert-danger tg-alertmessage fade in" id="deleteErreur" hidden>
+        <i class="fa fa-bug"></i>
+        <span><strong>{{ 'Error Message'|trans }}.</strong> Adipisicing elit, sed do eiusmod.</span>
+    </div>
+</div>
+<br><br>
+<div class="tg-tablescroll">
+    <div class="tg-favoritlistingbox">
+        <div class="tg-invoicestitle">
+            <span>{{ 'Title'|trans }}</span>
+            <span class="tg-titleamount">{{ 'Amount'|trans }}</span>
+            <span class="tg-titleaction">{{ 'Action'|trans }}</span>
+        </div>
+        <ul class="tg-invoices">
+            {% for subService in subServices %}
+            <li>
+                <div class="tg-invoicesheading">
+                    <h3><a href="#">{{ subService.subService.subService }}</a></h3>
+                </div>
+                <div class="tg-amout">
+                    <em>{{ subService.price }} €</em>
+                </div>
+                <div class="tg-btnaction">
+                    <a class="tg-btndelete delateSubService" href="#" id="{{ subService.id }}"><i class="fa fa-minus"></i></a>
+                </div>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".delateSubService").click(function () {
+            var subService = $('.delateSubService').attr('id');
+
+            var URL = "{{ path('invoices_delete', {'id' : 'sss'}) }}";
+            URL = URL.replace(/sss/g, subService);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    if (response == 'delete'){
+                        $("#deleteSuccess").show();
+                        $("#deleteErreur").hide();
+                        refreshSubServices();
+                    }else{
+                        $("#deleteSuccess").hide();
+                        $("#deleteErreur").show();
+                    }
+                    return true;
+                }
+            });
+        });
+    });
+
+    function refreshSubServices() {
+
+        var service = $('#serviceDoctor').val();
+        if (service != null){
+            var doctor = {{ app.user.idTable }};
+
+            var URL = "{{ path('invoices_listSubServices', {'doctor' : 'sss', 'service': 'ddd'}) }}";
+            URL = URL.replace(/sss/g, doctor);
+            URL = URL.replace(/ddd/g, service);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $("#listSubServices").html(response);
+                    $("#deleteSuccess").show();
+                    return true;
+                }
+            });
+        }
+    }
+</script>

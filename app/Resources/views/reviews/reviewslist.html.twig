@@ -1,0 +1,44 @@
+    <div class="tg-box">
+        <div class="tg-tabtitle">
+            <h2>Patient’s Feedback</h2>
+        </div>
+        <div class="tg-patientfeedbackhead">
+            <form class="tg-formtheme tg-formfeedbacksearch">
+                <fieldset>
+                    <input type="search" class="form-control" name="search" placeholder="Search in Feedback">
+                    <button><i class="fa fa-search"></i></button>
+                </fieldset>
+            </form>
+        </div>
+        
+    {% for review in reviews %}
+        <div class="tg-patientfeedbacks">
+            <div class="tg-patientfeedback">
+                <div class="tg-patientfeedbackbox">
+                    <figure>
+                        <img src="images/thumbnails/img-11.jpg" alt="image description">
+                        <figcaption>
+                            <a href="#"><i class="fa fa-reply "></i></a>
+                        </figcaption>
+                    </figure>
+                    <div class="tg-patientfeedbackcontent">
+                        <div class="tg-contenthead">
+                            <div class="tg-leftbox">
+                                <div class="tg-patientname">
+                                    <h4><a href="#">{{ review.title }}</a></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tg-description">
+                            <p>{{ review.description }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+
+        <div class="tg-btnbox">
+            <a class="tg-btn tg-btnloadmore" href="javascript:void(0);">load more</a>
+        </div>
+    </div>

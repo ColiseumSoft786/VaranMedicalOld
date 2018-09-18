@@ -1,0 +1,54 @@
+<div class="row tg-rowmargin">
+    <form action="" id="formEditEducation">
+        <div class="col-sm-5 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                {{ form_widget(edit_form.typeOfSchool, {'attr':{'class':'form-control', 'placeholder':'Type d\'ecole (exp : Medical school)'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-5 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                {{ form_widget(edit_form.school, {'attr':{'class':'form-control', 'placeholder':'L\'ecole'}}) }}
+                {{ form_widget(edit_form._token) }}
+                <input type="hidden" id="doctorsbundle_educations_doctor" name="doctorsbundle_educations[doctor]" value="{{ app.user.idTable }}" >
+                <input type="hidden" id="educationId"  value="{{ education.id }}" >
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                <button class="tg-btn tg-btn-lg" type="submit">{{ 'Edit'|trans }}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function () {
+        $('body').on('submit', '#formEditEducation', function (e) {
+            // On empêche le navigateur de soumettre le formulaire
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('educations_edit',{ 'id': 'myID' }) }}";
+            var idEducation = $('#educationId').val();
+            URL = URL.replace(/myID/g, idEducation);
+
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                    location.reload();
+
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>

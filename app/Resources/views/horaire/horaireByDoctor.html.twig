@@ -1,0 +1,92 @@
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!DOCTYPE html>
+<html lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href='//netdna.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css' rel='stylesheet'/>
+        <link rel="stylesheet" href="{{ asset('assets/css/horaire.css')}}">
+    </head>
+    <body>
+        <div class="container demo-bg">
+            <div class="row">
+                <select name="loc" id="loc" class="form-control" onChange="myFunction(event)" style="margin-bottom: 25px;">
+                    <option value="">{{'Select Location'|trans}}</option>
+                    {% for item in locations %}
+                        <option value="{{ item.id }}">{{ item.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="row">
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4"></div>
+                <div class="col-sm-4">
+                    <div class="business-hours">
+                        <h2 class="title">Heure d'ouverture</h2>
+                        <ul class="list-unstyled opening-hours">
+                            <li>Lundi <span id="hourL" class="pull-right"/></li>
+                            <li>Mardi <span id="hourMar" class="pull-right"/></li>
+                            <li>Mercredi <span id="hourMer" class="pull-right"/></li>
+                            <li>Jeudi <span id="hourJ" class="pull-right"/></li>
+                            <li>Vendredi <span id="hourV" class="pull-right"/></li>
+                            <li>Samedi <span id="hourS" class="pull-right"/></li>
+                            <li>Dimanche <span id="hourD" class="pull-right"/></li>                            
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+
+<script>
+    // highlight current day on opeining hours
+    $(document).ready(function() {
+    $('.opening-hours li').eq(new Date().getDay()).addClass('today');
+    });
+</script>
+
+<script>
+    function myFunction(e) {
+        
+        var locId = document.getElementById("loc").value;
+         
+        var d = new Date();
+        d.setHours(0,0);
+        var h = (d.getHours()<10?'0':'') + d.getHours();
+        var m = (d.getMinutes()<10?'0':'') + d.getMinutes();
+        var heure = h+':'+m;
+        
+        
+        {% for horaire in horaires %}
+            if('{{horaire.locationId.id}}' == locId ){
+                if('{{horaire.jour}}' == 'lundi'){
+                    document.getElementById("hourL").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'mardi'){
+                    document.getElementById("hourMar").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'mercredi'){                    
+                    document.getElementById("hourMer").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'jeudi'){
+                    document.getElementById("hourJ").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'vendredi'){
+                    document.getElementById("hourV").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'samedi'){
+                    document.getElementById("hourS").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+                if('{{horaire.jour}}' == 'dimanche'){
+                    document.getElementById("hourD").innerHTML = '{{horaire.heureDebut|date('H:i')}}'+"-"+'{{horaire.heureFin|date('H:i')}}';
+                }
+            }
+        {% endfor %}
+    }
+</script>

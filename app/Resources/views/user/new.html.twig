@@ -1,0 +1,166 @@
+<form  class="tg-formtheme tg-formsigninsignup" autocomplete="off" role="form" action=""  id="addUserForm">
+    <fieldset>
+        <div class="row tg-rowmargin">
+            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    {{ form_widget(form.email, {'attr':{'class':'form-control col-lg-6', 'placeholder':'Email'}}) }}
+                    <div id="noDispoEmail" hidden>
+                        <p style="color:#761c19"><i class="fa fa-times-circle" style="color: #761c19"></i>Email déja existe</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    {{ form_widget(form.username, {'attr':{'class':'form-control col-lg-6', 'placeholder':'Nom d/utilisateur'}}) }}
+                    <div id="dispoUserName" hidden>
+                        <p style="color: #2b542c"><i class="fa fa-check-circle" style="color: #2b542c"></i>Nom d'utilisateur disponible</p>
+                    </div>
+                    <div id="noDispoUserName" hidden>
+                        <p style="color:#761c19"><i class="fa fa-times-circle" style="color: #761c19"></i>Nom d'utilisateur déja existe</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    {{ form_widget(form.plainPassword.first, {'attr':{'class':'form-control col-lg-6', 'placeholder':'Mot de passe'}}) }}
+                </div>
+            </div>
+            <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+                <div class="form-group tg-formgroup">
+                    {{ form_widget(form.plainPassword.second, {'attr':{'class':'form-control col-lg-6', 'placeholder':'Confirmer le mot de passe', 'onkeyup':'checkPass();'}}) }}
+                </div>
+                <div id="confirmMessage">
+
+                </div>
+            </div>
+        </div>
+    </fieldset>
+    {{ form_widget(form._token) }}
+    <div class="form-group row" id="divIdTable">
+        <div class="col-lg-9">
+            <input type="hidden" id="userbundle_user_typeUser" name="userbundle_user[typeUser]"  value="{{ table }}">
+            <input type="hidden" name="role"  value="{{ table }}">
+            <input type="hidden" id="userbundle_user_idTable" name="userbundle_user[idTable]"  value="{{ idDoctor }}">
+            <input type="hidden" id="userbundle_user_verifier" name="userbundle_user[verifier]" value="0" >
+            <input type="hidden" id="checkUserName" value="false" >
+            <input type="hidden" id="checkEmail" value="false" >
+
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="clearfix"></div>
+    <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
+        <button type="submit" class="tg-btn pull-right" id="valideForm">Valider</button>
+    </div>
+</form>
+<script>
+
+    $('body').on('submit', '#addUserForm', function (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+
+        var $form = $(this);
+        var formdata = (window.FormData) ? new FormData($form[0]) : null;
+        var data = (formdata !== null) ? formdata : $form.serialize();
+        var pass1 = document.getElementById('userbundle_user_plainPassword_first');
+        var pass2 = document.getElementById('userbundle_user_plainPassword_second');
+        var message = document.getElementById('confirmMessage');
+        console.log(usernameDispo);
+        console.log(emailDispo);
+        var URL = "{{ path('user_createUser')}}";
+        console.log(URL);
+        var username = $('#checkUserName').val();
+        var mail = $('#checkEmail').val();
+        if( username == 'true' && mail == 'true'){
+            if (pass1.value == pass2.value) {
+                $.ajax({
+                    url: URL,
+                    type: "POST",
+                    contentType: false,
+                    processData: false,
+                    dataType: 'html',
+                    data: data,
+                    success: function (response) {
+                        $('#titleInscription').hide();
+                        $('#titleConnexion').show();
+                        $('#formAddDoctor').html(response);
+                        $('#alertSuccess').show();
+
+                    }
+                });
+            }else {
+                message.innerHTML = "<p style='color: darkred'>les mots de passe ne sont pas identiques</p>"
+            }
+        }else {
+            message.innerHTML = "<p style='color: darkred'>Nom d'utilisateur ou email déja existe</p>"
+        }
+
+        return false
+    });
+
+    function checkPass() {
+
+        var pass1 = document.getElementById('userbundle_user_plainPassword_first');
+        var pass2 = document.getElementById('userbundle_user_plainPassword_second');
+
+
+        var goodColor = "#6cbf6d";
+        var badColor = "#db6460";
+
+        if(pass1.value == pass2.value){
+            pass2.style.backgroundColor = goodColor;
+        }else{
+            pass2.style.backgroundColor = badColor;
+        }
+    }
+    var usernameDispo = false;
+    var emailDispo = false;
+
+    $("#userbundle_user_username").change(function (key) {
+        var username = $("#userbundle_user_username").val();
+        var DATA = 'username=' + username;
+
+        $.ajax({
+            type: "POST",
+            url: "{{ path('user_verifierUserName')}}",
+            data: DATA,
+            cache: false,
+            success: function (responce) {
+                if(responce == 'dispo'){
+                    $('#noDispoUserName').hide();
+                    $('#dispoUserName').show();
+                    $('#checkUserName').val('true');
+                    return usernameDispo = true;
+                }else {
+                    $('#dispoUserName').hide();
+                    $('#noDispoUserName').show();
+                    $('#checkUserName').val('false');
+                }
+
+            }
+        });
+        return false;
+    });
+
+    $("#userbundle_user_email").change(function (key) {
+        var email = $("#userbundle_user_email").val();
+        var DATA = 'email=' + email;
+
+        $.ajax({
+            type: "POST",
+            url: "{{ path('user_verifierMail')}}",
+            data: DATA,
+            cache: false,
+            success: function (responce) {
+                if(responce == 'noDispo'){
+                    $('#noDispoEmail').show();
+                    $('#checkEmail').val('false');
+                }else {
+                    $('#noDispoEmail').hide();
+                    $('#checkEmail').val('true');
+                }
+
+            }
+        });
+    });
+</script>

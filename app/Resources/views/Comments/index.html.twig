@@ -1,0 +1,229 @@
+{% include ('base.html.twig') %}
+{% block body %}
+<body class="tg-home tg-login">
+<!--[if lt IE 8]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+<!--************************************
+        Preloader Start
+*************************************
+<div class="preloader-outer">
+    <div class="pin"></div>
+    <div class="pulse"></div>
+</div>
+<!--************************************
+        Preloader End
+*************************************-->
+
+<!--************************************
+        Wrapper Start
+*************************************-->
+<div id="tg-wrapper" class="tg-wrapper tg-haslayout">
+    {{ render(controller('AppBundle:Default:header')) }}
+
+    <!--************************************
+            Main Start
+    *************************************-->
+    <main id="tg-main" class="tg-main tg-haslayout">
+        <div class="container">
+            <div class="row">
+                <div id="tg-content" class="tg-content tg-dashboard">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
+                        <div class="tg-widgetdashboard">
+                            <div class="tg-widgetprofile">
+                                <figure class="tg-directpostimg"> 
+                                    {% if vich_uploader_asset(doctor, 'imageFile') %}
+                                        <a href="#">
+                                            <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
+                                        </a>
+                                    {% else %}
+                                        <a href="#">
+                                            <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
+                                        </a>
+                                    {% endif %}
+                                    {% if app.user.verifier == 1 %}
+                                        <figcaption>
+                                            <a class="tg-usericon tg-iconvarified" href="#">
+                                                <em class="tg-usericonholder">
+                                                    <i class="fa fa-shield"></i>
+                                                    <span>{{ 'verified'|trans }}</span>
+                                                </em>
+                                            </a>
+                                        </figcaption>
+                                    {% endif %}
+                                </figure>
+                                <div class="tg-directposthead">
+                                    <h3><a href="#">Dr. {{ doctor.firstName }} {{ doctor.lastName }}</a></h3>
+                                    <div class="tg-subjects"></div>
+                                    <ul class="tg-metadata">
+                                        <li><span class="tg-stars"><span></span></span></li>
+                                        <li><a href="#"><i class="fa fa-thumbs-o-up"></i> 99% (1009 votes)</a></li>
+                                    </ul>
+                                </div>
+                                <a class="tg-btn tg-btn-lg" href="{{ path('user_profil', {'id': app.user.id }) }}">{{ 'Profile'|trans }}</a> </div>
+                            {% include('profilDoctorNav.html.twig') %}
+                        </div>
+                    </div>
+                    <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 pull-right">
+                        <div class="tg-dashboardjobslocations">
+                            <div class="tg-dashboardbox">
+
+                                <div class="tg-box tg-profilephoto">
+                                    <div class="row tg-rowmargin">
+                                        <div class="col-md-3 col-sm-6 col-xs-12 tg-columnpadding pull-right" >
+                                            <div class="form-group tg-formgroup ">
+                                                <a href="{{ path('doctors_comments_new',{'location':location}) }}" class="tg-btn tg-btn-lg">{{ 'Add New Comments'|trans }}</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="tg-dashboardboxtitle">
+                                    <h2>{{ 'Available Comments'|trans }}</h2>
+                                </div>
+                                <div id="divFormAdd">
+
+                                </div>
+                                <div class="tg-box tg-availablelocation">
+                                    <div class="tg-servicelocations">
+                                        <div id="divErreur" hidden>
+                                            <div class="tg-alertmessages">
+                                                <div class="alert alert-danger tg-alertmessage fade in">
+                                                    <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                                    <i class="fa fa-bug"></i>
+                                                    <span><strong>{{ 'Error Message'|trans }}.</strong> Adipisicing elit, sed do eiusmod et dolore magna aliqua enim ad minimati.</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        {% for item in comments %}
+                                            <div class="tg-servicelocation">
+                                                <div class="tg-directpost">
+                                                    <div class="tg-directinfo">
+                                                        <div class="tg-directposthead">
+                                                            <h3><a href="#">{{ item.comment }}</a></h3>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <ul class="tg-servicesinfo">
+                                                    <li>
+
+                                                    </li>
+                                                </ul>
+                                                <div class="tg-btnjoblocationeditdelete" style="width: 10%">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                        <a href="{{ path('doctors_comments_edit',{comment:item.id}) }}" class="tg-btndelete editLocation"  style="background-color: #2b2b2b" title="Modifier"><i class="fa fa-pencil"></i></a>
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                        <a href="{{ path('doctors_comments_delete',{comment:item.id}) }}" class="tg-btndelete deleteLocation" id="" style="background-color: #2b2b2b" title="Supprimer"><i class="fa fa-trash"></i></a><br>
+                                                    </div>
+                                                </div>
+                                                <br><br>
+                                            </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!--************************************
+            Main End
+    *************************************-->
+
+</div>
+<!--************************************
+        Wrapper End
+*************************************-->
+{% include ('default/footer.html.twig') %}
+{% block addLocationModal %}
+    <!--************************************
+            Light Box Start
+*************************************-->
+    {#<div class="modal tg-modal tg-appointmentlightbox fade" id="showMap" tabindex="-1" role="dialog">
+        <div class="modal-dialog tg-modaldialog">
+            <div class="modal-content tg-modalcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h2 id="locationName"></h2>
+                <div id="result">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal tg-modal tg-appointmentlightbox fade" id="editLocation" tabindex="-1" role="dialog">
+        <div class="modal-dialog tg-modaldialog">
+            <div class="modal-content tg-modalcontent">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"></span></button>
+                <h2 id="locationName"></h2>
+                <div id="formEdit">
+
+                </div>
+            </div>
+        </div>
+    </div>
+    #}<!--************************************
+                Light Box End
+    *************************************-->
+{% endblock %}
+
+{#<script>
+
+    $(document).ready(function () {
+
+        $(".showMap").click(function () {
+            var location = $(this).attr('id');
+            var URL = "{{ path('locations_show',{ 'id': 'myID' }) }}";
+            URL = URL.replace(/myID/g, location);
+            console.log(URL);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $('#result').html(response);
+                    return true;
+                }
+            });
+        });
+
+        $(".editLocation").click(function () {
+            var location = $(this).attr('id');
+            var URL = "{{ path('locations_edit',{ 'id': 'myID' }) }}";
+            URL = URL.replace(/myID/g, location);
+            console.log(URL);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    $('#formEdit').html(response);
+                    return true;
+                }
+            });
+        });
+        $(".deleteLocation").click(function () {
+            if (!confirm('Vous voulez vraiment supprime cette job location')) return false;
+            var locations = $(this).attr('id');
+            var URL = "{{ path('locations_delete',{ 'id': 'myID' }) }}";
+            URL = URL.replace(/myID/g, locations);
+            console.log(URL);
+            $.ajax({
+                type: "GET",
+                url: URL,
+                cache: false,
+                success: function (response) {
+                    if (response == 'erreur') {
+                        $('#divErreur').show();
+                        return true;
+                    }
+                    location.reload();
+                    return true;
+                }
+            });
+        });
+    });
+</script>#}
+{% endblock %}

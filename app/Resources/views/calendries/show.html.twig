@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Calendry'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ calendry.id }}</td>
+            </tr>
+            {#
+            <tr>
+                <th>{{ 'Date debut'|trans }}</th>
+                <td>{% if calendry.dateDebut %}{{ calendry.dateDebut|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Date fin'|trans }}</th>
+                <td>{% if calendry.dateFin %}{{ calendry.dateFin|date('Y-m-d H:i:s') }}{% endif %}</td> 
+            </tr>
+            <tr>
+                <th>{{ 'Active'|trans }}</th>
+                <td>{{ calendry.active }}</td>
+            </tr>
+            #}
+            
+            {# i add this two tr #}
+            <tr>
+                <th>{{ 'Date'|trans }}</th>
+                <td>{% if calendry.date %}{{ calendry.date|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Location'|trans }}</th>
+                <td>{% if calendry.location %}{{ calendry.location}}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('calendries_index', { 'id': calendry.id })}}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('calendries_edit', { 'id': calendry.id }) }}">{{ 'Edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

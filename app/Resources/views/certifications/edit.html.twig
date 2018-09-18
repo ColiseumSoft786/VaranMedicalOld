@@ -1,0 +1,68 @@
+<br><br>
+<div class="row tg-rowmargin">
+    <form action="" id="formEditCertification">
+        <div class="col-sm-10 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                {{ form_widget(edit_form.title, {'attr':{'class':'form-control', 'placeholder':'Titre'}}) }}
+                {{ form_widget(edit_form._token) }}
+            </div>
+        </div>
+        <div class="col-sm-5 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                {{ form_widget(edit_form.occasion, {'attr':{'class':'form-control', 'placeholder':'L\'occasion'}}) }}
+            </div>
+        </div>
+        <div class="col-sm-5 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                {{ form_widget(edit_form.date, {'attr':{'class':'form-control js-datepicker ', 'placeholder':'Date'}}) }}
+                <input type="hidden" id="doctorsbundle_certifications_doctor" name="doctorsbundle_certifications[doctor]" value="{{ certification.doctor.id }}">
+                <input type="hidden" id="certificationId"  value="{{ certification.id }}" >
+            </div>
+        </div>
+        <div class="col-md-2 col-sm-3 col-xs-12 tg-columnpadding">
+            <div class="form-group tg-formgroup">
+                <button class="tg-btn tg-btn-lg" type="submit">{{ 'Edit'|trans }}</button>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    $(document).ready(function() {
+        // configure the bootstrap datepicker
+        $('.js-datepicker').datepicker({
+            format: 'dd-mm-yyyy'
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('body').on('submit', '#formEditCertification', function (e) {
+            // On empêche le navigateur de soumettre le formulaire
+            e.preventDefault();
+            e.stopImmediatePropagation();
+
+            var $form = $(this);
+            var formdata = (window.FormData) ? new FormData($form[0]) : null;
+            var data = (formdata !== null) ? formdata : $form.serialize();
+
+            var URL = "{{ path('certifications_edit',{ 'id': 'myID' }) }}";
+            var idCertification = $('#certificationId').val();
+            URL = URL.replace(/myID/g, idCertification);
+
+            $.ajax({
+                url: URL,
+                type: "POST",
+                contentType: false, // obligatoire pour de l'upload
+                processData: false, // obligatoire pour de l'upload
+                dataType: 'html', // selon le retour attendu
+                data: data,
+                success: function (response) {
+                        location.reload();
+                    return true;
+                }
+            });
+            return false;
+        });
+    });
+</script>
+

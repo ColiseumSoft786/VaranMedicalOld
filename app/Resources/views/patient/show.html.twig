@@ -1,0 +1,64 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Patient'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ patient.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Firstname'|trans }}</th>
+                <td>{{ patient.firstName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Lastname'|trans }}</th>
+                <td>{{ patient.lastName }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Birthday'|trans }}</th>
+                <td>{% if patient.birthday %}{{ patient.birthday|date('Y-m-d H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Gsm'|trans }}</th>
+                <td>{{ patient.gSM }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Domicile'|trans }}</th>
+                <td>{{ patient.domicile }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Travail'|trans }}</th>
+                <td>{{ patient.travail }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Preferred number'|trans }} </th>
+                <td>{{ patient.preferredNumber }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Adresse'|trans }}</th>
+                <td>{{ patient.adresse }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Sexe'|trans }}</th>
+                <td>{{ patient.sexe }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('patient_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('patient_edit', { 'id': patient.id }) }}">{{ 'edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

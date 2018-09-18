@@ -1,0 +1,75 @@
+{% extends "::admin.html.twig" %}
+
+{% block title %}Admin: Weekends{% endblock %}
+
+{% block body %}
+
+    <section class="content-header">
+        <h1>
+            Add a weekend Day
+        </h1>
+        <ol class="breadcrumb">
+            <li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+            <li><a href="#"><i class="fa fa-dashboard"></i> Weekends</a></li>
+            <li class="active">New</li>
+        </ol>
+    </section>
+
+    <section class="content">
+
+
+        <!-- Main row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="box box-info">
+                    <div class="box-header with-border">
+                        <label class="label label-info">Note: This Day will be blocked for the whole year.</label>
+                        <div class="box-tools pull-right">
+                            <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                            </button>
+                            {#<button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>#}
+                        </div>
+                    </div>
+                    <!-- /.box-header -->
+                    <div class="box-body">
+                        <div class="col-sm-offset-4 col-sm-4">
+                            <form id="dayform" action="" method="post">
+                                <div class="form-group">
+                                    <label>Select Day</label>
+                                    <select class="form-control select2" id="day" name="day" style="width: 100%;">
+                                        <option value="">Select A Day</option>
+                                        <option value="Monday">Monday</option>
+                                        <option value="Tuesday">Tuesday</option>
+                                        <option value="Wednesday">Wednesday</option>
+                                        <option value="Thursday">Thursday</option>
+                                        <option value="Friday">Friday</option>
+                                        <option value="Saturday">Saturday</option>
+                                        <option value="Sunday">Sunday</option>
+                                    </select>
+                                </div>
+                                <input style="margin-top: 20px" type="submit" class="btn btn-info btn-block">
+                            </form>
+                            <script>
+                                $('#dayform').submit(function(e){
+                                   if($('#day').val() == ""){
+                                       e.preventDefault();
+                                   }
+                                });
+                            </script>
+
+                        </div>
+
+
+                    </div>
+                    <!-- /.box-body -->
+
+                    <!-- /.box-footer -->
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+
+
+{% endblock %}

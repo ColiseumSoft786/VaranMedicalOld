@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{'Seance'|trans }}</h1>
+
+    <table>
+        <tbody>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <td>{{ seance.id }}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Jour'|trans }}</th>
+                <td>{% if seance.jour %}{{ seance.jour|date('Y-m-d') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Heure debut'|trans }}</th>
+                <td>{% if seance.heurDebut %}{{ seance.heurDebut|date('H:i:s') }}{% endif %}</td>
+            </tr>
+            <tr>
+                <th>{{ 'Heure fin'|trans }}</th>
+                <td>{% if seance.heurFin %}{{ seance.heurFin|date('H:i:s') }}{% endif %}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+            <a href="{{ path('seances_index') }}">{{ 'Back to the list'|trans }}</a>
+        </li>
+        <li>
+            <a href="{{ path('seances_edit', { 'id': seance.id }) }}">{{ 'Edit'|trans }}</a>
+        </li>
+        <li>
+            {{ form_start(delete_form) }}
+                <input type="submit" value="Delete">
+            {{ form_end(delete_form) }}
+        </li>
+    </ul>
+{% endblock %}

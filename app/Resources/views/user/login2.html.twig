@@ -1,0 +1,107 @@
+<div class="tg-widget tg-widgetlogin">
+    <div class="tg-widgetcontent">
+        <div class="tg-widgettitle">
+            <h3>Connectez-vous à votre compte MedicalApp</h3>
+        </div>
+        <form action="{{ path("fos_user_security_check") }}" method="post" class="tg-themeform tg-formsignin" id="fosloginform">
+            {% if error %}
+                <div class="row">
+                    <div class="col-sm-12 col-xs-12">
+                        <div class="tg-alertmessages">
+                            <div class="alert alert-danger tg-alertmessage fade in">
+                                <a href="#" class="close" data-dismiss="alert" aria-label="close">×</a>
+                                <i class="fa fa-bug"></i>
+                                <span><strong>Error Message.</strong> {{ error.messageKey|trans(error.messageData, 'security') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+            {% if csrf_token %}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+            {% endif %}
+            <fieldset>
+                <div class="form-group tg-formgroup">
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" required="required" class="form-control" />
+                </div>
+                <div class="form-group tg-formgroup">
+                    <input type="password" id="password" name="_password" required="required" class="form-control" />
+                </div>
+                <div class="tg-kepploginpassword">
+                    <div class="tg-checkbox">
+                        <input type="checkbox" id="remember_me" name="_remember_me" value="on"/>
+                        <label for="keeplogin">Garder ma session active</label>
+                    </div>
+                </div>
+                <div id="divformresult" style="width: 40%" class="center-block text-center">
+                    <div style="display: none" id="_notmatched" class="text-danger">User name and password not matched</div>
+                    <div style="display: none" id="_matched" class="text-success">User name and password matched</div>
+                </div>
+                <div id="divemailcode" style="width: 40%;margin-bottom: 20px;display: none" class="center-block text-center">
+                    <div class="text-info">Code has been sent to your Email</div>
+                    <input type="text" id="emailcode" placeholder="Ender Code" class="form-control">
+                </div>
+
+                <button type="submit" class="tg-btn col-sm-12 col-xs-12" id="_submit" name="_submit" style="background-color: #00adcf"><b>Se connecter</b></button>
+            </fieldset>
+            <a href="{{ path('fos_user_resetting_request') }}" class=""><b>Mot de passe oublie ?</b></a>
+            <br>
+            <hr>
+            <div class="tg-widgettitle">
+                <h3>Nouveau à MedicalApp ?</h3>
+            </div>
+            <button type="button" class="tg-btn tg-btnnext col-sm-12 col-xs-12" style="background-color: #00adcf"><b>Créer un compte</b></button>
+
+        </form>
+        <script>
+            var code;
+            var formcheck = true;
+            $('#fosloginform').submit(function(e){
+                if (formcheck){
+                    e.preventDefault();
+                    $('#username').attr('readonly','readonly');
+                    $('#password').attr('readonly','readonly');
+                    $('#remember_me').attr('readonly','readonly');
+                    $('#_submit').attr('disabled','disabled');
+                    $.ajax({
+                        url: '{{ path('user_ipcheck') }}',
+                        type: 'POST',
+                        data: $(this).serialize(),
+                        success: function(result){
+                            if(result == 'false'){
+                                $('#_notmatched').show();
+                                $('#_matched').hide();
+                                $('#_submit').removeAttr('disabled');
+                                $('#username').removeAttr('readonly');
+                                $('#password').removeAttr('readonly');
+                                $('#remember_me').removeAttr('readonly');
+                            }else if(result == 'true'){
+                                $('#_matched').show();
+                                formcheck = false;
+                                $('#fosloginform').submit();
+                            }else{
+                                code = result;
+                                $('#_notmatched').hide();
+                                $('#_matched').show();
+                                $('#divemailcode').show();
+                            }
+                            alert(result);
+                        }
+                    })
+                }
+
+            });
+            $('#emailcode').keyup(function () {
+                if ($(this).val() == code){
+                    $('#_submit').removeAttr('disabled');
+                    formcheck = false;
+                }else{
+                    $('#_submit').attr('disabled','disabled');
+                    formcheck = true;
+                }
+            })
+        </script>
+    </div>
+
+</div>
+

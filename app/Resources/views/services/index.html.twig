@@ -1,0 +1,16 @@
+<div class="tg-box tg-dashboardservices tg-uiicons">
+    <div class="tg-dashboardboxtitle tg-margin">
+        <h2>{{ 'Services'|trans }}</h2>
+    </div>
+    <div class="tg-dashboardboxtitle tg-feetitle tg-margin">
+        <h2>{{ 'Fee Per Patient'|trans }}</h2>
+    </div>
+    <div class="tg-servicesbox">
+        {% for service in services %}
+        <div class="tg-servicesholder">
+            <div class="tg-mainservice"> <em>{{ service.service }}</em> <i class="fa fa-pencil"></i> <i class="fa fa-close"></i> </div>
+            {{ render(controller('DoctorsBundle:Invoices:index', {'doctor':doctor, 'service':service.id})) }}
+        </div>
+        {% endfor %}
+    </div>
+</div>

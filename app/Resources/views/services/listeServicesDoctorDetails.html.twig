@@ -1,0 +1,6 @@
+<div id="tg-servicesfeecollapse" class="tg-servicesfeecollapse">
+    {% for service in services %}
+    <h3 class="fa fa-angle-down">{{ service.service }}</h3>
+    {{ render(controller('DoctorsBundle:Invoices:listeOfInvoicesByDoctor', {'doctor':doctor, 'service':service.id})) }}
+    {% endfor %}
+</div>

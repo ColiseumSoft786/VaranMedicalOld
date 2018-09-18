@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <h1>{{ 'Doctors list'|trans }}</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>{{ 'Id'|trans }}</th>
+                <th>{{ 'Firstname'|trans }}</th>
+                <th>{{ 'Lastname'|trans }}</th>
+                <th>{{ 'Birthday'|trans }}</th>
+                {#<th>{{ 'Email'|trans }}</th>#}
+                <th>{{ 'Gsm'|trans }}</th>
+                {#<th>{{ 'Sexe'|trans }}</th>#}
+                <th>{{ 'Professional statement'|trans }}</th>
+                <th>{{ 'Actions'|trans }}</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for doctor in doctors %}
+            <tr>
+                <td><a href="{{ path('doctors_show', { 'id': doctor.id }) }}">{{ doctor.id }}</a></td>
+                <td>{{ doctor.firstName }}</td>
+                <td>{{ doctor.lastName }}</td>
+                <td>{% if doctor.birthday %}{{ doctor.birthday|date('Y-m-d') }}{% endif %}</td>
+                {#<td>{{ doctor.email }}</td>#}
+                <td>{{ doctor.GSM }}</td>
+                {#<td>{{ doctor.sexe }}</td>#}
+                <td>{{ doctor.professionalStatement }}</td>
+                <td>
+                    <ul>
+                        <li>
+                            <a href="{{ path('doctors_show', { 'id': doctor.id }) }}">{{ 'show'|trans }}</a>
+                        </li>
+                        <li>
+                            <a href="{{ path('doctors_edit', { 'id': doctor.id }) }}">{{ 'edit'|trans }}</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <ul>
+        <li>
+           <a href="{{ path('doctors_new') }}">{{ 'Create a new doctor'|trans }}</a>
+        </li>
+    </ul>
+{% endblock %}

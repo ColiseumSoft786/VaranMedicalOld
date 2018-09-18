@@ -1,0 +1,14 @@
+{% if educations %}
+<div class="tg-dashboardbox">
+    <div class="tg-dashboardboxtitle">
+        <h2><i class="fa fa-graduation-cap"></i> {{ 'education'|trans }}</h2>
+    </div>
+    <div class="tg-box tg-experience tg-uiicons">
+        <ul class="tg-themelist tg-liststyledot tg-listdatastyle">
+            {% for education in educations %}
+            <li> <span>{{ education.typeOfSchool }}</span> <span>{{ education.school }}</span> </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endif %}
