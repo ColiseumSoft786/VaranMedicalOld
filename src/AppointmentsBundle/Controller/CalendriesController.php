@@ -319,6 +319,8 @@ class CalendriesController extends Controller
         }
     }
     public function createappAction(Request $request){
+
+
         $sd = explode("-",$request->get('sdate'));
         $sdate = new \DateTime();
         $sdate->setDate($sd[0],$sd[1],$sd[2]);
@@ -331,6 +333,7 @@ class CalendriesController extends Controller
         $etime = new \DateTime();
         $t = explode(":",$request->get('etime'));
         $etime->setTime($t[0], $t[1], "00");
+
         $loc = $request->get('loc');
         $atime = $request->get('atime');
         $ptime = $request->get('ptime');
@@ -401,6 +404,45 @@ class CalendriesController extends Controller
             // find day from hrare :: you will get start time and end time.
 
 
+            $fday = $this->getDayInFrench($sdate);
+
+            $time = $this->getDoctrine()->getRepository(Horaire::class)->findBy(array(
+                'jour'=>$fday, 'locationId'=>$loc
+            ));
+            echo count($time);
+            echo '<br>';
+            foreach ($time as $item) {
+                $startDaytime = $item->getHeureDebut()->format('H:i');
+                $endDaytime = $item->getHeureFin()->format('H:i');
+                $startSelectedtime = $stime->format('H:i');
+                $endSelectedtime = $etime->format('H:i');
+
+                if($startDaytime != 0)
+                {
+                    if($startSelectedtime >=$startDaytime && $endSelectedtime <= $endDaytime)
+                    {
+
+                        echo $startSelectedtime;
+                        echo 'Start';
+                        echo '<br>';
+                        echo $endSelectedtime;
+                        echo 'End';
+                        echo '<br>';
+                    }
+                    else
+                    {
+                        echo '<script>alert("Alloted time range is out of specified range")</script>';
+                    }
+                }
+                else
+                {
+                    echo '<script>alert("Time alloted to current day is 00:00. Please check your work place (Lieux De Travail)")</script>';
+                }
+
+
+            }
+
+
 
 
 
@@ -417,7 +459,7 @@ class CalendriesController extends Controller
                 $calcheck = $emcheck->getRepository('DataBundle:Calendries')->findOneBy(array('date' => $i,'location'=>$location, 'deleatedat' => null));
                 if($calcheck != null){
                     $calcheck->setDeleatedAt(new \DateTime());
-                    $emcheck->flush();
+//                    $emcheck->flush();
                 }
                 // if($calcheck == null){
 
@@ -428,7 +470,7 @@ class CalendriesController extends Controller
                 $calendrie->setPublic(1);
                 $calendrie->setAbsence(0);
                 $em->persist($calendrie);
-                $em->flush();
+//                $em->flush();
                 if($break == "on"){
                     $ebbtime = clone $sbtime;
                     $tempStime = clone $stime;
@@ -447,7 +489,7 @@ class CalendriesController extends Controller
                                 $seance->setCalendrie($calendrie);
                                 $seance->setDispo(1);
                                 $em1->persist($seance);
-                                $em1->flush();
+//                                $em1->flush();
                                 $tempStime->modify("+".$ptime." minutes");
                             }else{
                                 $check = false;
@@ -466,7 +508,7 @@ class CalendriesController extends Controller
                         $SApp = clone $tempStime;
                         $EApp = clone $tempStime->modify("+".$atime." minutes");
                         if ($EApp <= $etime){
-                            echo "<h2>".$SApp->format('H:i')."-".$EApp->format('H:i')."</h2>";
+//                            echo "<h2>".$SApp->format('H:i')."-".$EApp->format('H:i')."</h2>";
                             $em1 = $this->getDoctrine()->getManager();
                             $seance = new Entity\Seances();
                             $seance->setHeurDebut($SApp);
@@ -475,7 +517,7 @@ class CalendriesController extends Controller
                             $seance->setCalendrie($calendrie);
                             $seance->setDispo(1);
                             $em1->persist($seance);
-                            $em1->flush();
+//                            $em1->flush();
                             $tempStime->modify("+".$ptime." minutes");
                         }else{
                             $check = false;
@@ -489,8 +531,12 @@ class CalendriesController extends Controller
 
 
         }
-        //return new Response(";");
+
+        return new Response("OK");
+        /*
         return $this->redirect($this->generateUrl('calendries_index',array('id' => 0)));
+          */
+
     }
     public function copyadayAction($calendrie,Request $request){
         $caltocopy = $this->getDoctrine()->getRepository('DataBundle:Calendries')->find($calendrie);
