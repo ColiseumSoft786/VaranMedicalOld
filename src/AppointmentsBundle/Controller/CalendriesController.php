@@ -459,6 +459,10 @@ class CalendriesController extends Controller
                                 echo "<h2>".$SApp->format('H:i')."-".$EApp->format('H:i')."</h2>";
                                 $em1 = $this->getDoctrine()->getManager();
                                 $seance = new Entity\Seances();
+//                                echo $SApp->format('H:i').' start';
+//                                echo '<br>';
+//                                echo $EApp->format('H:i').' end';
+//                                echo '<br>';
                                 $seance->setHeurDebut($SApp);
                                 $seance->setHeurFin($EApp);
                                 $seance->setAbsence(0);
