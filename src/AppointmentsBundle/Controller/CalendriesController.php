@@ -328,8 +328,8 @@ class CalendriesController extends Controller
         $ed = explode("-",$request->get('edate'));
         $edate = new \DateTime();
         $edate->setDate($ed[0],$ed[1],$ed[2]);
-        $stime = new \DateTime();
-        $etime = new \DateTime();
+        /*$stime = new \DateTime();
+        $etime = new \DateTime();*/
 
 
         $loc = $request->get('loc');
@@ -391,13 +391,13 @@ class CalendriesController extends Controller
             $time = $this->getDoctrine()->getRepository(Horaire::class)->findOneBy(array(
                 'jour'=>$fday, 'locationId'=>$loc
             ));
-            $startDaytime = $time->getHeureDebut()->format('H:i');
-            $endDaytime = $time->getHeureFin()->format('H:i');
-            $t = explode(":",$startDaytime);
+            $stime = clone $time->getHeureDebut();
+            $etime = clone $time->getHeureFin();
+            /*$t = explode(":",$startDaytime);
             $stime->setTime($t[0], $t[1], "00");
 
             $t = explode(":",$endDaytime);
-            $etime->setTime($t[0], $t[1], "00");
+            $etime->setTime($t[0], $t[1], "00");*/
 //            echo '<br>';
 //            echo $startDaytime;
 //            echo '<br>';
