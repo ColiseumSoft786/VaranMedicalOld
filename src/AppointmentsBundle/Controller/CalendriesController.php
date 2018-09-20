@@ -4,6 +4,7 @@ namespace AppointmentsBundle\Controller;
 
 use AppointmentsBundle\Entity\Calendries;
 use DataBundle\Entity;
+use DoctorsBundle\Entity\Horaire;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
@@ -404,24 +405,52 @@ class CalendriesController extends Controller
             // find day from hrare :: you will get start time and end time.
 
 
-            $fday = $this->getDayInFrench($sdate);
-
-            $time = $this->getDoctrine()->getRepository(Horaire::class)->findBy(array(
+            $fday = $this->getDayInFrench($i);
+//            echo $fday;
+            $time = $this->getDoctrine()->getRepository(Horaire::class)->findOneBy(array(
                 'jour'=>$fday, 'locationId'=>$loc
             ));
-            echo count($time);
+//            echo count($time);
             echo '<br>';
-            foreach ($time as $item) {
-                $startDaytime = $item->getHeureDebut()->format('H:i');
-                $endDaytime = $item->getHeureFin()->format('H:i');
-                $startSelectedtime = $stime->format('H:i');
-                $endSelectedtime = $etime->format('H:i');
-
-                if($startDaytime != 0)
+            /*foreach ($time as $item) {*/
+                $startDaytime = clone $time->getHeureDebut();
+                $endDaytime = clone $time->getHeureFin();
+                $startSelectedtime = clone $stime;
+                $endSelectedtime = clone $etime;
+                //echo $startDaytime;
+//            echo $startDaytime->getTimestamp();
+                if($startDaytime->getTimestamp() > 0)
                 {
-                    if($startSelectedtime >=$startDaytime && $endSelectedtime <= $endDaytime)
-                    {
+                     $selectedtimestart = "";
+                    $selectedtimeend = "";
+                    $check11  = false;
+                    if ($startDaytime->getTimestamp() >= $startSelectedtime->getTimestamp()){
+                        $selectedtimestart = clone $startDaytime;
+                    }else{
+                        $selectedtimestart = clone $startSelectedtime;
+                    }
+//                    echo $selectedtimestart . "-";
+                    if ($endDaytime->getTimestamp() <= $endSelectedtime->getTimestamp()){
+                        $selectedtimeend = clone $endDaytime;
+                    }else{
+                        $selectedtimeend = clone $endSelectedtime;
+                    }
+//                    echo $selectedtimeend;
+                    if ($startDaytime->getTimestamp() <= $selectedtimestart->getTimestamp() && $endDaytime->getTimestamp() >= $selectedtimeend->getTimestamp()){
+                        echo $selectedtimestart->format('H:i');
+                        echo 'Start';
+                        echo '<br>';
+                        echo $selectedtimeend->format('H:i');
+                        echo 'End';
+                        echo '<br>';
+                    }else{
+                        $found = true;
+                        echo "Not running ". $fday;
+                    }
 
+                    /*if($startSelectedtime >= $startDaytime && $endSelectedtime <= $endDaytime)
+                    {
+                        echo "running ". $fday;
                         echo $startSelectedtime;
                         echo 'Start';
                         echo '<br>';
@@ -431,16 +460,26 @@ class CalendriesController extends Controller
                     }
                     else
                     {
+                        if($startSelectedtime < $startDaytime)
+                        {
+                            echo $startDaytime;
+                        }
+
+
+                        echo "Not running ". $fday;
+                        $found = true;
                         echo '<script>alert("Alloted time range is out of specified range")</script>';
-                    }
+                    }*/
                 }
                 else
                 {
+                    echo "Not running ". $fday;
+                    $found = true;
                     echo '<script>alert("Time alloted to current day is 00:00. Please check your work place (Lieux De Travail)")</script>';
                 }
 
 
-            }
+//            }
 
 
 
