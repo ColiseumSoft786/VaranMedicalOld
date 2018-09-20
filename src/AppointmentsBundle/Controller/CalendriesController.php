@@ -417,26 +417,31 @@ class CalendriesController extends Controller
                 $endDaytime = clone $time->getHeureFin();
                 $startSelectedtime = clone $stime;
                 $endSelectedtime = clone $etime;
+            echo $startDaytime->format('His') ."<br>";
+            echo $endDaytime->format('His')  ."<br>";
+            echo $startSelectedtime->format('His')  ."<br>";
+            echo $endSelectedtime->format('His') ."<br>--------<br>" ;
                 //echo $startDaytime;
 //            echo $startDaytime->getTimestamp();
-                if($startDaytime->getTimestamp() > 0)
+//            echo $startDaytime->format('Hisms');
+                if($startDaytime->format('His') != 000000)
                 {
                      $selectedtimestart = "";
                     $selectedtimeend = "";
                     $check11  = false;
-                    if ($startDaytime->getTimestamp() >= $startSelectedtime->getTimestamp()){
+                    if ($startDaytime->format('His') >= $startSelectedtime->format('His')){
                         $selectedtimestart = clone $startDaytime;
                     }else{
                         $selectedtimestart = clone $startSelectedtime;
                     }
 //                    echo $selectedtimestart . "-";
-                    if ($endDaytime->getTimestamp() <= $endSelectedtime->getTimestamp()){
+                    if ($endDaytime->format('His') <= $endSelectedtime->format('His')){
                         $selectedtimeend = clone $endDaytime;
                     }else{
                         $selectedtimeend = clone $endSelectedtime;
                     }
 //                    echo $selectedtimeend;
-                    if ($startDaytime->getTimestamp() <= $selectedtimestart->getTimestamp() && $endDaytime->getTimestamp() >= $selectedtimeend->getTimestamp()){
+                    if ($startDaytime->format('His') <= $selectedtimestart->format('His') && $endDaytime->format('His') >= $selectedtimeend->format('His')){
                         echo $selectedtimestart->format('H:i');
                         echo 'Start';
                         echo '<br>';
