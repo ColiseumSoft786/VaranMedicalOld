@@ -214,7 +214,7 @@
                 }
             });
         });
-        $(".deleteLocation").click(function () {
+            $(".deleteLocation").click(function () {
             if (!confirm('Vous voulez vraiment supprime cette job location')) return false;
             var locations = $(this).attr('id');
             var URL = "{{ path('locations_delete',{ 'id': 'myID' }) }}";
