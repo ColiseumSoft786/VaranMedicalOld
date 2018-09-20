@@ -80,6 +80,11 @@
                                     <br><br>
                                     <div id="addSeanceFram"></div>
                                     <div id="settings" style="display: none;">
+                                        <div class="col-md-3">
+                                            <h3>{{ 'Requirement'|trans }}</h3>
+                                            <label style="color: red">* Please choose Heure De Début and Heure Fin as specfied in Lieux de travail </label>
+                                        </div>
+                                        <div class="col-md-9">
                                         <form id="appform" action="{{ path('calendries_create_app') }}" method="POST">
                                             <div class="col-md-12" style="margin-top: 10px">
                                                 <div class="col-md-4">
@@ -105,16 +110,6 @@
                                                 $("#from").datepicker();
                                                 $("#to").datepicker();
                                             </script>#}
-                                            <div class="col-md-12" style="margin-top: 10px">
-                                                <div class="col-md-offset-2 col-md-4">
-                                                    <label>{{'Start Time'|trans}}</label>
-                                                    <input id="stime" type="text" name="stime" placeholder="Enter Start Time" class="form-control clockpicker">
-                                                </div>
-                                                <div class="col-md-4">
-                                                    <label>{{'End Time'|trans}}</label>
-                                                    <input id="etime" class="form-control clockpicker" name="etime" placeholder="Enter End Time" type="text">
-                                                </div></div>
-
                                             <div class="col-md-12" style="margin-top: 10px"><div class="col-md-6">
                                                     <label for="">{{'Select Appointment Time'|trans}}</label>
                                                     <select id="atime" name="atime" class="form-control">
@@ -177,7 +172,9 @@
                                                 <input type="submit" value="Confirm Scheduling" class="btn btn-info btn-block">
                                             </div>
                                         </form>
+                                        </div>
                                         <script>
+
                                             $('#break').change(function(){
                                                 if(!document.getElementById('break').checked) {
                                                     $('#sbtime').attr("disabled","disabled");
