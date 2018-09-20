@@ -538,6 +538,15 @@ class CalendriesController extends Controller
           */
 
     }
+    public function getDayInFrench($date)
+    {
+        $day =  $date->format('D');
+        $usdayArray = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat','Sun'];
+        $frenchDayArray = ['Lundi','Mardi','Mercredi','Jeudi','Vendredi','Samedi','Dimanche'];
+        $index = array_search($day,$usdayArray);
+        return $frenchDayArray[$index];
+//
+    }
     public function copyadayAction($calendrie,Request $request){
         $caltocopy = $this->getDoctrine()->getRepository('DataBundle:Calendries')->find($calendrie);
         $seanstocopy = $this->getDoctrine()->getRepository('DataBundle:Seances')->findBy(array(
