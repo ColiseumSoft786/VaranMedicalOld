@@ -329,11 +329,8 @@ class CalendriesController extends Controller
         $edate = new \DateTime();
         $edate->setDate($ed[0],$ed[1],$ed[2]);
         $stime = new \DateTime();
-        $t = explode(":",$request->get('stime'));
-        $stime->setTime($t[0], $t[1], "00");
         $etime = new \DateTime();
-        $t = explode(":",$request->get('etime'));
-        $etime->setTime($t[0], $t[1], "00");
+
 
         $loc = $request->get('loc');
         $atime = $request->get('atime');
@@ -387,6 +384,25 @@ class CalendriesController extends Controller
         }
         for ($i = clone $sdate;$i <= $edate;$i->modify("+1 day")){
 
+
+
+
+            $fday = $this->getDayInFrench($i);
+            $time = $this->getDoctrine()->getRepository(Horaire::class)->findOneBy(array(
+                'jour'=>$fday, 'locationId'=>$loc
+            ));
+            $startDaytime = $time->getHeureDebut()->format('H:i');
+            $endDaytime = $time->getHeureFin()->format('H:i');
+            $t = explode(":",$startDaytime);
+            $stime->setTime($t[0], $t[1], "00");
+
+            $t = explode(":",$endDaytime);
+            $etime->setTime($t[0], $t[1], "00");
+//            echo '<br>';
+//            echo $startDaytime;
+//            echo '<br>';
+//            echo $endDaytime;
+//            echo '<br>';
             $found = false;
             foreach ($weekends as $item){
                 if($item->format('Y-m-d') == $i->format('Y-m-d')){
@@ -405,90 +421,6 @@ class CalendriesController extends Controller
             // find day from hrare :: you will get start time and end time.
 
 
-            $fday = $this->getDayInFrench($i);
-//            echo $fday;
-            $time = $this->getDoctrine()->getRepository(Horaire::class)->findOneBy(array(
-                'jour'=>$fday, 'locationId'=>$loc
-            ));
-//            echo count($time);
-            echo '<br>';
-            /*foreach ($time as $item) {*/
-                $startDaytime = clone $time->getHeureDebut();
-                $endDaytime = clone $time->getHeureFin();
-                $startSelectedtime = clone $stime;
-                $endSelectedtime = clone $etime;
-            echo $startDaytime->format('His') ."<br>";
-            echo $endDaytime->format('His')  ."<br>";
-            echo $startSelectedtime->format('His')  ."<br>";
-            echo $endSelectedtime->format('His') ."<br>--------<br>" ;
-                //echo $startDaytime;
-//            echo $startDaytime->getTimestamp();
-//            echo $startDaytime->format('Hisms');
-                if($startDaytime->format('His') != 000000)
-                {
-                     $selectedtimestart = "";
-                    $selectedtimeend = "";
-                    $check11  = false;
-                    if ($startDaytime->format('His') >= $startSelectedtime->format('His')){
-                        $selectedtimestart = clone $startDaytime;
-                    }else{
-                        $selectedtimestart = clone $startSelectedtime;
-                    }
-//                    echo $selectedtimestart . "-";
-                    if ($endDaytime->format('His') <= $endSelectedtime->format('His')){
-                        $selectedtimeend = clone $endDaytime;
-                    }else{
-                        $selectedtimeend = clone $endSelectedtime;
-                    }
-//                    echo $selectedtimeend;
-                    if ($startDaytime->format('His') <= $selectedtimestart->format('His') && $endDaytime->format('His') >= $selectedtimeend->format('His')){
-                        echo $selectedtimestart->format('H:i');
-                        echo 'Start';
-                        echo '<br>';
-                        echo $selectedtimeend->format('H:i');
-                        echo 'End';
-                        echo '<br>';
-                    }else{
-                        $found = true;
-                        echo "Not running ". $fday;
-                    }
-
-                    /*if($startSelectedtime >= $startDaytime && $endSelectedtime <= $endDaytime)
-                    {
-                        echo "running ". $fday;
-                        echo $startSelectedtime;
-                        echo 'Start';
-                        echo '<br>';
-                        echo $endSelectedtime;
-                        echo 'End';
-                        echo '<br>';
-                    }
-                    else
-                    {
-                        if($startSelectedtime < $startDaytime)
-                        {
-                            echo $startDaytime;
-                        }
-
-
-                        echo "Not running ". $fday;
-                        $found = true;
-                        echo '<script>alert("Alloted time range is out of specified range")</script>';
-                    }*/
-                }
-                else
-                {
-                    echo "Not running ". $fday;
-                    $found = true;
-                    echo '<script>alert("Time alloted to current day is 00:00. Please check your work place (Lieux De Travail)")</script>';
-                }
-
-
-//            }
-
-
-
-
 
             if(!$found){
                 // if (stime < stimeofhrare) replace stime = clone stimeofharare;
@@ -503,7 +435,7 @@ class CalendriesController extends Controller
                 $calcheck = $emcheck->getRepository('DataBundle:Calendries')->findOneBy(array('date' => $i,'location'=>$location, 'deleatedat' => null));
                 if($calcheck != null){
                     $calcheck->setDeleatedAt(new \DateTime());
-//                    $emcheck->flush();
+                    $emcheck->flush();
                 }
                 // if($calcheck == null){
 
@@ -514,7 +446,7 @@ class CalendriesController extends Controller
                 $calendrie->setPublic(1);
                 $calendrie->setAbsence(0);
                 $em->persist($calendrie);
-//                $em->flush();
+                $em->flush();
                 if($break == "on"){
                     $ebbtime = clone $sbtime;
                     $tempStime = clone $stime;
@@ -533,7 +465,7 @@ class CalendriesController extends Controller
                                 $seance->setCalendrie($calendrie);
                                 $seance->setDispo(1);
                                 $em1->persist($seance);
-//                                $em1->flush();
+                                $em1->flush();
                                 $tempStime->modify("+".$ptime." minutes");
                             }else{
                                 $check = false;
@@ -561,7 +493,7 @@ class CalendriesController extends Controller
                             $seance->setCalendrie($calendrie);
                             $seance->setDispo(1);
                             $em1->persist($seance);
-//                            $em1->flush();
+                            $em1->flush();
                             $tempStime->modify("+".$ptime." minutes");
                         }else{
                             $check = false;
@@ -576,10 +508,10 @@ class CalendriesController extends Controller
 
         }
 
-        return new Response("OK");
-        /*
+//        return new Response("OK");
+
         return $this->redirect($this->generateUrl('calendries_index',array('id' => 0)));
-          */
+
 
     }
     public function getDayInFrench($date)
