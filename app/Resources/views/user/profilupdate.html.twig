@@ -31,7 +31,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
                             <div class="tg-widgetdashboard">
                                 <div class="tg-widgetprofile">
-                                    <figure class="tg-directpostimg"> 
+                                    <figure class="tg-directpostimg">
                                         {% if vich_uploader_asset(doctor, 'imageFile') %}
                                             <a href="#">
                                                 <img src="{{ vich_uploader_asset(doctor, 'imageFile') }}" alt="{{ doctor.image }}" />
@@ -138,14 +138,14 @@
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>  
+                                    </div>
                                     <div role="tabpanel" class="tab-pane" id="services">
                                         <div class="tg-dashboardbox tg-profilesettings">
                                             {{ render(controller('DoctorsBundle:Services:index', {'doctor':doctor.id})) }}
                                         </div>
                                         <div class="tg-updateall"> <span class="tg-note">* Click <strong>invoices settings</strong> to update latest added detail (s).</span>
                                         </div>
-                                    </div>                
+                                    </div>
                                     <div role="tabpanel" class="tab-pane" id="addphotos">
                                         <div class="tg-dashboardbox">
                                             <div class="col-md-12 col-sm-12 col-xs-12 tg-columnpadding">
@@ -223,7 +223,7 @@
                         }
                     });
                 });
-                
+
                 $('body').on('submit', '#formEducation', function (e) {
                     // On empêche le navigateur de soumettre le formulaire
                     e.preventDefault();
@@ -285,7 +285,7 @@
                     });
                     return false;
                 });
-                
+
             $('body').on('submit', '#formEditDoctorImage', function (e) {
                 // On empêche le navigateur de soumettre le formulaire
                 e.preventDefault();

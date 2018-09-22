@@ -110,9 +110,11 @@
                                                 $("#from").datepicker();
                                                 $("#to").datepicker();
                                             </script>#}
-                                            <div class="col-md-12" style="margin-top: 10px"><div class="col-md-6">
+                                            <div class="col-md-12" style="margin-top: 10px">
+                                                <div class="col-md-6">
                                                     <label for="">{{'Select Appointment Time'|trans}}</label>
-                                                    <select id="atime" name="atime" class="form-control">
+                                                    <input type="number" id="atime" onkeyup="negativeCheck()" name="atime" class="form-control">
+                                                    {#<select id="atime" name="atime" class="form-control">
                                                         <option value="">{{'Select Appointment Time'|trans}}</option>
                                                         <option value="15">15 min</option>
                                                         <option value="20">20 min</option>
@@ -124,7 +126,7 @@
                                                         <option value="50">50 min</option>
                                                         <option value="55">55 min</option>
                                                         <option value="60">60 min</option>
-                                                    </select>
+                                                    </select>#}
                                                 </div>
                                                 <div class="col-md-6">
                                                     <label for="">{{'Select Pause Time'|trans}}</label>
@@ -143,7 +145,8 @@
                                                         <option value="55">55 min</option>
                                                         <option value="60">60 min</option>
                                                     </select>
-                                                </div></div>
+                                                </div>
+                                            </div>
 
 
                                             <div class="col-md-12" style="margin-top: 10px"><div class="col-md-3">
@@ -174,6 +177,17 @@
                                         </form>
                                         </div>
                                         <script>
+
+
+
+                                            function negativeCheck()
+                                            {
+                                                var text = $('#atime').val();
+                                                if( text <=0 )
+                                                {
+                                                    $('#atime').val('');
+                                                }
+                                            }
 
                                             $('#break').change(function(){
                                                 if(!document.getElementById('break').checked) {

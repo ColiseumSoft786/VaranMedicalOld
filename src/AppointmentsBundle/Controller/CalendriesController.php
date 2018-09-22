@@ -393,6 +393,10 @@ class CalendriesController extends Controller
             ));
             $stime = clone $time->getHeureDebut();
             $etime = clone $time->getHeureFin();
+
+
+
+
             /*$t = explode(":",$startDaytime);
             $stime->setTime($t[0], $t[1], "00");
 
@@ -414,6 +418,31 @@ class CalendriesController extends Controller
                 if($item->getDate() == $i->format('m/d/Y')){
                     $found = true;
                 }
+            }
+
+            $stimeCheck =  $stime->format('H:i:s');
+            $etimeCheck =  $etime->format('H:i:s');
+
+
+            $diffTime =  $stime->diff($etime);
+
+            //Check Difference of StartTime and EndTime
+            $minutes = $diffTime->days * 24 * 60;
+            $minutes += $diffTime->h * 60;
+            $minutes += $diffTime->i;
+            $checkDiff =  $minutes.' minutes';
+
+            if($atime > $checkDiff )
+            {
+//                echo '<script>alert("Appointment Time is less than Exisiting Time Slot")</script>';
+                $found = true;
+            }
+
+
+            if($stimeCheck == $etimeCheck)
+            {
+//                echo '<script>alert("Equal")</script>';
+                $found = true;
             }
 
             //getharare from location
@@ -518,6 +547,7 @@ class CalendriesController extends Controller
 
 
     }
+
     public function getDayInFrench($date)
     {
         $day =  $date->format('D');
