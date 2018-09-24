@@ -3,9 +3,9 @@
 namespace DataBundle\Entity;
 
 /**
- * Publicholiday
+ * Detailstatistic
  */
-class Publicholiday
+class Detailstatistic
 {
     /**
      * @var string
@@ -13,9 +13,9 @@ class Publicholiday
     private $date;
 
     /**
-     * @var string
+     * @var integer
      */
-    private $reason;
+    private $value;
 
     /**
      * @var integer
@@ -23,9 +23,9 @@ class Publicholiday
     private $id;
 
     /**
-     * @var \DataBundle\Entity\Admin
+     * @var \DataBundle\Entity\Statistic
      */
-    private $admin;
+    private $statistic;
 
 
     /**
@@ -33,7 +33,7 @@ class Publicholiday
      *
      * @param string $date
      *
-     * @return Publicholiday
+     * @return Detailstatistic
      */
     public function setDate($date)
     {
@@ -53,27 +53,27 @@ class Publicholiday
     }
 
     /**
-     * Set reason
+     * Set value
      *
-     * @param string $reason
+     * @param integer $value
      *
-     * @return Publicholiday
+     * @return Detailstatistic
      */
-    public function setReason($reason)
+    public function setValue($value)
     {
-        $this->reason = $reason;
+        $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Get reason
+     * Get value
      *
-     * @return string
+     * @return integer
      */
-    public function getReason()
+    public function getValue()
     {
-        return $this->reason;
+        return $this->value;
     }
 
     /**
@@ -87,27 +87,27 @@ class Publicholiday
     }
 
     /**
-     * Set admin
+     * Set statistic
      *
-     * @param \DataBundle\Entity\Admin $admin
+     * @param \DataBundle\Entity\Statistic $statistic
      *
-     * @return Publicholiday
+     * @return Detailstatistic
      */
-    public function setAdmin(\DataBundle\Entity\Admin $admin = null)
+    public function setStatistic(\DataBundle\Entity\Statistic $statistic = null)
     {
-        $this->admin = $admin;
+        $this->statistic = $statistic;
 
         return $this;
     }
 
     /**
-     * Get admin
+     * Get statistic
      *
-     * @return \DataBundle\Entity\Admin
+     * @return \DataBundle\Entity\Statistic
      */
-    public function getAdmin()
+    public function getStatistic()
     {
-        return $this->admin;
+        return $this->statistic;
     }
 }
 

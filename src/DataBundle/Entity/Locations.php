@@ -50,7 +50,12 @@ class Locations
     /**
      * @var integer
      */
-    private $public;
+    private $public = '1';
+
+    /**
+     * @var string
+     */
+    private $comments;
 
     /**
      * @var integer
@@ -280,6 +285,30 @@ class Locations
     }
 
     /**
+     * Set comments
+     *
+     * @param string $comments
+     *
+     * @return Locations
+     */
+    public function setComments($comments)
+    {
+        $this->comments = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Get comments
+     *
+     * @return string
+     */
+    public function getComments()
+    {
+        return $this->comments;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -312,33 +341,5 @@ class Locations
     {
         return $this->doctor;
     }
-    /**
-     * @var string
-     */
-    private $comments;
-
-
-    /**
-     * Set comments
-     *
-     * @param string $comments
-     *
-     * @return Locations
-     */
-    public function setComments($comments)
-    {
-        $this->comments = $comments;
-
-        return $this;
-    }
-
-    /**
-     * Get comments
-     *
-     * @return string
-     */
-    public function getComments()
-    {
-        return $this->comments;
-    }
 }
+

@@ -127,3 +127,4 @@ class Specialities
         return $this->doctor;
     }
 }
+

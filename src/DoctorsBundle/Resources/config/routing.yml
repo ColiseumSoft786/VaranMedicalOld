@@ -62,3 +62,7 @@ doctors_comments_delete:
 doctors_comments_edit:
     path: /Location/Comments/Edit/{comment}
     defaults: { _controller: "DoctorsBundle:Comments:edit" }
+numOfAppointment:
+    path:     /AppointmentChart
+    defaults: { _controller: "DoctorsBundle:appointmentCharts:AppointmentNumber" }
+    methods:  GET

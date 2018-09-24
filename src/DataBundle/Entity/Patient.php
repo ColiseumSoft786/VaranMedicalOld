@@ -371,3 +371,4 @@ class Patient
         return $this->profilPicture;
     }
 }
+

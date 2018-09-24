@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>{% block title %}Welcome!{% endblock %}</title>
     {% block stylesheets %}{% include ('default/stylesheet.html.twig') %}{% endblock %}
+    {% block bootstrapSheet %}{% endblock %}
+    {% block chartScript %}{% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('assets/images/favicon.ico') }}" />
     <style>
         #loading{

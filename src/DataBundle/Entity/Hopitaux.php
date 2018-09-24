@@ -98,3 +98,4 @@ class Hopitaux
         return $this->doctor;
     }
 }
+

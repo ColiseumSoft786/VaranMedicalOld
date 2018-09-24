@@ -50,6 +50,11 @@ class Doctors
     /**
      * @var integer
      */
+    private $views = '0';
+
+    /**
+     * @var integer
+     */
     private $id;
 
     /**
@@ -264,6 +269,30 @@ class Doctors
     }
 
     /**
+     * Set views
+     *
+     * @param integer $views
+     *
+     * @return Doctors
+     */
+    public function setViews($views)
+    {
+        $this->views = $views;
+
+        return $this;
+    }
+
+    /**
+     * Get views
+     *
+     * @return integer
+     */
+    public function getViews()
+    {
+        return $this->views;
+    }
+
+    /**
      * Get id
      *
      * @return integer
@@ -340,33 +369,5 @@ class Doctors
     {
         return $this->specialitie;
     }
-    /**
-     * @var integer
-     */
-    private $views;
-
-
-    /**
-     * Set views
-     *
-     * @param integer $views
-     *
-     * @return Doctors
-     */
-    public function setViews($views)
-    {
-        $this->views = $views;
-
-        return $this;
-    }
-
-    /**
-     * Get views
-     *
-     * @return integer
-     */
-    public function getViews()
-    {
-        return $this->views;
-    }
 }
+

@@ -139,3 +139,4 @@ class Certifications
         return $this->doctor;
     }
 }
+

@@ -110,3 +110,4 @@ class Educations
         return $this->doctor;
     }
 }
+

@@ -3,14 +3,14 @@
 namespace DataBundle\Entity;
 
 /**
- * Settings
+ * Statistic
  */
-class Settings
+class Statistic
 {
     /**
-     * @var \DateTime
+     * @var string
      */
-    private $durreappointment;
+    private $statname;
 
     /**
      * @var integer
@@ -24,27 +24,27 @@ class Settings
 
 
     /**
-     * Set durreappointment
+     * Set statname
      *
-     * @param \DateTime $durreappointment
+     * @param string $statname
      *
-     * @return Settings
+     * @return Statistic
      */
-    public function setDurreappointment($durreappointment)
+    public function setStatname($statname)
     {
-        $this->durreappointment = $durreappointment;
+        $this->statname = $statname;
 
         return $this;
     }
 
     /**
-     * Get durreappointment
+     * Get statname
      *
-     * @return \DateTime
+     * @return string
      */
-    public function getDurreappointment()
+    public function getStatname()
     {
-        return $this->durreappointment;
+        return $this->statname;
     }
 
     /**
@@ -62,7 +62,7 @@ class Settings
      *
      * @param \DataBundle\Entity\Doctors $doctor
      *
-     * @return Settings
+     * @return Statistic
      */
     public function setDoctor(\DataBundle\Entity\Doctors $doctor = null)
     {

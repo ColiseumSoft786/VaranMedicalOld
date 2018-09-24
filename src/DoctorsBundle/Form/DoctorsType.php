@@ -21,7 +21,7 @@ class DoctorsType extends AbstractType
                 'widget' => 'single_text',
                 'html5' => false,
                 'attr' => ['class' => 'js-datepicker'],
-                'format' => 'yyyy-MM-dd'
+                'format' => 'dd-MM-yyyy'
             ))
             ->add('GSM')
             ->add('title')

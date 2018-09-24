@@ -46,6 +46,7 @@
     <field name="public" type="integer" column="public" nullable="true">
       <options>
         <option name="unsigned"/>
+        <option name="default">1</option>
       </options>
     </field>
     <field name="comments" type="string" column="Comments" length="45" nullable="true">

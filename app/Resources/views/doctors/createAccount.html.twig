@@ -145,7 +145,7 @@
                 });
             });
         </script>
-        
+
         <script>
             var nomDispo = false;
             var prenomDispo = false;
@@ -160,12 +160,12 @@
                 var URL = "{{ path('doctors_create')}}";
                 console.log(URL);
                 //i add this (comments) to have possiblity to create account with same nom and prenom
-/*                
+/*
                 if (prenomDispo == false && nomDispo == false){
                     $('#noDispoName').show();
                 }else {
                     $('#noDispoName').hide();
-*/                    
+*/
                     $.ajax({
                         url: URL,
                         type: "POST",
@@ -182,7 +182,7 @@
                             return true;
                         }
                     });
-/*                    
+/*
                 }
 */
                 return false;

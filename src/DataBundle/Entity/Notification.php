@@ -110,3 +110,4 @@ class Notification
         return $this->id;
     }
 }
+

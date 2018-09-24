@@ -5,11 +5,13 @@ namespace AppointmentsBundle\Controller;
 //use AppointmentsBundle\Entity\Appointments;
 use DataBundle\Entity\Appointments;
 use DataBundle\Entity\Calendries;
+use DataBundle\Entity\Detailstatistic;
 use DataBundle\Entity\Dp;
 use DataBundle\Entity\FosUser;
 use DataBundle\Entity\Locations;
 use DataBundle\Entity\Patient;
 use DataBundle\Entity\Seances;
+use DataBundle\Entity\Statistic;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -87,8 +89,8 @@ class AppointmentsController extends Controller
         if ($startDay->format('j') > $daysError) {
             $startDay->modify('- 7 days');
         }
-
         $days = array();
+
 
         while ($startDay->format('Y-m') <= $year.'-'.str_pad($month, 2, 0, STR_PAD_LEFT)) {
             $days[] = clone($startDay);
@@ -525,7 +527,9 @@ class AppointmentsController extends Controller
         $appointment = new \AppointmentsBundle\Entity\Appointments();
         $form = $this->createForm('AppointmentsBundle\Form\AppointmentsType', $appointment);
         $form->handleRequest($request);
-
+        $docId='';
+        $statId='';
+        $currentDate = date("d-m-Y");
         $em = $this->getDoctrine()->getManager();
         $seance = $em->getRepository('DataBundle:Seances')->find($seance);
         if ($this->getUser()->getTypeUser() == 'doctors'){
@@ -543,6 +547,7 @@ class AppointmentsController extends Controller
             if ($this->getUser()->getTypeUser() == 'patients'){
                 $patient = $em->getRepository('DataBundle:Patient')->find($this->getUser()->getIdTable());
                 $doctor = $appointment->getSeance()->getCalendrie()->getLocation()->getDoctor();
+                $docId = $doctor->getId();
                 $doctor = $this->getDoctrine()->getRepository('DataBundle:Doctors')->find($doctor->getId());
                 $dp = $this->getDoctrine()->getRepository('DataBundle:Dp')->findBy(array(
                     'doctor' => $doctor,
@@ -561,6 +566,50 @@ class AppointmentsController extends Controller
 //                $es->createAppointment($appointment,$doctor,$patient,$this->getUser());
 //                $ss->createAppointment($appointment,$doctor,$patient,$this->getUser());
             }
+
+
+
+
+            $statCheck = $this->getDoctrine()->getRepository(Statistic::class)->findBy( array('doctor' => $docId, 'statname' => 'Appointment'));
+
+            if(empty($statCheck))
+            {
+
+
+                    $stat = new Statistic();
+                    $getDoc = $this->getDoctrine()->getRepository('DataBundle:Doctors')->find($docId);
+                    $stat->setDoctor($getDoc);
+                    $stat->setStatName('Appointment');
+                    $em->persist($stat);
+                    $em->flush();
+
+            }
+            foreach ($statCheck as $item)
+             {
+                 $statId =   $item->getId();
+             }
+            $DetailStatCheck = $this->getDoctrine()->getRepository(Detailstatistic::class)->findBy( array('statistic'=> $statId, 'date' => $currentDate));
+            if(empty($DetailStatCheck))
+            {
+                $statIdObj = $this->getDoctrine()->getRepository(Statistic::class)->find($statId);
+                $detailStat = new Detailstatistic();
+                $detailStat->setStatistic($statIdObj);
+                $detailStat->setDate($currentDate);
+                $detailStat->setValue(1);
+                $em->persist($detailStat);
+                $em->flush();
+            }
+            else
+            {
+                $dStat = $em->getRepository( Detailstatistic::class)->findOneBy( array('statistic'=> $statId, 'date'=> $currentDate));
+                $cValue = $dStat->getValue();
+                $cValue = $cValue + 1;
+                $dStat->setValue($cValue);
+                $em->flush();
+            }
+
+
+//            return new Response('OK');
             return $this->redirectToRoute('appointments_appointmentsByUser', array('success'=> true));
         }
 
@@ -570,6 +619,7 @@ class AppointmentsController extends Controller
             'patient' => $patient,
             'seance' => $seance,
         ));
+
     }
 
     /**
@@ -671,7 +721,9 @@ class AppointmentsController extends Controller
                 $loc = $cal->getLocation();
                 $doc = $loc->getDoctor();
                 if($patient->getId() == $doc->getId()){
+
                     array_push($temp,$item);
+
                 }
             }
             $appointments = $temp;

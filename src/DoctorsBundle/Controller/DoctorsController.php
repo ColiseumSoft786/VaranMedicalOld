@@ -349,8 +349,6 @@ class DoctorsController extends Controller
 
         if ($editForm->isSubmitted() && $editForm->isValid()) {
 
-
-
             $this->getDoctrine()->getManager()->flush();
             $user = $this->getUser();
             $doctorId = $user->getIdTable();

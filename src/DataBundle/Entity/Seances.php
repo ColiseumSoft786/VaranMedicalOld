@@ -168,3 +168,4 @@ class Seances
         return $this->calendrie;
     }
 }
+

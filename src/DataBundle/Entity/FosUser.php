@@ -429,3 +429,4 @@ class FosUser
         return $this->id;
     }
 }
+

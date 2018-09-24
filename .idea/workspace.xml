@@ -2,9 +2,77 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a7d466db-8d38-40fe-bd0d-8658081631d1" name="Default" comment="">
+      <change afterPath="$PROJECT_DIR$/app/Resources/views/Appointmentcharts/noOfAppointments.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/base.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/base.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/doctors/createAccount.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/doctors/createAccount.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/doctors/edit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/doctors/edit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Resources/views/profilDoctorNav.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/app/Resources/views/profilDoctorNav.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bin/symfony_requirements" beforeDir="false" afterPath="$PROJECT_DIR$/bin/symfony_requirements" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Admin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Appointements.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Appointments.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Blockdays.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Calendries.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Certifications.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Comments.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Doctors.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Dp.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Educations.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/FosUser.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Holidaysadmin.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Hopitaux.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Horaire.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Invoices.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Locations.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Media.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Notification.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Patient.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Publicholiday.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Questions.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Reasons.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Reviews.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Seances.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Services.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Settings.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Specialities.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/SubServices.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Unblockday.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Entity/Unblockph.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Admin.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Admin.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Appointements.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Appointements.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Appointments.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Appointments.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Blockdays.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Blockdays.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Calendries.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Calendries.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Certifications.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Certifications.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Comments.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Comments.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Doctors.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Doctors.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Dp.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Dp.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Educations.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Educations.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/FosUser.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/FosUser.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Holidaysadmin.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Holidaysadmin.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Hopitaux.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Hopitaux.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Horaire.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Horaire.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Invoices.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Invoices.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Locations.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Locations.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Media.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Media.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Notification.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Notification.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Patient.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Patient.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Publicholiday.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Publicholiday.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Questions.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Questions.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Reasons.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Reasons.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Reviews.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Reviews.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Seances.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Seances.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Services.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Services.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Settings.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Settings.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Specialities.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Specialities.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/SubServices.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/SubServices.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Unblockday.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Unblockday.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Unblockph.orm.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DataBundle/Resources/config/doctrine/Unblockph.orm.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DoctorsBundle/Form/DoctorsType.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/DoctorsBundle/Form/DoctorsType.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing.yml" beforeDir="false" afterPath="$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/var/SymfonyRequirements.php" beforeDir="false" afterPath="$PROJECT_DIR$/var/SymfonyRequirements.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/web/config.php" beforeDir="false" afterPath="$PROJECT_DIR$/web/config.php" afterDir="false" />
     </list>
@@ -18,13 +86,51 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
   </component>
+  <component name="DatabaseView">
+    <option name="SHOW_INTERMEDIATE" value="true" />
+    <option name="GROUP_DATA_SOURCES" value="true" />
+    <option name="GROUP_SCHEMA" value="true" />
+    <option name="GROUP_CONTENTS" value="false" />
+    <option name="SORT_POSITIONED" value="false" />
+    <option name="SHOW_EMPTY_GROUPS" value="false" />
+    <option name="AUTO_SCROLL_FROM_SOURCE" value="false" />
+    <option name="HIDDEN_KINDS">
+      <set />
+    </option>
+    <expand />
+    <select />
+  </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="CalendriesController.php" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php">
+    <leaf>
+      <file leaf-file-name="AppointmentsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="397" lean-forward="true" selection-start-line="397" selection-end-line="397" />
+            <state relative-caret-position="206">
+              <caret line="35" column="90" selection-start-line="35" selection-start-column="90" selection-end-line="35" selection-end-column="90" />
+              <folding>
+                <element signature="e#96#131#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="appointmentChartsController.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/appointmentChartsController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="462">
+              <caret line="21" column="89" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="89" />
+              <folding>
+                <element signature="e#44#82#0#PHP" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="noOfAppointments.html.twig" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/Resources/views/Appointmentcharts/noOfAppointments.html.twig">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="380">
+              <caret line="86" column="105" selection-start-line="86" selection-start-column="105" selection-end-line="86" selection-end-column="105" />
             </state>
           </provider>
         </entry>
@@ -35,40 +141,42 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="HTML File" />
+        <option value="twig" />
       </list>
     </option>
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>byUser</find>
-      <find>details</find>
-      <find>Doctor</find>
-      <find>DataBundle:Doct</find>
-      <find>owl-carousel</find>
-      <find>index</find>
-      <find>indexAc</find>
-      <find>getBlockDays</find>
-      <find>Require</find>
-      <find>setting</find>
-      <find>Horaire</find>
-      <find>etime</find>
-      <find>stime</find>
-      <find>Hor</find>
-      <find>$stime</find>
-      <find>&lt;span</find>
-      <find>cal</find>
-      <find>Available Locations</find>
-      <find>&lt;</find>
+      <find>ERROR MESSAGE Account creation problem</find>
+      <find>formAddDoctor</find>
+      <find>doctors_create</find>
+      <find>createAction</find>
+      <find>creaye</find>
+      <find>divErreurAlert</find>
+      <find>create</find>
+      <find>CreateAccountStep2</find>
+      <find>createACT</find>
+      <find>birthday</find>
+      <find>newAct</find>
+      <find>profileEdi</find>
+      <find>date</find>
+      <find>ID=</find>
+      <find>doctors_edit</find>
+      <find>editA</find>
+      <find>editAc</find>
+      <find>formBasicInfo</find>
+      <find>basicInfo</find>
+      <find>editBasicInfo</find>
+      <find>profiledit</find>
       <find>form</find>
-      <find>Available</find>
-      <find>Select A Location</find>
-      <find>locations_index</find>
-      <find>Confirm</find>
-      <find>&lt;input</find>
-      <find>tg-servicelocations</find>
-      <find>.dele</find>
-      <find>new</find>
-      <find>flush</find>
+      <find>statistic</find>
+      <find>oNETO</find>
+      <find>Date</find>
+      <find>appointment</find>
+      <find>session</find>
+      <find>findBy</find>
+      <find>getUser</find>
+      <find>for</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -77,26 +185,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/Resources/views/profilPatientNav.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/appointments/appointmentsByUser.html.twig" />
-        <option value="$PROJECT_DIR$/src/DoctorsBundle/Controller/LocationsController.php" />
-        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/config/routing.yml" />
-        <option value="$PROJECT_DIR$/app/config/services.yml" />
-        <option value="$PROJECT_DIR$/app/Resources/views/calendries/listeCalendries.html.twig" />
-        <option value="$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php" />
-        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/config/routing/seances.yml" />
-        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Controller/SeancesController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/seances/weekSeancesByLocation.html.twig" />
-        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/config/routing/appointments.yml" />
-        <option value="$PROJECT_DIR$/app/Resources/views/profilDoctorNav.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/default/header.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/user/profil.html.twig" />
-        <option value="$PROJECT_DIR$/src/DoctorsBundle/Entity/Doctors.php" />
-        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php" />
-        <option value="$PROJECT_DIR$/src/DoctorsBundle/Controller/PatientController.php" />
-        <option value="$PROJECT_DIR$/src/PatientBundle/Controller/DoctorController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/doctors/doctorDetails.html.twig" />
-        <option value="$PROJECT_DIR$/src/UserBundle/UserBundle.php" />
         <option value="$PROJECT_DIR$/src/AppBundle/Controller/DefaultController.php" />
         <option value="$PROJECT_DIR$/src/UserBundle/Resources/config/services.yml" />
         <option value="$PROJECT_DIR$/app/Resources/views/user/login.html.twig" />
@@ -111,7 +199,6 @@
         <option value="$PROJECT_DIR$/app/Resources/views/seances/listeSeancesCalendar.html.twig" />
         <option value="D:/Angular/html/html/index.html" />
         <option value="$PROJECT_DIR$/src/UserBundle/Listener/LoginListener.php" />
-        <option value="$PROJECT_DIR$/src/UserBundle/Controller/UserController.php" />
         <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/display.html.twig" />
         <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/addweekend.html.twig" />
         <option value="$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/unblockweekend.html.twig" />
@@ -121,13 +208,34 @@
         <option value="$PROJECT_DIR$/src/DoctorsBundle/Resources/views/Patient/details.html.twig" />
         <option value="$PROJECT_DIR$/src/DoctorsBundle/Resources/views/Patient/display.html.twig" />
         <option value="$PROJECT_DIR$/src/AppointmentsBundle/Controller/HolidayController.php" />
-        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
-        <option value="C:/xampp/htdocs/VaranMedical/app/Resources/views/calendries/index.html.twig" />
-        <option value="$PROJECT_DIR$/app/Resources/views/calendries/index.html.twig" />
+        <option value="$PROJECT_DIR$/../../VaranMedical/app/Resources/views/calendries/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/locations/doctorLocations.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/locations/index.html.twig" />
         <option value="$PROJECT_DIR$/app/Resources/views/horaire/new.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/calendries/index.html.twig" />
         <option value="$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php" />
+        <option value="$PROJECT_DIR$/src/UserBundle/Controller/UserController.php" />
+        <option value="$PROJECT_DIR$/../../../apache/conf/extra/httpd-vhosts.conf" />
+        <option value="$PROJECT_DIR$/app/Resources/views/user/profil.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/Apointmentcharts/noOfAppointments.html.twig" />
+        <option value="$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing/charts.yml" />
+        <option value="$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing.yml" />
+        <option value="$PROJECT_DIR$/app/Resources/views/profilDoctorNav.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/base.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/appointments/appointmentsByUser.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Entity/statistic.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/user/profilupdate.html.twig" />
+        <option value="$PROJECT_DIR$/src/DoctorsBundle/Form/DoctorsType.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/doctors/createAccount.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/doctors/profilEditBasicInformation.html.twig" />
+        <option value="$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/doctors/edit.html.twig" />
+        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Entity/DetailStatistic.php" />
+        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Entity/Statistic.php" />
+        <option value="$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php" />
+        <option value="$PROJECT_DIR$/src/DoctorsBundle/Controller/appointmentChartsController.php" />
+        <option value="$PROJECT_DIR$/app/Resources/views/admin.html.twig" />
+        <option value="$PROJECT_DIR$/app/Resources/views/Appointmentcharts/noOfAppointments.html.twig" />
       </list>
     </option>
   </component>
@@ -143,7 +251,7 @@
   <component name="PhpDebugGeneral" xdebug_debug_port="9050" />
   <component name="PhpServers">
     <servers>
-      <server host="127.0.0.1" id="26882006-ef55-4dab-ba0f-42d5de7ef3ae" name="localhost" port="8000" />
+      <server host="localhost" id="26882006-ef55-4dab-ba0f-42d5de7ef3ae" name="localhost" />
     </servers>
   </component>
   <component name="PhpWorkspaceProjectConfiguration" interpreter_name="PHP 7.2">
@@ -196,17 +304,15 @@
     </include_path>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="1" />
-    <option name="y" value="1" />
-    <option name="width" value="1358" />
-    <option name="height" value="736" />
+    <option name="x" value="296" />
+    <option name="width" value="1631" />
+    <option name="height" value="1047" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -238,25 +344,20 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Resources" type="462c0819:PsiDirectoryNode" />
               <item name="views" type="462c0819:PsiDirectoryNode" />
-              <item name="horaire" type="462c0819:PsiDirectoryNode" />
+              <item name="Appointmentcharts" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VaranMedicalOld" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Resources" type="462c0819:PsiDirectoryNode" />
+              <item name="views" type="462c0819:PsiDirectoryNode" />
+              <item name="invoices" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
               <item name="VaranMedicalOld" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VaranMedicalOld" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="AppointmentsBundle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
-              <item name="VaranMedicalOld" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="AppointmentsBundle" type="462c0819:PsiDirectoryNode" />
-              <item name="Controller" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
@@ -270,18 +371,24 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="DoctorsBundle" type="462c0819:PsiDirectoryNode" />
               <item name="Controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="VaranMedicalOld" type="b2602c69:ProjectViewProjectNode" />
+              <item name="VaranMedicalOld" type="462c0819:PsiDirectoryNode" />
+              <item name="var" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="SearchEverywhereHistoryKey" value="location&#9;null&#9;null" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../PHPlec2" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../phpApiAngular" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="reference.webide.settings.project.settings.php.debug" />
@@ -307,16 +414,18 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="PHP Script.CalendriesController.php">
-    <configuration name="CalendriesController.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php" />
-    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="/app_dev.php" />
+  <component name="RunManager" selected="PHP Web Page.localhost">
+    <configuration name="CalendriesController.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" path="$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php" />
+    <configuration name="DoctorsController.php" type="PhpLocalRunConfigurationType" factoryName="PHP Console" temporary="true" path="$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php" />
+    <configuration name="localhost" type="PhpWebAppRunConfigurationType" factoryName="PHP Web Application" server_name="localhost" start_url="/GitProjects/VaranMedicalOld/web/app_dev.php/" />
     <list>
-      <item itemvalue="PHP Web Page.localhost" />
       <item itemvalue="PHP Script.CalendriesController.php" />
+      <item itemvalue="PHP Web Page.localhost" />
+      <item itemvalue="PHP Script.DoctorsController.php" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="PHP Script.CalendriesController.php" />
+        <item itemvalue="PHP Script.DoctorsController.php" />
       </list>
     </recent_temporary>
   </component>
@@ -339,29 +448,33 @@
       <workItem from="1537033142718" duration="9932000" />
       <workItem from="1537170016636" duration="7984000" />
       <workItem from="1537434320667" duration="22555000" />
+      <workItem from="1537478054755" duration="1349000" />
+      <workItem from="1537585626092" duration="223000" />
+      <workItem from="1537592893476" duration="15075000" />
+      <workItem from="1537615484813" duration="41578000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="122056000" />
+    <option name="totallyTimeSpent" value="180281000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.16791044" />
       <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.50073206" side_tool="true" weight="0.39906102" />
-      <window_info anchor="right" id="Database" order="3" />
       <window_info anchor="bottom" id="Database Changes" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="10" />
       <window_info anchor="bottom" id="Run" order="2" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="9" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49926794" weight="0.39869282" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49891067" visible="true" weight="0.14179105" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info anchor="right" id="Database" order="3" weight="0.32995737" />
+      <window_info id="Structure" order="1" sideWeight="0.50108933" side_tool="true" weight="0.195629" />
+      <window_info id="Favorites" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49926794" weight="0.108932465" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -378,297 +491,351 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="22" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="php">
+          <url>file://$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php</url>
+          <line>242</line>
+          <option name="timeStamp" value="30" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="34" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/seances/listeSeancesCalendar.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing/services.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="19" column="24" selection-start-line="19" selection-start-column="24" selection-end-line="19" selection-end-column="24" />
+        <state relative-caret-position="238">
+          <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://D:/Angular/html/html/index.html" />
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Listener/LoginListener.php">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profil.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="67" selection-start-line="67" selection-end-line="67" />
+        <state relative-caret-position="652">
+          <caret line="66" column="42" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="42" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/UserController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="42" column="23" selection-start-line="42" selection-start-column="23" selection-end-line="42" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/display.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="437">
-          <caret line="52" column="108" lean-forward="true" selection-start-line="52" selection-start-column="108" selection-end-line="52" selection-end-column="108" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/addweekend.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="52" column="115" selection-start-line="52" selection-start-column="115" selection-end-line="52" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/unblockweekend.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="52" column="115" selection-start-line="52" selection-start-column="115" selection-end-line="52" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/appointmentforPatient.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="299">
-          <caret line="52" column="115" selection-start-line="52" selection-start-column="115" selection-end-line="52" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/display.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="460">
-          <caret line="101" column="115" selection-start-line="101" selection-start-column="115" selection-end-line="101" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/displaybydate.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing/charts.yml">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/getdetails.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/seancebycal.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Appointments/seancebylocation.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PatientBundle/Resources/views/Doctor/display.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/services/settings.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="48" column="113" selection-start-line="48" selection-start-column="113" selection-end-line="48" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/views/Patient/details.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="120" column="115" selection-start-line="120" selection-start-column="115" selection-end-line="120" selection-end-column="115" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/views/Patient/display.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="368">
-          <caret line="52" column="104" selection-start-line="52" selection-start-column="104" selection-end-line="52" selection-end-column="104" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profilupdate.html.twig.bak" />
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profilupdate.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="81" column="73" selection-start-line="81" selection-start-column="73" selection-end-line="81" selection-end-column="73" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/appointments/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="23">
-          <caret line="1" column="17" selection-start-line="1" selection-start-column="13" selection-end-line="1" selection-end-column="17" />
+        <state relative-caret-position="340">
+          <caret line="10" column="25" selection-end-line="133" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/Resources/views/base.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="207">
-          <caret line="9" column="12" selection-start-line="9" selection-start-column="12" selection-end-line="9" selection-end-column="12" />
+        <state relative-caret-position="204">
+          <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="44" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Controller/HolidayController.php">
+    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/config/routing/appointments.yml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="64" column="29" lean-forward="true" selection-start-line="64" selection-start-column="29" selection-end-line="64" selection-end-column="29" />
+        <state relative-caret-position="376">
+          <caret line="61" column="80" selection-start-line="61" selection-start-column="62" selection-end-line="61" selection-end-column="80" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/appointments/appointmentsByUser.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="512">
+          <caret line="64" column="42" selection-start-line="64" selection-start-column="42" selection-end-line="64" selection-end-column="42" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Bundle/FrameworkBundle/Controller/ControllerTrait.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="371" column="23" selection-start-line="371" selection-start-column="23" selection-end-line="371" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/doctors/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/doctors/index.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/config/routing/user.yml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/new.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1550">
+          <caret line="84" selection-start-line="84" selection-end-line="84" />
+          <folding>
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#p#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="503">
+          <caret line="64" column="16" selection-start-line="64" selection-end-line="64" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../phpMyAdmin/index.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="25" selection-start-line="25" selection-end-line="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/FormConfigBuilder.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="401" selection-start-line="401" selection-end-line="401" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Util/OrderedHashMap.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="175">
+          <caret line="163" selection-start-line="163" selection-end-line="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Util/OrderedHashMapIterator.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="96" selection-start-line="96" selection-end-line="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/Form.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="372">
+          <caret line="741" selection-start-line="741" selection-end-line="741" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/Form/FormInterface.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="607">
+          <caret line="298" column="20" selection-start-line="298" selection-start-column="20" selection-end-line="298" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing/doctors.yml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="308">
+          <caret line="41" column="12" selection-start-line="41" selection-end-line="41" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/doctors/createAccount.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="802">
+          <caret line="167" column="2" lean-forward="true" selection-start-line="162" selection-end-line="167" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="11" column="12" selection-start-line="11" selection-start-column="12" selection-end-line="11" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/DoctorsBundle.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/app_dev.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="398">
+          <caret line="29" selection-start-line="29" selection-end-line="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpKernel/HttpKernel.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="168">
+          <caret line="69" selection-start-line="69" selection-end-line="69" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/UserBundle/Controller/UserController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="140" column="60" selection-start-line="140" selection-start-column="60" selection-end-line="140" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Form/DoctorsType.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/doctors/profilEditBasicInformation.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="2" column="66" selection-start-line="2" selection-start-column="66" selection-end-line="2" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/user/profilupdate.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="169" column="28" selection-start-line="169" selection-start-column="28" selection-end-line="169" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/doctors/edit.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="46" column="32" selection-start-line="46" selection-start-column="32" selection-end-line="46" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Entity/Services.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-164">
+          <caret line="35" lean-forward="true" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Entity/Appointments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1054">
+          <caret line="9" column="21" selection-start-line="9" selection-start-column="21" selection-end-line="9" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Entity/DetailStatistic.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="59" column="6" lean-forward="true" selection-start-line="59" selection-start-column="6" selection-end-line="59" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Entity/Statistic.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="52" column="6" selection-start-line="52" selection-start-column="6" selection-end-line="52" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Dp.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2550">
+          <caret line="90" column="25" lean-forward="true" selection-start-line="90" selection-start-column="25" selection-end-line="90" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Entity/Doctors.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-18932">
+          <caret line="176" column="21" lean-forward="true" selection-start-line="176" selection-start-column="21" selection-end-line="176" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/PatientController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-136">
+          <caret line="22" column="62" selection-start-line="22" selection-start-column="60" selection-end-line="22" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Appointements.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="564">
+          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Appointments.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-8208" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Admin.php">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/DoctorsController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="283">
+          <caret line="353" column="27" lean-forward="true" selection-start-line="353" selection-start-column="27" selection-end-line="353" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Statistic.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="7" column="6" selection-start-line="7" selection-start-column="6" selection-end-line="7" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/DataBundle/Entity/Detailstatistic.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="73" column="28" selection-start-line="73" selection-start-column="20" selection-end-line="73" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendor/symfony/symfony/src/Symfony/Component/HttpFoundation/Response.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6426">
+          <caret line="196" column="20" selection-start-line="196" selection-start-column="20" selection-end-line="196" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/invoices/listeInvoicesDoctorDetails.html.twig">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/profilDoctorNav.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="9" column="47" selection-start-line="9" selection-start-column="47" selection-end-line="9" selection-end-column="47" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/admin.html.twig">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="61">
+          <caret line="63" column="17" selection-start-line="63" selection-start-column="14" selection-end-line="63" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Controller/AppointmentsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="507" column="21" selection-start-line="507" selection-start-column="21" selection-end-line="507" selection-end-column="21" />
+        <state relative-caret-position="206">
+          <caret line="35" column="90" selection-start-line="35" selection-start-column="90" selection-end-line="35" selection-end-column="90" />
           <folding>
-            <element signature="e#95#130#0#PHP" expanded="true" />
+            <element signature="e#96#131#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://C:/xampp/htdocs/VaranMedical/src/AppointmentsBundle/Controller/CalendriesController.php">
+    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/appointmentChartsController.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="540" column="12" lean-forward="true" selection-start-line="540" selection-start-column="12" selection-end-line="540" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/parameters.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="4" column="31" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Entity/Horaire.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="156">
-          <caret line="106" column="27" selection-start-line="106" selection-start-column="20" selection-end-line="106" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/calendries/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="61">
-          <caret line="111" column="55" selection-start-line="111" selection-start-column="55" selection-end-line="111" selection-end-column="55" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="462">
+          <caret line="21" column="89" selection-start-line="21" selection-start-column="80" selection-end-line="21" selection-end-column="89" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#44#82#0#PHP" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/nearestDoctors.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/doctorLocations.html.twig">
+    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/views/Holiday/unblockweekend.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="523">
-          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        <state relative-caret-position="297">
+          <caret line="76" column="49" selection-start-line="76" selection-start-column="49" selection-end-line="76" selection-end-column="49" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/comments.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/comboLocations.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/edit.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/mapLocations.html.twig">
+    <entry file="file://$PROJECT_DIR$/app/Resources/views/Appointmentcharts/noOfAppointments.html.twig">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/horaire/show.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="245">
-          <caret line="27" column="12" lean-forward="true" selection-start-line="27" selection-start-column="12" selection-end-line="27" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/horaire/horaireByDoctor.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="4" column="17" selection-start-line="4" selection-start-column="17" selection-end-line="4" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UserBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DataBundle/Resources/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/routing.yml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-27" />
-      </provider>
-    </entry>
-    <entry file="file://C:/xampp/htdocs/VaranMedical/app/Resources/views/locations/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-6760">
-          <caret line="1" column="16" lean-forward="true" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://C:/xampp/htdocs/VaranMedical/app/Resources/views/horaire/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://C:/xampp/htdocs/VaranMedical/app/Resources/views/calendries/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="618">
-          <caret line="198" column="49" lean-forward="true" selection-start-line="186" selection-start-column="47" selection-end-line="198" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/locations/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="215" column="11" lean-forward="true" selection-start-line="215" selection-start-column="11" selection-end-line="215" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/LocationsController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="59" column="43" selection-start-line="59" selection-start-column="43" selection-end-line="59" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/DoctorsBundle/Controller/HoraireController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-263">
-          <caret line="39" column="27" selection-start-line="39" selection-start-column="27" selection-end-line="39" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/horaire/new.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="242" column="9" selection-start-line="242" selection-start-column="9" selection-end-line="242" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/Resources/views/horaire/index.html.twig">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-810" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/AppointmentsBundle/Controller/CalendriesController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="397" lean-forward="true" selection-start-line="397" selection-end-line="397" />
+        <state relative-caret-position="380">
+          <caret line="86" column="105" selection-start-line="86" selection-start-column="105" selection-end-line="86" selection-end-column="105" />
         </state>
       </provider>
     </entry>

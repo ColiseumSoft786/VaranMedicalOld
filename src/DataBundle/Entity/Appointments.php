@@ -226,3 +226,4 @@ class Appointments
         return $this->seance;
     }
 }
+
