@@ -131,10 +131,10 @@
                                         console.log(divToPrint.innerHTML);
                                         var newWin=window.open('','Print-Window');
                                         newWin.document.open();
-                                        newWin.document.write('<html><head></head>');
-                                        newWin.document.write('<body onload="window.print()">'+divToPrint.innerHTML+'</body></html>');
+                                        newWin.document.write("<html><head></head>");
+                                        newWin.document.write("<body onload='window.print()'>"+divToPrint.innerHTML);
+                                        newWin.document.write("");
                                         newWin.document.close();
-                                        /*setTimeout(function(){newWin.close();},10);*/
 
                                     }
                                     function nextdate(){
@@ -325,35 +325,7 @@
 
 
 
-                                {#<div class="" style="">
-                                    <div class="row">
-                                        <div class="col-md-1" style="border: 1px solid skyblue;border-top:2px solid skyblue; padding:0px 20px 2px 20px; height: 70px;">
-                                            <p style="font-size: 19px; padding: 18px; color: #464e52;">01</p>
-                                        </div>
-                                        <div class="col-md-11" style="margin: 0px; padding: 0px; height: 70px; background-color: #83c1f4;">
-                                            <div class="col-md-12" style="background-color: #c1e9fe; height: 64px; margin-left: 20px; width: 98%;">
-                                                <p style="margin: 0px; padding: 0; font-size: 16px; font-weight: bold;">slakdjf</p>
-                                                <p style="margin: 0px; padding: 0;">slakdjf</p>
-                                                <p style="margin: 0px; padding: 0;">slakdjf</p>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class="row">
-
-                                        <div class="col-md-1" style="border: 1px solid skyblue; padding:0px 20px 2px 20px; height: 65px;">
-                                            <p style="font-size: 19px; padding: 18px; color: #464e52;">05</p>
-                                        </div>
-                                        <div class="col-md-11" style="margin: 0px; padding: 0px; height: 64px;">
-                                            <div class="col-md-12" style="eight: 64px; margin-left: 20px; width: 98%;">
-                                                <p></p>
-                                                <p></p>
-                                                <p></p>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>#}
                             </div>
                         </div>
                     </div>

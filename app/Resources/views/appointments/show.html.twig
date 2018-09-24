@@ -34,7 +34,7 @@
                         <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12 pull-left">
                             <div class="tg-widgetdashboard">
                                 <div class="tg-widgetprofile">
-                                    <figure class="tg-directpostimg"> 
+                                    <figure class="tg-directpostimg">
                                         {% if vich_uploader_asset(patient, 'imageFile') %}
                                             <a href="#">
                                                 <img src="{{ vich_uploader_asset(patient, 'imageFile') }}" alt="{{ patient.image }}" />
@@ -43,7 +43,7 @@
                                             <a href="#">
                                                 <img src="{{ asset('assets/images/thumbnails/img-20.jpg') }}" alt="image description">
                                             </a>
-                                        {% endif %}                                        
+                                        {% endif %}
                                         {% if app.user.verifier == 1 %}
                                             <figcaption>
                                                 <a class="tg-usericon tg-iconvarified" href="#">
@@ -161,7 +161,7 @@
                     }
                 });
             });
-            
+
             $(".accept").click(function () {
                 if (!confirm('Vous voulez vraiment accepter se rendez-vous')) return false;
                 var seance = $(this).attr('id');

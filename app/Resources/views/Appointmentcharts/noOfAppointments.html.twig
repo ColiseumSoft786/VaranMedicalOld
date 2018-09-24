@@ -77,14 +77,40 @@
                                     <h3 >{{ 'No of Appointments'|trans }}</h3>
                                 </div>
                                 <div class="col-lg-8">
-                                    {% set value='' %}
-                                    {% set date='' %}
-                                    {% for item in StatChart  %}
-                                        {#<input type="text" value="{{ item.getDate }}" onclick="ByDate({{ item.getValue()}},{{  item.getDate() }})">#}
-                                        {% set value = item.getValue() %}
-                                        {% set date = item.getDate()%}
-                                    {% endfor %}
-                                    <button class="btn btn-primary" onclick="ByDate({{ value }},{{  date  }})">Display</button>
+                                    <div class="col-lg-6 ">
+                                        {#foreach ($DstatArray as $dValue)#}
+                                        {#{#}
+                                        {#foreach ($dValue as $statValue)#}
+                                        {#{#}
+                                        {#echo $statValue->getStatistic()->getStatname();#}
+                                        {#echo $statValue->getValue();#}
+                                        {#echo '<br>';#}
+                                        {#}#}
+                                        {#}#}
+                                            <h4>StartDate </h4>
+                                        <select id="chartByDate">
+                                        {% for dValue in StatChart  %}
+                                            {% for statValue in dValue  %}
+                                                <option value="{{statValue.getValue()}}">{{statValue.getStatistic().getStatname()}}</option>
+                                            {% endfor %}
+                                        {% endfor %}
+                                        </select>
+                                            {#<select id="chartByDate">#}
+
+                                            {#</select>#}
+                                    </div>
+                                    <div class="col-lg-6">
+
+                                        {#<h4>EndDate </h4>#}
+
+                                        {#<select id="chartByDate">#}
+                                            {#{% for item in StatChart  %}#}
+                                                {#<option value="{{ item.getValue() }}">{{ item.getDate() }}</option>#}
+                                            {#{% endfor %}#}
+                                        {#</select>#}
+
+                                    </div>
+
                                 </div>
 
                         </div>
@@ -117,6 +143,16 @@
     <script>
 
         var ctx = document.getElementById("barChart");
+        $date = $('#chartByDate').find("option:selected").text();
+        $value = $('#chartByDate').find("option:selected").val();
+        ByDate($value,$date);
+
+        $('#chartByDate').change(function () {
+            $date = $(this).find("option:selected").text();
+            $value = $(this).find("option:selected").val();
+            ByDate($value,$date);
+        });
+
         function ByDate(appointData,appDate) {
             var myChart = new Chart(ctx, {
                 type: 'bar',

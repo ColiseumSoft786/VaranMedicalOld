@@ -115,6 +115,7 @@ class DoctorsController extends Controller
 
 
     public function detailsAction($doctor){
+        $currentDate = date("d-m-Y");
         $em = $this->getDoctrine()->getManager();
         $location = $this->getDoctrine()->getRepository('DataBundle:Locations')->findBy(
             array(
@@ -123,10 +124,7 @@ class DoctorsController extends Controller
                 'deletedat' => null
             ));
         $doctor = $em->getRepository('DataBundle:Doctors')->find($doctor);
-        $view = $doctor->getViews();
-        $view++;
-        $doctor->setViews($view);
-        $em->flush();
+        $this->get('StatService')->setStat($doctor,'View',$currentDate);
         return $this->render('doctors/doctorDetails.html.twig', array(
             'doctor' => $doctor,
             'location' => $location

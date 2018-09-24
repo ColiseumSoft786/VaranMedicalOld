@@ -12,16 +12,24 @@ class appointmentChartsController extends Controller
 {
     public function AppointmentNumberAction()
     {
+        $statArray = [];
+        $DstatArray = [];
         $doc = $this->getUser();
         $docId = $doc->getIdTable();
-        $stat = $this->getDoctrine()->getRepository(Statistic::class)->findOneBy(array('doctor' => $docId));
-        $StatId = $stat->getId();
-        if($stat->getStatname() == 'Appointment')
+        $stat = $this->getDoctrine()->getRepository(Statistic::class)->findBy(array('doctor' => $docId));
+        foreach ($stat as $item)
         {
-          $dStat = $this->getDoctrine()->getRepository(Detailstatistic::class)->findBy(array('statistic' => $StatId));
-          return $this->render('Appointmentcharts/noOfAppointments.html.twig',['StatChart'=>$dStat]);
+         $StatId = $item->getId();
+         array_push($statArray,$StatId);
         }
-        return $this->render('Appointmentcharts/noOfAppointments.html.twig');
+
+        foreach ($statArray as $value)
+        {
+            $dStat = $this->getDoctrine()->getRepository(Detailstatistic::class)->findBy(array('statistic' => $value));
+            array_push($DstatArray,$dStat);
+        }
+
+       return $this->render('Appointmentcharts/noOfAppointments.html.twig',['StatChart'=>$DstatArray]);
     }
 
 }

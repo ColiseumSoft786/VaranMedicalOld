@@ -12,6 +12,7 @@ use DataBundle\Entity\Locations;
 use DataBundle\Entity\Patient;
 use DataBundle\Entity\Seances;
 use DataBundle\Entity\Statistic;
+use DataBundle\Services\StatService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -414,6 +415,7 @@ class AppointmentsController extends Controller
         ));
     }
     public function cutcopyAction(Request $request){
+        $currentDate = date("d-m-Y");
         $em = $this->getDoctrine()->getManager();
         $app = $em->getRepository(Appointments::class)->find($request->get('app'));
         $nsea = $em->getRepository(Seances::class)->find($request->get('sea'));
@@ -449,6 +451,7 @@ class AppointmentsController extends Controller
 //            $ss->cutcopy($napp,$doctor,$patient,$osea,$nsea,"copied",$this->getUser());
             $em->flush();
         }
+        $this->get('StatService')->setStat($doctor,'ReSchedule',$currentDate);
         return $this->redirectToRoute('appointments_display');
 
     }
@@ -527,8 +530,6 @@ class AppointmentsController extends Controller
         $appointment = new \AppointmentsBundle\Entity\Appointments();
         $form = $this->createForm('AppointmentsBundle\Form\AppointmentsType', $appointment);
         $form->handleRequest($request);
-        $docId='';
-        $statId='';
         $currentDate = date("d-m-Y");
         $em = $this->getDoctrine()->getManager();
         $seance = $em->getRepository('DataBundle:Seances')->find($seance);
@@ -537,7 +538,6 @@ class AppointmentsController extends Controller
         }else if ($this->getUser()->getTypeUser() == 'patients'){
             $patient = $em->getRepository('DataBundle:Patient')->find($this->getUser()->getIdTable());
         }
-
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
             $em->persist($appointment);
@@ -567,47 +567,7 @@ class AppointmentsController extends Controller
 //                $ss->createAppointment($appointment,$doctor,$patient,$this->getUser());
             }
 
-
-
-
-            $statCheck = $this->getDoctrine()->getRepository(Statistic::class)->findBy( array('doctor' => $docId, 'statname' => 'Appointment'));
-
-            if(empty($statCheck))
-            {
-
-
-                    $stat = new Statistic();
-                    $getDoc = $this->getDoctrine()->getRepository('DataBundle:Doctors')->find($docId);
-                    $stat->setDoctor($getDoc);
-                    $stat->setStatName('Appointment');
-                    $em->persist($stat);
-                    $em->flush();
-
-            }
-            foreach ($statCheck as $item)
-             {
-                 $statId =   $item->getId();
-             }
-            $DetailStatCheck = $this->getDoctrine()->getRepository(Detailstatistic::class)->findBy( array('statistic'=> $statId, 'date' => $currentDate));
-            if(empty($DetailStatCheck))
-            {
-                $statIdObj = $this->getDoctrine()->getRepository(Statistic::class)->find($statId);
-                $detailStat = new Detailstatistic();
-                $detailStat->setStatistic($statIdObj);
-                $detailStat->setDate($currentDate);
-                $detailStat->setValue(1);
-                $em->persist($detailStat);
-                $em->flush();
-            }
-            else
-            {
-                $dStat = $em->getRepository( Detailstatistic::class)->findOneBy( array('statistic'=> $statId, 'date'=> $currentDate));
-                $cValue = $dStat->getValue();
-                $cValue = $cValue + 1;
-                $dStat->setValue($cValue);
-                $em->flush();
-            }
-
+            $this->get('StatService')->setStat($docId,'Appointment',$currentDate);
 
 //            return new Response('OK');
             return $this->redirectToRoute('appointments_appointmentsByUser', array('success'=> true));
@@ -634,7 +594,7 @@ class AppointmentsController extends Controller
         }else if ($this->getUser()->getTypeUser() == 'patients'){
             $patient = $em->getRepository('PatientBundle:Patient')->find($this->getUser()->getIdTable());
         }
-        
+
         return $this->render('appointments/show.html.twig', array(
             'appointment' => $appointment,
             'patient' => $patient,
@@ -731,7 +691,7 @@ class AppointmentsController extends Controller
             $appointments = $em->getRepository('AppointmentsBundle:Appointments')->findBy(array('patient' => $user->getId()));
 
         }
-        
+
         return $this->render('appointments/appointmentsByUser.html.twig', array(
             'patient' => $patient,
             'doctor' => $patient,
