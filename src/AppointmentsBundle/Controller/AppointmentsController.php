@@ -415,7 +415,7 @@ class AppointmentsController extends Controller
         ));
     }
     public function cutcopyAction(Request $request){
-        $currentDate = date("d-m-Y");
+        $currentDate = date("Y-m-d");
         $em = $this->getDoctrine()->getManager();
         $app = $em->getRepository(Appointments::class)->find($request->get('app'));
         $nsea = $em->getRepository(Seances::class)->find($request->get('sea'));
@@ -530,7 +530,7 @@ class AppointmentsController extends Controller
         $appointment = new \AppointmentsBundle\Entity\Appointments();
         $form = $this->createForm('AppointmentsBundle\Form\AppointmentsType', $appointment);
         $form->handleRequest($request);
-        $currentDate = date("d-m-Y");
+        $currentDate = date("Y-m-d");
         $em = $this->getDoctrine()->getManager();
         $seance = $em->getRepository('DataBundle:Seances')->find($seance);
         if ($this->getUser()->getTypeUser() == 'doctors'){

@@ -115,7 +115,7 @@ class DoctorsController extends Controller
 
 
     public function detailsAction($doctor){
-        $currentDate = date("d-m-Y");
+        $currentDate = date("Y-m-d");
         $em = $this->getDoctrine()->getManager();
         $location = $this->getDoctrine()->getRepository('DataBundle:Locations')->findBy(
             array(

@@ -1,0 +1,33 @@
+
+<div class="col-lg-12">
+    {#{% set statName = '' %}#}
+    {#{% for item in chartDisplay %}#}
+        {#{% set statName = item.getStatistic()  %}#}
+        {#{%  if statName.getStatname() == 'Appointment' %}#}
+
+        {#{% endif %}#}
+
+    {#{% endfor %}#}
+    <canvas id="barChart"></canvas>
+</div>
+<script>
+
+        var ctx = document.getElementById("barChart");
+        var myChart = new Chart(ctx, {
+            type: 'bar',
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true
+                        }
+                    }]
+                }
+            }
+        });
+        for(let i=0;i<10;i++){
+            myChart.data[i].dataset.push(5);
+        }
+
+
+</script>

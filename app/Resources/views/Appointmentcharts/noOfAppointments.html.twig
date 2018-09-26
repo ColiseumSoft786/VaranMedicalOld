@@ -88,27 +88,24 @@
                                         {#}#}
                                         {#}#}
                                             <h4>StartDate </h4>
-                                        <select id="chartByDate">
                                         {% for dValue in StatChart  %}
                                             {% for statValue in dValue  %}
-                                                <option value="{{statValue.getValue()}}">{{statValue.getStatistic().getStatname()}}</option>
                                             {% endfor %}
                                         {% endfor %}
-                                        </select>
-                                            {#<select id="chartByDate">#}
+                                        <input type="date" id="startChartByDate" class="form-control">
+                                        {#<select id="chartByDate">#}
 
                                             {#</select>#}
                                     </div>
                                     <div class="col-lg-6">
 
-                                        {#<h4>EndDate </h4>#}
+                                        <h4>EndDate </h4>
 
-                                        {#<select id="chartByDate">#}
-                                            {#{% for item in StatChart  %}#}
-                                                {#<option value="{{ item.getValue() }}">{{ item.getDate() }}</option>#}
-                                            {#{% endfor %}#}
-                                        {#</select>#}
-
+                                            {% for dValue in StatChart  %}
+                                                {% for statValue in dValue  %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        <input type="date" id="endChartByDate" class="form-control">
                                     </div>
 
                                 </div>
@@ -116,8 +113,8 @@
                         </div>
                     </div>
                     <div class="col-lg-9 col-md-8 col-sm-8 col-xs-12 tg-margin">
-                        <canvas id="barChart"></canvas>
 
+                        <div id="chart"></div>
                         {#<button onclick="check(25,20)">Check</button>#}
                     </div>
                     </div>
@@ -142,46 +139,38 @@
 
     <script>
 
-        var ctx = document.getElementById("barChart");
-        $date = $('#chartByDate').find("option:selected").text();
-        $value = $('#chartByDate').find("option:selected").val();
-        ByDate($value,$date);
-
-        $('#chartByDate').change(function () {
-            $date = $(this).find("option:selected").text();
-            $value = $(this).find("option:selected").val();
-            ByDate($value,$date);
+        var sdate='';
+        var edate='';
+        $('#startChartByDate').change(function(){
+            sdate = $('#startChartByDate').val();
+            $('#endChartByDate').attr({
+                "min" : sdate
+            });
+            check();
+            // alert(sdate);
         });
+        $('#endChartByDate').change(function(){
+            edate = $('#endChartByDate').val();
+            check();
+        });
+        function check(){
+            if(sdate !='' && edate != '')
+            {
+                callChart(sdate,edate);
+            }
+        }
 
-        function ByDate(appointData,appDate) {
-            var myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    datasets: [{
-                        label: 'Number of Appointments',
-                        data: [appointData,20,20],
-                        backgroundColor: [
-                            "rgb(255, 99, 132)",
-                            "rgb(54, 162, 235)",
-                            "rgb(255, 205, 86)"
-                        ]
-                    }],
-
-                    // These labels appear in the legend and in the tooltips when hovering different arcs
-                    labels: [appDate,'12','31']
-                },
-
-                options: {
-                    scales: {
-                        yAxes: [{
-                            ticks: {
-                                beginAtZero: true
-                            }
-                        }]
-                    }
+        function callChart(sdate,edate) {
+            $.ajax({
+                url: '{{ path('AppointmentChart') }}?sdate=' + sdate + '&edate=' + edate,
+                type: 'get',
+                success: function (result) {
+                    $('#chart').html(result);
                 }
             });
         }
+
+
 
             
             // function addToChart(appointData,appDate) {

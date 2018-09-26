@@ -66,3 +66,8 @@ numOfAppointment:
     path:     /AppointmentChart
     defaults: { _controller: "DoctorsBundle:appointmentCharts:AppointmentNumber" }
     methods:  GET
+AppointmentChart:
+    path:     /AppointChart
+    defaults: { _controller: "DoctorsBundle:appointmentCharts:AppointmentChart" }
+    methods:  GET
+
